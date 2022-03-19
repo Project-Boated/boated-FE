@@ -27,9 +27,30 @@ module.exports = {
   rules: {
     // import devDependencies
     'import/no-extraneous-dependencies': 0,
+    'import/extensions': 0,
 
     'react/function-component-definition': 0,
     'react/jsx-props-no-spreading': 0,
     'react/require-default-props': 0,
+
+    // import order settings
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', ['parent', 'sibling'], 'index'],
+        // pathGroups: [
+        //   {
+        //     pattern: 'angular',
+        //     group: 'external',
+        //     position: 'before',
+        //   },
+        // ],
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+        'newlines-between': 'always',
+      },
+    ],
   },
 };
