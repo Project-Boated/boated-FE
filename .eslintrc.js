@@ -28,6 +28,7 @@ module.exports = {
     // import devDependencies
     'import/no-extraneous-dependencies': 0,
     'import/extensions': 0,
+    'import/prefer-default-export': 0,
 
     'react/function-component-definition': 0,
     'react/jsx-props-no-spreading': 0,
@@ -38,13 +39,14 @@ module.exports = {
       'error',
       {
         groups: ['builtin', 'external', ['parent', 'sibling'], 'index'],
-        // pathGroups: [
-        //   {
-        //     pattern: 'angular',
-        //     group: 'external',
-        //     position: 'before',
-        //   },
-        // ],
+        pathGroups: [
+          {
+            pattern: 'react',
+            group: 'builtin',
+            position: 'before',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['react'],
         alphabetize: {
           order: 'asc',
           caseInsensitive: true,
