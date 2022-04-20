@@ -7,6 +7,7 @@ import styled, { css } from 'styled-components';
 interface IIconWrapperProps {
   width?: number;
   height?: number;
+  margin?: string;
 }
 
 const IconWrapper = styled.div<IIconWrapperProps>`
@@ -16,6 +17,7 @@ const IconWrapper = styled.div<IIconWrapperProps>`
   justify-content: center;
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
+  margin: ${(props) => props.margin};
 `;
 
 type IconOption = keyof typeof icons;
@@ -24,13 +26,14 @@ interface IIconProps {
   icon: IconOption;
   width?: number;
   height?: number;
+  margin?: string;
 }
 
-const Icon = ({ icon, width, height, ...props }: IIconProps) => {
+const Icon = ({ icon, width, height, margin, ...props }: IIconProps) => {
   const IconComponent = icons[icon];
 
   return (
-    <IconWrapper {...props} width={width || 24} height={height || 24}>
+    <IconWrapper {...props} width={width || 24} height={height || 24} margin={margin}>
       <IconComponent {...props} />
     </IconWrapper>
   );

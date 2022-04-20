@@ -3,7 +3,7 @@ import React from 'react';
 const ExclamationMark = ({ ...props }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="70" viewBox="0 0 17 70" fill="none" {...props}>
-      <g clip-path="url(#clip0_191_678)">
+      <g clipPath="url(#clip0_191_678)">
         <path
           d="M7.62988 70C10.9436 70 13.6299 67.3137 13.6299 64C13.6299 60.6863 10.9436 58 7.62988 58C4.31617 58 1.62988 60.6863 1.62988 64C1.62988 67.3137 4.31617 70 7.62988 70Z"
           fill="black"
