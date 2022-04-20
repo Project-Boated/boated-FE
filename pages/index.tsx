@@ -8,16 +8,18 @@ import Icon from '@/components/atoms/Icon';
 const Wrapper = styled.div``;
 
 const MainSection = styled.section`
+  position: absolute;
   margin-top: 52px;
+  width: 100%;
   height: 400vh;
+
   background: url('../imgs/LandingPageSVG.svg') no-repeat;
   background-size: cover;
 `;
 
 const MainContainer = styled.div`
-  position: absolute;
-  top: 242px;
-  left: 64px;
+  margin-top: 18vh;
+  margin-left: 6vh;
 `;
 
 const WelcomeContainer = styled.div`
@@ -51,9 +53,7 @@ const LoginAnchor = styled.a`
 `;
 
 const SubContainer = styled.div`
-  position: absolute;
-  top: 1400px;
-  left: 350px;
+  margin: 100vh auto 0 auto;
 
   display: flex;
   flex-direction: column;
