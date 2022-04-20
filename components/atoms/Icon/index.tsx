@@ -1,8 +1,7 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
 
 import * as icons from '@/components/atoms/Icon/Icons';
-
-import styled, { css } from 'styled-components';
 
 interface IIconWrapperProps {
   width?: number;
