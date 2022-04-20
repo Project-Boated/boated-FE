@@ -39,4 +39,9 @@ export const fontFace = `
     font-weight: 500;
     src: url("/fonts/GmarketSansMedium.otf") format("truetype");
   }
+  @font-face {
+    font-family: 'Gmarket Sans';
+    font-weight: 400;
+    src: url("/fonts/GmarketSansLight.otf") format("truetype");
+  }
 `;
