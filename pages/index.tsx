@@ -18,8 +18,7 @@ const MainSection = styled.section`
 `;
 
 const MainContainer = styled.div`
-  margin-top: 18vh;
-  margin-left: 6vh;
+  margin: 137px 0 0 46px;
 `;
 
 const WelcomeContainer = styled.div`
@@ -44,9 +43,9 @@ const LoginAnchor = styled.a`
   height: 52px;
 
   background: ${({ theme }) => theme.M_1};
+  color: ${({ theme }) => theme.S_0};
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
-  color: ${({ theme }) => theme.S_0};
   font-size: 13px;
 
   cursor: pointer;
