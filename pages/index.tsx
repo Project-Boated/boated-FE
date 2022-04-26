@@ -32,6 +32,10 @@ const WelcomePhrase = styled.h1`
   font-size: 40px;
 `;
 
+const IconWrapper = styled.div`
+  margin-left: 29px;
+`;
+
 const LoginAnchor = styled.a`
   display: flex;
   justify-content: center;
@@ -91,8 +95,12 @@ const LandingPage: NextPage = () => (
       <MainContainer>
         <WelcomeContainer>
           <WelcomePhrase>Let’s start team projects with</WelcomePhrase>
-          <Icon icon="BoatedSignature" width={239} height={70} margin="0 0 0 29px" />
-          <Icon icon="ExclamationMark" width={17} height={70} margin="0 0 0 29px" />
+          <IconWrapper>
+            <Icon icon="BoatedSignature" width={239} height={70} />
+          </IconWrapper>
+          <IconWrapper>
+            <Icon icon="ExclamationMark" width={17} height={70} />
+          </IconWrapper>
         </WelcomeContainer>
         <Link href="/login">
           <LoginAnchor>로그인</LoginAnchor>

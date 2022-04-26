@@ -6,7 +6,7 @@ import * as icons from '@/components/atoms/Icon/Icons';
 interface IIconWrapperProps {
   width?: number;
   height?: number;
-  margin?: string;
+  rotate?: number;
 }
 
 const IconWrapper = styled.div<IIconWrapperProps>`
@@ -14,9 +14,14 @@ const IconWrapper = styled.div<IIconWrapperProps>`
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
+
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
-  margin: ${(props) => props.margin};
+
+  ${(props) =>
+    props.rotate && {
+      transform: `rotate(${props.rotate}deg)`,
+    }}
 `;
 
 type IconOption = keyof typeof icons;
@@ -25,14 +30,14 @@ interface IIconProps {
   icon: IconOption;
   width?: number;
   height?: number;
-  margin?: string;
+  rotate?: number;
 }
 
-const Icon = ({ icon, width, height, margin, ...props }: IIconProps) => {
+const Icon = ({ icon, width, height, rotate, ...props }: IIconProps) => {
   const IconComponent = icons[icon];
 
   return (
-    <IconWrapper {...props} width={width || 24} height={height || 24} margin={margin}>
+    <IconWrapper {...props} width={width || 24} height={height || 24} rotate={rotate}>
       <IconComponent {...props} />
     </IconWrapper>
   );
