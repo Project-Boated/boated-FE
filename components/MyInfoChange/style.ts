@@ -3,9 +3,6 @@ import styled from 'styled-components';
 export const Wrapper = styled.section`
   position: relative;
 
-  top: 200px;
-  left: 200px;
-
   width: 1003px;
   height: 582px;
 
@@ -94,7 +91,9 @@ export const NicknameInput = styled.input`
   }
 `;
 
-export const NicknameWarningText = styled.div`
+export const NicknameWarningText = styled.div<{ isDuplicated: boolean }>`
+  visibility: ${(props) => (props.isDuplicated ? 'visible' : 'hidden')};
+
   margin: 8px 240px 0 0;
 
   font-weight: 400;
@@ -116,6 +115,8 @@ export const SubmitButton = styled.button`
 
   font-weight: 400;
   font-size: 13px;
+
+  cursor: pointer;
 `;
 
 export const DeleteAccount = styled.div`
