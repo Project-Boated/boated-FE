@@ -20,7 +20,7 @@ const LoginPage = () => {
           res = await kakaoLogin(String(code));
 
           if (res.status === 200) {
-            router.push('/login');
+            router.push('/myInfoChange');
           }
         } catch (e: unknown) {
           const error = e as AxiosError;
