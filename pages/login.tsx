@@ -3,13 +3,14 @@ import { useRouter } from 'next/router';
 import { AxiosError } from 'axios';
 
 import { kakaoLogin } from '@/src/lib/api/auth';
-import { kakaoLoginPath } from '@/src/lib/constants';
+
+import LoginBox from '@/components/Login/LoginBox';
+
+import { Wrapper } from '@/styles/pages/LoginPage/style';
 
 const LoginPage = () => {
   const router = useRouter();
   const { code } = router.query;
-
-  const onClickKakaoLogin = () => router.push(kakaoLoginPath);
 
   useEffect(() => {
     if (code) {
@@ -30,9 +31,9 @@ const LoginPage = () => {
   }, [code]);
 
   return (
-    <div>
-      <button onClick={() => onClickKakaoLogin()}>카카오 로그인</button>
-    </div>
+    <Wrapper>
+      <LoginBox />
+    </Wrapper>
   );
 };
 
