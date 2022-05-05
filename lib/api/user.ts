@@ -8,6 +8,9 @@ export const getProfileImg = () => client.get('/api/account/profile/profile-imag
 export const putProfileImg = (profileImg: FormData) =>
   client.put('/api/account/profile/profile-image', { profileImg }).then((res) => res.data);
 
+export const putProfileNickname = (nickname: string) =>
+  client.put('/api/account/profile/nickname', { nickname }).then((res) => res.data);
+
 export const patchProfile = (profile: User) => client.patch('/api/account/profile', profile).then((res) => res.data);
 
 export const isNicknameDuplicated = (nickname: string) =>
