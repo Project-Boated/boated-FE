@@ -1,5 +1,5 @@
-import client from '@/src/lib/api/client';
-import { User } from '@/src/lib/types/user';
+import client from '@/lib/api/client';
+import { User } from '@/lib/types/user';
 
 export const getMe = () => client.get('/api/account/profile').then((res) => res.data);
 

@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
 
-import { getMe, getProfileImg, isNicknameDuplicated, patchProfile, putProfileImg } from '@/src/lib/api/user';
+import { getMe, getProfileImg, isNicknameDuplicated, patchProfile, putProfileImg } from '@/lib/api/user';
 
-import { User } from '@/src/lib/types/user';
+import { User } from '@/lib/types/user';
 
-import useDebounce from '@/src/hooks/useDebounce';
+import useDebounce from '@/hooks/useDebounce';
 
 import Icon from '@/components/atoms/Icon';
 
