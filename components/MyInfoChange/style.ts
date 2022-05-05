@@ -31,7 +31,7 @@ export const ProfileChangeWrapper = styled.div`
   align-items: center;
 `;
 
-export const ProfileImage = styled.div`
+export const ProfileImage = styled.img`
   width: 146px;
   height: 146px;
 
@@ -40,13 +40,17 @@ export const ProfileImage = styled.div`
   border-radius: 50%;
 `;
 
-export const SettingIconWrapper = styled.div`
+export const SettingIconLabel = styled.label`
   position: relative;
 
   top: -30px;
   left: 50px;
 
   cursor: pointer;
+`;
+
+export const ImageInput = styled.input`
+  display: none;
 `;
 
 export const ProfileImageText = styled.div`
