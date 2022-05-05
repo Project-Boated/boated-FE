@@ -1,7 +1,14 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
 
-import { getMe, getProfileImg, isNicknameDuplicated, patchProfile, putProfileImg } from '@/lib/api/user';
+import {
+  getMe,
+  getProfileImg,
+  isNicknameDuplicated,
+  patchProfile,
+  putProfileImg,
+  putProfileNickname,
+} from '@/lib/api/user';
 
 import { User } from '@/lib/types/user';
 
@@ -26,16 +33,14 @@ import {
 } from './style';
 
 const MyInfoChange = () => {
-  const [userInfo, setUserInfo] = useState<User>({
-    nickname: '',
-    profileImageFile: '',
-  });
+  const [nickname, setNickname] = useState<string>('');
+  const [profileImageUrl, setProfileImageUrl] = useState<string>('');
   const [isDuplicated, setIsDuplicated] = useState<boolean>(false);
 
-  const debounceNickname = useDebounce<string>(userInfo.nickname, 500);
+  const debounceNickname = useDebounce<string>(nickname, 500);
 
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserInfo({ ...userInfo, nickname: e.target.value });
+    setNickname(e.target.value);
   };
 
   const checkNicknameDuplicated = async (nickname: string) => {
@@ -64,12 +69,9 @@ const MyInfoChange = () => {
 
       try {
         formData.append('image', image);
-        const data = await putProfileImg(formData);
-        console.log(data);
-        setUserInfo({
-          ...userInfo,
-          profileImageFile: data,
-        });
+        const imageUrl = await putProfileImg(formData);
+        console.log(imageUrl);
+        setProfileImageUrl(imageUrl);
       } catch (error) {
         alert('오류가 발생했습니다. 다른 사진을 시도해주세요.');
       }
@@ -79,6 +81,7 @@ const MyInfoChange = () => {
   const fetchMe = async () => {
     try {
       const profile = await getMe();
+      console.log(profile);
       return profile;
     } catch (e: unknown) {
       const error = e as AxiosError;
@@ -86,9 +89,12 @@ const MyInfoChange = () => {
     }
   };
 
-  const onClickSubmitProfile = async () => {
+  const onClickSubmitNickname = async () => {
+    if (isDuplicated) {
+      return;
+    }
     try {
-      const response = await patchProfile(userInfo);
+      const response = await putProfileNickname(nickname);
       console.log(response);
     } catch (e: unknown) {
       const error = e as AxiosError;
@@ -96,11 +102,15 @@ const MyInfoChange = () => {
     }
   };
 
-  // 닉네임 설정을 안해주면, 카카오 프로필 이미지를 못불러오는거 같음.
+  // 맨 처음 카카오 이미지를 위해 사용자 정보 불러오기
   useEffect(() => {
-    // console.log(fetchProfileImg());
+    // const profile = fetchMe();
+    // if (profile.profileImageUrl === null) {
+    // setProfileImageUrl('imgs/defaultProfileImg.svg');
+    // }
   }, []);
 
+  // 닉네임 중복체크 디바운스
   useEffect(() => {
     checkNicknameDuplicated(debounceNickname);
   }, [debounceNickname]);
@@ -111,7 +121,7 @@ const MyInfoChange = () => {
         <Icon icon="SeaWaveMedium" width={916} height={586} />
       </SeaIconWrapper>
       <ProfileChangeWrapper>
-        <ProfileImage src={userInfo.profileImageFile || 'imgs/defaultProfileImg.svg'} alt="profileImg" />
+        <ProfileImage src={profileImageUrl} alt="profileImg" />
         <SettingIconLabel htmlFor="profileImg">
           <Icon icon="Setting" width={30} height={30} />
         </SettingIconLabel>
@@ -125,10 +135,10 @@ const MyInfoChange = () => {
         <ProfileImageText>프로필 이미지</ProfileImageText>
         <NicknameInputWrapper>
           <NicknameTitle>닉네임</NicknameTitle>
-          <NicknameInput value={userInfo.nickname} onChange={onChangeNickname} />
+          <NicknameInput value={nickname} onChange={onChangeNickname} />
         </NicknameInputWrapper>
         <NicknameWarningText isDuplicated={isDuplicated}>*이미 존재하는 닉네임이에요!</NicknameWarningText>
-        <SubmitButton type="submit" onClick={onClickSubmitProfile}>
+        <SubmitButton type="submit" onClick={onClickSubmitNickname}>
           저장하기
         </SubmitButton>
       </ProfileChangeWrapper>
