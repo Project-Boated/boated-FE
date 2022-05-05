@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AxiosError } from 'axios';
 
-import { kakaoLogin } from '@/src/lib/api/auth';
+import { kakaoLogin } from '@/lib/api/auth';
 
 import LoginBox from '@/components/Login/LoginBox';
 

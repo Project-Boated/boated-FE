@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { kakaoLoginPath } from '@/src/lib/constants';
+import { kakaoLoginPath } from '@/lib/constants';
 
 import Icon from '@/components/atoms/Icon';
 
