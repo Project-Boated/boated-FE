@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 
   display: flex;
 
-  width: 1003px;
+  width: 1137px;
   height: 582px;
 
   background: ${Theme.S_0};
@@ -57,5 +57,5 @@ export const LeftContainer = styled.div`
 `;
 
 export const RightContainer = styled.div`
-  margin-left: 503px;
+  width: 566px;
 `;
