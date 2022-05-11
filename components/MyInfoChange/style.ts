@@ -35,7 +35,7 @@ export const ProfileImage = styled.img`
   box-sizing: border-box;
   width: 146px;
   height: 146px;
-  padding: 30px;
+  padding: 10px;
 
   background: ${({ theme }) => theme.S_0};
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);

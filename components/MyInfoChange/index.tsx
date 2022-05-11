@@ -1,16 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
 
-import {
-  getMe,
-  getProfileImg,
-  isNicknameDuplicated,
-  patchProfile,
-  putProfileImg,
-  putProfileNickname,
-} from '@/lib/api/user';
-
-import { User } from '@/lib/types/user';
+import { getMe, isNicknameDuplicated, postProfileImg, putProfileNickname } from '@/lib/api/user';
 
 import useDebounce from '@/hooks/useDebounce';
 
@@ -37,6 +29,8 @@ const MyInfoChange = () => {
   const [profileImageUrl, setProfileImageUrl] = useState<string>('');
   const [isDuplicated, setIsDuplicated] = useState<boolean>(false);
 
+  const router = useRouter();
+
   const debounceNickname = useDebounce<string>(nickname, 500);
 
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,12 +43,43 @@ const MyInfoChange = () => {
     }
 
     try {
-      const res = await isNicknameDuplicated(nickname);
-      if (res.duplicated) {
+      const response = await isNicknameDuplicated(nickname);
+      if (response.duplicated) {
         setIsDuplicated(true);
         return;
       }
       setIsDuplicated(false);
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      alert(JSON.stringify(error.response?.data.message));
+    }
+  };
+
+  // 기본 이미지를 form data를 어떻게 붙여주지
+
+  // const setDefaultImage = async () => {
+  //   try {
+  //     const formData = new FormData();
+
+  //     // formData.append('file', defaultImage);
+  //     const response = await postProfileImg(formData);
+  //     setProfileImageUrl(response.profileImageUrl);
+  //   } catch (e: unknown) {
+  //     const error = e as AxiosError;
+  //     alert(JSON.stringify(error.response?.data.message));
+  //   }
+  // };
+
+  const fetchProfileImage = async () => {
+    try {
+      const response = await getMe();
+
+      if (response.profileImageUrl === null) {
+        // 기본 이미지 첨부하기
+        // setDefaultImage();
+        return;
+      }
+      setProfileImageUrl(response.profileImageUrl);
     } catch (e: unknown) {
       const error = e as AxiosError;
       alert(JSON.stringify(error.response?.data.message));
@@ -68,24 +93,12 @@ const MyInfoChange = () => {
       const image = files[0];
 
       try {
-        formData.append('image', image);
-        const imageUrl = await putProfileImg(formData);
-        console.log(imageUrl);
-        setProfileImageUrl(imageUrl);
+        formData.append('file', image);
+        const response = await postProfileImg(formData);
+        // response 오는 url 넣어주기
       } catch (error) {
         alert('오류가 발생했습니다. 다른 사진을 시도해주세요.');
       }
-    }
-  };
-
-  const fetchMe = async () => {
-    try {
-      const profile = await getMe();
-      console.log(profile);
-      return profile;
-    } catch (e: unknown) {
-      const error = e as AxiosError;
-      alert(JSON.stringify(error.response?.data.message));
     }
   };
 
@@ -95,7 +108,9 @@ const MyInfoChange = () => {
     }
     try {
       const response = await putProfileNickname(nickname);
-      console.log(response);
+      if (response.status === 200) {
+        router.push('/project');
+      }
     } catch (e: unknown) {
       const error = e as AxiosError;
       alert(JSON.stringify(error.response?.data.message));
@@ -104,10 +119,8 @@ const MyInfoChange = () => {
 
   // 맨 처음 카카오 이미지를 위해 사용자 정보 불러오기
   useEffect(() => {
-    // const profile = fetchMe();
-    // if (profile.profileImageUrl === null) {
-    // setProfileImageUrl('imgs/defaultProfileImg.svg');
-    // }
+    fetchProfileImage();
+    // setDefaultImage();
   }, []);
 
   // 닉네임 중복체크 디바운스
