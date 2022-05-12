@@ -1,9 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 
-import Text from '@/components/atoms/Text';
-
-import { TextProps } from '@/components/atoms/Text';
+import Text, { TextProps } from '@/components/atoms/Text';
 
 export default {
   component: Text,
