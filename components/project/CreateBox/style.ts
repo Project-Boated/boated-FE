@@ -58,4 +58,23 @@ export const LeftContainer = styled.div`
 
 export const RightContainer = styled.div`
   width: 566px;
+  height: 416px;
+
+  margin-top: 69px;
+`;
+
+export const StyledLabel = styled.label`
+  cursor: pointer;
+
+  color: ${Theme.S_5};
+  font-size: 14px;
+  font-weight: 400;
+
+  .is-required {
+    color: ${Theme.W_1};
+  }
+`;
+
+export const WarningWrapper = styled.div<{ hasError: boolean }>`
+  visibility: ${({ hasError }) => (hasError ? 'visible' : 'hidden')};
 `;
