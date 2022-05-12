@@ -21,7 +21,7 @@ export const SeaIconWrapper = styled.div`
 export const ProfileChangeWrapper = styled.div`
   position: relative;
 
-  top: 80px;
+  top: 98px;
   left: 375px;
 
   width: 518px;
@@ -35,7 +35,6 @@ export const ProfileImage = styled.img`
   box-sizing: border-box;
   width: 146px;
   height: 146px;
-  padding: 10px;
 
   background: ${({ theme }) => theme.S_0};
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
@@ -56,8 +55,6 @@ export const ImageInput = styled.input`
 `;
 
 export const ProfileImageText = styled.div`
-  margin-top: 24px;
-
   font-weight: 400;
   font-size: 14px;
 

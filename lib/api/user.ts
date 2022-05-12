@@ -1,9 +1,10 @@
 import client from '@/lib/api/client';
 import { UserProfile } from '@/lib/types/user';
 
-export const getMe = () => client.get('/api/account/profile').then((res) => res.data);
+export const getMe = () => client.get('/api/account/profile?isProxy=true').then((res) => res.data);
 
-export const getProfileImg = () => client.get('/api/account/profile/profile-image').then((res) => res.data);
+export const getProfileImg = () =>
+  client.get('/api/account/profile/profile-image?isProxy=true').then((res) => res.data);
 
 export const postProfileImg = (profileImg: FormData) =>
   client.post('/api/account/profile/profile-image', profileImg).then((res) => res.data);

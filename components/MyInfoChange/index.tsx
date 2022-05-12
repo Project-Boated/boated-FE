@@ -26,7 +26,7 @@ import {
 
 const MyInfoChange = () => {
   const [nickname, setNickname] = useState<string>('');
-  const [profileImageUrl, setProfileImageUrl] = useState<string>('');
+  const [profileImageUrl, setProfileImageUrl] = useState<string>('/imgs/defaultProfileImg.png');
   const [isDuplicated, setIsDuplicated] = useState<boolean>(false);
 
   const router = useRouter();
@@ -55,28 +55,12 @@ const MyInfoChange = () => {
     }
   };
 
-  // 기본 이미지를 form data를 어떻게 붙여주지
-
-  // const setDefaultImage = async () => {
-  //   try {
-  //     const formData = new FormData();
-
-  //     // formData.append('file', defaultImage);
-  //     const response = await postProfileImg(formData);
-  //     setProfileImageUrl(response.profileImageUrl);
-  //   } catch (e: unknown) {
-  //     const error = e as AxiosError;
-  //     alert(JSON.stringify(error.response?.data.message));
-  //   }
-  // };
-
   const fetchProfileImage = async () => {
     try {
       const response = await getMe();
 
       if (response.profileImageUrl === null) {
-        // 기본 이미지 첨부하기
-        // setDefaultImage();
+        setProfileImageUrl('/imgs/defaultProfileImg.png');
         return;
       }
       setProfileImageUrl(response.profileImageUrl);
@@ -94,8 +78,8 @@ const MyInfoChange = () => {
 
       try {
         formData.append('file', image);
-        const response = await postProfileImg(formData);
-        // response 오는 url 넣어주기
+        await postProfileImg(formData);
+        fetchProfileImage();
       } catch (error) {
         alert('오류가 발생했습니다. 다른 사진을 시도해주세요.');
       }
@@ -109,7 +93,7 @@ const MyInfoChange = () => {
     try {
       const response = await putProfileNickname(nickname);
       if (response.status === 200) {
-        router.push('/project');
+        router.push('/mypage');
       }
     } catch (e: unknown) {
       const error = e as AxiosError;
@@ -120,7 +104,6 @@ const MyInfoChange = () => {
   // 맨 처음 카카오 이미지를 위해 사용자 정보 불러오기
   useEffect(() => {
     fetchProfileImage();
-    // setDefaultImage();
   }, []);
 
   // 닉네임 중복체크 디바운스
