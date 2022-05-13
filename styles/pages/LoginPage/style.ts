@@ -5,5 +5,5 @@ export const Wrapper = styled.main`
   align-items: center;
   justify-content: center;
 
-  height: 90vh;
+  height: 100vh;
 `;
