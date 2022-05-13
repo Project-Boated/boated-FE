@@ -55,7 +55,7 @@ export const InnerContainer = styled.div`
 `;
 
 export const ToggleItem = styled.div`
-  z-index: 10;
+  z-index: 1;
 
   &.left {
     color: ${Theme.S_0};
