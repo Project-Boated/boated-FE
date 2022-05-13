@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { SizeProps } from '@/types/size';
 
@@ -11,9 +11,7 @@ export interface Props {
   setIsRight: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ToggleSwitch = ({ width, height, leftContent, rightContent }: SizeProps & Props) => {
-  const [isRight, setIsRight] = useState<boolean>(false);
-
+const ToggleSwitch = ({ width, height, leftContent, rightContent, isRight, setIsRight }: SizeProps & Props) => {
   const onClickToggleSwitch = () => setIsRight((prev: boolean) => !prev);
 
   return (
