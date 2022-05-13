@@ -11,12 +11,13 @@ import { Wrapper, DefaultTitleWrapper, RefWrapper, SelectListWrapper, SelectItem
 
 export interface DropDownProps extends DropDownSize {
   defaultTitle: string;
+  target?: string;
   selectList: Array<string>;
   selectedItem: string;
-  setSelectedItem: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedItem: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const DropDown = ({ type, defaultTitle, selectList, selectedItem, setSelectedItem }: DropDownProps) => {
+const DropDown = ({ type, defaultTitle, target, selectList, selectedItem, setSelectedItem }: DropDownProps) => {
   const selectListRef = useRef<HTMLUListElement>(null);
   const [isShowList, setIsShowList] = useDetectOutsideClick(selectListRef);
 
@@ -25,9 +26,19 @@ const DropDown = ({ type, defaultTitle, selectList, selectedItem, setSelectedIte
   };
 
   const onClickListItem = (e: React.MouseEvent<HTMLLIElement>) => {
-    if (e.currentTarget.textContent) {
+    const { textContent } = e.currentTarget;
+
+    if (!textContent) return;
+
+    if (target) {
+      setSelectedItem((prev: any) => ({
+        ...prev,
+        [target]: textContent,
+      }));
+    } else {
       setSelectedItem(e.currentTarget.textContent);
     }
+
     setIsShowList((prev: boolean) => !prev);
   };
 
