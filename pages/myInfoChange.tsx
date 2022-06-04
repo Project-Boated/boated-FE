@@ -2,13 +2,13 @@ import React from 'react';
 
 import MyInfoChange from '@/components/MyInfoChange';
 
-import { Wrapper } from '@/styles/pages/LoginPage/style';
+import AppLayoutSub from '@/components/common/AppLayoutSub';
 
 const MyInfoChangePage = () => {
   return (
-    <Wrapper>
+    <AppLayoutSub>
       <MyInfoChange />
-    </Wrapper>
+    </AppLayoutSub>
   );
 };
 

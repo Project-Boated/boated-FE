@@ -6,7 +6,7 @@ import { kakaoLogin } from '@/lib/api/auth';
 
 import LoginBox from '@/components/Login/LoginBox';
 
-import { Wrapper } from '@/styles/pages/LoginPage/style';
+import AppLayoutSub from '@/components/common/AppLayoutSub';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -31,9 +31,9 @@ const LoginPage = () => {
   }, [code]);
 
   return (
-    <Wrapper>
+    <AppLayoutSub>
       <LoginBox />
-    </Wrapper>
+    </AppLayoutSub>
   );
 };
 
