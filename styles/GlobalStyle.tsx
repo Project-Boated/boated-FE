@@ -5,11 +5,17 @@ export const GlobalStyle = createGlobalStyle`
   ${reset}
   body * {
     font-family: Noto Sans KR, sans-serif;
+    box-sizing: border-box;
   }
 
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  input {
+    border: none;
+    outline: none;
   }
 `;
 

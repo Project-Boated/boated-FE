@@ -37,7 +37,7 @@ const Icon = ({ icon, width, height, rotate, ...props }: IIconProps) => {
   const IconComponent = icons[icon];
 
   return (
-    <IconWrapper {...props} width={width || 24} height={height || 24} rotate={rotate}>
+    <IconWrapper {...props} width={width} height={height} rotate={rotate}>
       <IconComponent {...props} />
     </IconWrapper>
   );

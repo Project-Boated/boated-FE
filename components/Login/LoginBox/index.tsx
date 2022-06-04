@@ -10,7 +10,7 @@ const LoginBox = () => {
   return (
     <Wrapper>
       <SeaWaveWrapper>
-        <Icon icon="SeaWaveLarge" width={1178} height={1000} />
+        <Icon icon="SeaWaveLarge" width={1178} />
       </SeaWaveWrapper>
       <Container>
         <Icon icon="BoatedSymbol" width={65} height={63} />
