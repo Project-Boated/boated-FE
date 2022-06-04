@@ -92,7 +92,7 @@ export const SelectListWrapper = styled.ul<DropDownSize>`
       width: 176px;
 
       li {
-        width: 145px;
+        width: 100%;
       }
     `};
 
@@ -102,7 +102,7 @@ export const SelectListWrapper = styled.ul<DropDownSize>`
       width: 110px;
 
       li {
-        width: 86px;
+        width: 100%;
       }
     `};
 
@@ -112,7 +112,7 @@ export const SelectListWrapper = styled.ul<DropDownSize>`
       width: 72px;
 
       li {
-        width: 52px;
+        width: 100%;
       }
     `};
 `;
@@ -124,11 +124,14 @@ export const SelectItemWrapper = styled.li<{ isSelected: boolean }>`
   align-items: center;
 
   border-radius: 6px;
-  background-color: ${({ isSelected }) => isSelected && Theme.P_3};
+  background-color: ${({ isSelected }) => isSelected && Theme.M_1};
 
+  color: ${({ isSelected }) => isSelected && Theme.S_0};
+
+  width: 50px;
   min-height: 40px;
 
-  padding-left: 5px;
+  padding-left: 13px;
 
   margin: 0 auto;
 `;
