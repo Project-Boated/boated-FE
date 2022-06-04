@@ -13,7 +13,7 @@ export const ChildrenContainer = styled.div`
 
 export const BackgroundContainer = styled.div`
   position: absolute;
-  bottom: -35vh;
+  bottom: 0;
   z-index: -999;
 `;
 
