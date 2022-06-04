@@ -13,16 +13,27 @@ export const ChildrenContainer = styled.div`
 
 export const BackgroundContainer = styled.div`
   position: absolute;
-  bottom: 0;
+
+  width: 100%;
+
+  bottom: -20vh;
   z-index: -999;
 `;
 
-export const BackgroundSeaWave = styled.img`
+export const BackgroundSeaWave = styled.div`
   display: flex;
-  max-width: 100%;
+
+  height: 445px;
+
+  background: url('../imgs/SubAppLayoutSeaWave.svg') no-repeat;
+  background-size: cover;
 `;
 
-export const BackgroundRectangle = styled.img`
+export const BackgroundRectangle = styled.div`
   display: flex;
-  max-width: 100%;
+
+  height: 160px;
+
+  background: url('../imgs/SubAppLayoutRectangle.svg') no-repeat;
+  background-size: cover;
 `;
