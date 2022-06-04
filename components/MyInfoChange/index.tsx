@@ -93,7 +93,7 @@ const MyInfoChange = () => {
     try {
       const response = await putProfileNickname(nickname);
       if (response.status === 200) {
-        router.push('/mypage');
+        router.push('/project/create');
       }
     } catch (e: unknown) {
       const error = e as AxiosError;
