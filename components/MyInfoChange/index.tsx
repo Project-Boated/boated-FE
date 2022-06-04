@@ -135,10 +135,9 @@ const MyInfoChange = () => {
         </NicknameInputWrapper>
         <NicknameWarningText isDuplicated={isDuplicated}>*이미 존재하는 닉네임이에요!</NicknameWarningText>
         <SubmitButton type="submit" onClick={onClickSubmitNickname}>
-          저장하기
+          회원가입하기
         </SubmitButton>
       </ProfileChangeWrapper>
-      <DeleteAccount>탈퇴하기</DeleteAccount>
     </Wrapper>
   );
 };
