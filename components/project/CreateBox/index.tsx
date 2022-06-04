@@ -36,9 +36,18 @@ interface Props {
   setIsRight: React.Dispatch<React.SetStateAction<boolean>>;
   setRequiredInfo: React.Dispatch<React.SetStateAction<RequiredInfoState>>;
   setOptionalInfo: React.Dispatch<React.SetStateAction<OptionalInfoState>>;
+  onClickSubmit: () => void;
 }
 
-const CreateBox = ({ isRight, requiredInfo, optionalInfo, setIsRight, setRequiredInfo, setOptionalInfo }: Props) => {
+const CreateBox = ({
+  isRight,
+  requiredInfo,
+  optionalInfo,
+  setIsRight,
+  setRequiredInfo,
+  setOptionalInfo,
+  onClickSubmit,
+}: Props) => {
   const onChangeRequiredInfo = (e: React.ChangeEvent<any>) => {
     const { name, value } = e.target;
 
@@ -148,7 +157,7 @@ const CreateBox = ({ isRight, requiredInfo, optionalInfo, setIsRight, setRequire
             onChange={onChangeRequiredInfo}
           />
         </ProjectDescriptionContainer>
-        <Button width={200} height={52}>
+        <Button width={200} height={52} onClick={onClickSubmit}>
           생성하기
         </Button>
       </RightContainer>
