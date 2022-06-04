@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import useDetectOutsideClick from '@/hooks/useDetectOutside';
 
@@ -17,13 +17,22 @@ export interface DropDownProps extends DropDownSize {
   setSelectedItem: React.Dispatch<React.SetStateAction<any>>;
 }
 
+interface ScrollToProps {
+  containerRef: React.RefObject<HTMLUListElement>;
+  itemRef: React.RefObject<HTMLLIElement>;
+}
+
 const DropDown = ({ type, defaultTitle, target, selectList, selectedItem, setSelectedItem }: DropDownProps) => {
   const selectListRef = useRef<HTMLUListElement>(null);
   const [isShowList, setIsShowList] = useDetectOutsideClick(selectListRef);
 
+  const selectedItemRef = useRef<HTMLLIElement>(null);
+
   const onClickDropDown = () => {
     setIsShowList((prev: boolean) => !prev);
   };
+
+  const isSelected = (target: string, selectedItem: string) => target === selectedItem;
 
   const onClickListItem = (e: React.MouseEvent<HTMLLIElement>) => {
     const { textContent } = e.currentTarget;
@@ -42,6 +51,21 @@ const DropDown = ({ type, defaultTitle, target, selectList, selectedItem, setSel
     setIsShowList((prev: boolean) => !prev);
   };
 
+  const scrollTo = ({ containerRef, itemRef }: ScrollToProps) => {
+    if (!itemRef.current) return;
+
+    containerRef.current?.scroll({
+      top: itemRef.current.offsetTop,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    if (!isShowList) return;
+
+    scrollTo({ containerRef: selectListRef, itemRef: selectedItemRef });
+  }, [isShowList, selectedItem]);
+
   return (
     <Wrapper>
       <DefaultTitleWrapper type={type} onClick={onClickDropDown}>
@@ -54,7 +78,12 @@ const DropDown = ({ type, defaultTitle, target, selectList, selectedItem, setSel
         <RefWrapper>
           <SelectListWrapper ref={selectListRef} type={type}>
             {selectList.map((item, idx) => (
-              <SelectItemWrapper key={idx} isSelected={item === selectedItem} onClick={onClickListItem}>
+              <SelectItemWrapper
+                key={idx}
+                ref={isSelected(item, selectedItem) ? selectedItemRef : null}
+                isSelected={isSelected(item, selectedItem)}
+                onClick={onClickListItem}
+              >
                 {item}
               </SelectItemWrapper>
             ))}
