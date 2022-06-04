@@ -46,12 +46,6 @@ export const LeftContainer = styled.div`
   }
 
   & > span {
-    font-family: 'Gmarket Sans';
-    color: ${Theme.M_1};
-    font-size: 18px;
-    line-height: 18px;
-    font-weight: 300;
-
     margin-top: 70px;
   }
 `;

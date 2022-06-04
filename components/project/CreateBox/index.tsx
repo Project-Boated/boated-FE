@@ -66,7 +66,9 @@ const CreateBox = ({
         <img src="/imgs/InnerCircle.png" />
         <img src="/imgs/OuterCircle.png" />
         <Icon icon="BoatedSymbol" width={49} height={46} />
-        <span>프로젝트 생성하기</span>
+        <Text fontSize={18} fontWeight={300} lineHeight={18} fontFamily="Gmarket Sans">
+          프로젝트 생성하기
+        </Text>
       </LeftContainer>
       <WarningAbsoluteWrapper>
         <Text color={Theme.W_1} fontSize={12} fontWeight={400}>
