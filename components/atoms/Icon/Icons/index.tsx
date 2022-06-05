@@ -6,3 +6,4 @@ export { default as SeaWaveMedium } from './SeaWaveMedium';
 export { default as KakaoSymbol } from './KaKaoSymbol';
 export { default as Setting } from './Setting';
 export { default as Arrow } from './Arrow';
+export { default as Loading } from './Loading';
