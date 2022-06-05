@@ -1,19 +1,30 @@
 import client from '@/lib/api/client';
-import { UserProfile } from '@/lib/types/user';
+import request from '@/lib/api/request';
+import {
+  PostUserNicknameDuplicatedRequestProps,
+  PostUserNicknameDuplicatedResponse,
+  PutUserNicknameRequestProps,
+} from '@/lib/api/types/user';
 
-export const getMe = () => client.get('/api/account/profile?isProxy=true').then((res) => res.data);
+const userBaseUrl = '/api/account/profile';
 
-export const getProfileImg = () =>
-  client.get('/api/account/profile/profile-image?isProxy=true').then((res) => res.data);
+const userUrl = {
+  getMe: `${userBaseUrl}?isProxy=true`,
+  postProfileImg: `${userBaseUrl}/profile-image`,
+  isNicknameDuplicated: `${userBaseUrl}/nickname/unique-validation`,
+  putProfileNickname: `${userBaseUrl}/nickname`,
+};
 
-export const postProfileImg = (profileImg: FormData) =>
-  client.post('/api/account/profile/profile-image', profileImg).then((res) => res.data);
+export const getMe = () => client.get(userUrl.getMe).then((res) => res.data);
 
-export const putProfileNickname = (nickname: string) =>
-  client.put('/api/account/profile/nickname', { nickname }).then((res) => res);
+export const postProfileImg = (profileImg: FormData) => request('POST', userUrl.postProfileImg, profileImg);
 
-export const patchProfile = (profile: UserProfile) =>
-  client.patch('/api/account/profile', profile).then((res) => res.data);
+export const isNicknameDuplicated = ({ nickname }: PostUserNicknameDuplicatedRequestProps) =>
+  request<PostUserNicknameDuplicatedResponse, PostUserNicknameDuplicatedRequestProps>(
+    'POST',
+    userUrl.isNicknameDuplicated,
+    { nickname },
+  );
 
-export const isNicknameDuplicated = (nickname: string) =>
-  client.post('/api/account/profile/nickname/unique-validation', { nickname }).then((res) => res.data);
+export const putProfileNickname = ({ nickname }: PutUserNicknameRequestProps) =>
+  request('PUT', userUrl.putProfileNickname, { nickname });

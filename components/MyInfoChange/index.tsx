@@ -7,20 +7,23 @@ import { getMe, isNicknameDuplicated, postProfileImg, putProfileNickname } from 
 import useDebounce from '@/hooks/useDebounce';
 
 import Icon from '@/components/atoms/Icon';
+import Text from '@/components/atoms/Text';
+import Button from '@/components/atoms/Button';
+
+import Theme from '@/styles/Theme';
 
 import {
   ImageInput,
-  DeleteAccount,
   NicknameInput,
   NicknameInputWrapper,
-  NicknameTitle,
-  NicknameWarningText,
+  NicknameTitleWrapper,
+  NicknameWarningTextWrapper,
   ProfileChangeWrapper,
   ProfileImage,
-  ProfileImageText,
   SeaIconWrapper,
   SettingIconLabel,
-  SubmitButton,
+  ButtonWrapper,
+  LoadingWrapper,
   Wrapper,
 } from './style';
 
@@ -31,28 +34,24 @@ const MyInfoChange = () => {
 
   const router = useRouter();
 
-  const debounceNickname = useDebounce<string>(nickname, 500);
+  const [isLoading, debounceNickname] = useDebounce<string>(nickname, 500);
 
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
 
-  const checkNicknameDuplicated = async (nickname: string) => {
+  const checkNicknameDuplicated = (nickname: string) => {
     if (nickname === '') {
       return;
     }
 
-    try {
-      const response = await isNicknameDuplicated(nickname);
-      if (response.duplicated) {
+    isNicknameDuplicated({ nickname }).then((res) => {
+      if (res.data.duplicated) {
         setIsDuplicated(true);
         return;
       }
       setIsDuplicated(false);
-    } catch (e: unknown) {
-      const error = e as AxiosError;
-      alert(JSON.stringify(error.response?.data.message));
-    }
+    });
   };
 
   const fetchProfileImage = async () => {
@@ -70,35 +69,27 @@ const MyInfoChange = () => {
     }
   };
 
-  const onChangeImg = async (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeImg = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files) {
       const formData = new FormData();
       const image = files[0];
 
-      try {
-        formData.append('file', image);
-        await postProfileImg(formData);
-        fetchProfileImage();
-      } catch (error) {
-        alert('오류가 발생했습니다. 다른 사진을 시도해주세요.');
-      }
+      formData.append('file', image);
+
+      postProfileImg(formData).then(() => fetchProfileImage());
     }
   };
 
-  const onClickSubmitNickname = async () => {
+  const onClickSubmitNickname = () => {
     if (isDuplicated) {
       return;
     }
-    try {
-      const response = await putProfileNickname(nickname);
-      if (response.status === 200) {
+    putProfileNickname({ nickname }).then((res) => {
+      if (res.statusCode === 200) {
         router.push('/project/create');
       }
-    } catch (e: unknown) {
-      const error = e as AxiosError;
-      alert(JSON.stringify(error.response?.data.message));
-    }
+    });
   };
 
   // 맨 처음 카카오 이미지를 위해 사용자 정보 불러오기
@@ -128,15 +119,24 @@ const MyInfoChange = () => {
           name="imgSrc"
           onChange={onChangeImg}
         />
-        <ProfileImageText>프로필 이미지</ProfileImageText>
+        <Text fontSize={14}>프로필 이미지</Text>
         <NicknameInputWrapper>
-          <NicknameTitle>닉네임</NicknameTitle>
+          <NicknameTitleWrapper>
+            <Text fontSize={14}>닉네임</Text>
+          </NicknameTitleWrapper>
           <NicknameInput value={nickname} onChange={onChangeNickname} />
+          <LoadingWrapper>{isLoading && <Icon width={30} height={30} icon="Loading" />}</LoadingWrapper>
         </NicknameInputWrapper>
-        <NicknameWarningText isDuplicated={isDuplicated}>*이미 존재하는 닉네임이에요!</NicknameWarningText>
-        <SubmitButton type="submit" onClick={onClickSubmitNickname}>
-          회원가입하기
-        </SubmitButton>
+        <NicknameWarningTextWrapper isDuplicated={isDuplicated}>
+          <Text fontSize={10} color={Theme.W_1}>
+            *이미 존재하는 닉네임이에요!
+          </Text>
+        </NicknameWarningTextWrapper>
+        <ButtonWrapper>
+          <Button width={200} height={52} onClick={onClickSubmitNickname}>
+            회원가입하기
+          </Button>
+        </ButtonWrapper>
       </ProfileChangeWrapper>
     </Wrapper>
   );

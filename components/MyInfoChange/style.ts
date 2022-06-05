@@ -54,24 +54,13 @@ export const ImageInput = styled.input`
   display: none;
 `;
 
-export const ProfileImageText = styled.div`
-  font-weight: 400;
-  font-size: 14px;
-
-  color: ${({ theme }) => theme.M_1};
-`;
-
 export const NicknameInputWrapper = styled.div`
   margin: 56px 35px 0 0;
   display: flex;
   align-items: center;
 `;
-export const NicknameTitle = styled.span`
-  font-weight: 400;
-  font-size: 14px;
-
+export const NicknameTitleWrapper = styled.div`
   margin-right: 33px;
-  color: ${({ theme }) => theme.M_1};
 `;
 
 export const NicknameInput = styled.input`
@@ -94,43 +83,17 @@ export const NicknameInput = styled.input`
   }
 `;
 
-export const NicknameWarningText = styled.div<{ isDuplicated: boolean }>`
+export const LoadingWrapper = styled.div`
+  position: absolute;
+  right: 15px;
+`;
+
+export const NicknameWarningTextWrapper = styled.div<{ isDuplicated: boolean }>`
   visibility: ${(props) => (props.isDuplicated ? 'visible' : 'hidden')};
 
-  margin: 8px 240px 0 0;
-
-  font-weight: 400;
-  font-size: 10px;
-
-  color: ${({ theme }) => theme.W_1};
+  margin: 8px 220px 0 0;
 `;
 
-export const SubmitButton = styled.button`
-  width: 200px;
-  height: 52px;
-
-  margin-top: 79px;
-
-  background-color: ${({ theme }) => theme.M_1};
-  color: ${({ theme }) => theme.S_0};
-  border: none;
-  border-radius: 6px;
-
-  font-weight: 400;
-  font-size: 13px;
-
-  cursor: pointer;
-`;
-
-export const DeleteAccount = styled.div`
-  position: absolute;
-  top: 536px;
-  left: 43px;
-
-  font-weight: 400;
-  font-size: 10px;
-
-  color: ${({ theme }) => theme.S_4};
-
-  cursor: pointer;
+export const ButtonWrapper = styled.div`
+  margin-top: 70px;
 `;
