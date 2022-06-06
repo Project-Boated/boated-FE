@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { NextPage } from 'next';
 import { AxiosError } from 'axios';
 
 import { kakaoLogin } from '@/lib/api/auth';
 
+import AppLayoutSub from '@/components/common/AppLayoutSub';
 import LoginBox from '@/components/Login/LoginBox';
 
-import { Wrapper } from '@/styles/pages/LoginPage/style';
-
-const LoginPage = () => {
+const LoginPage: NextPage = () => {
   const router = useRouter();
   const { code } = router.query;
 
@@ -20,7 +20,7 @@ const LoginPage = () => {
           res = await kakaoLogin(String(code));
 
           if (res.status === 200) {
-            router.push('/login');
+            router.push('/myInfoChange');
           }
         } catch (e: unknown) {
           const error = e as AxiosError;
@@ -31,9 +31,9 @@ const LoginPage = () => {
   }, [code]);
 
   return (
-    <Wrapper>
+    <AppLayoutSub>
       <LoginBox />
-    </Wrapper>
+    </AppLayoutSub>
   );
 };
 

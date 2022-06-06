@@ -11,6 +11,8 @@ export const Wrapper = styled.button<SizeProps & Props>`
   align-items: center;
   justify-content: center;
 
+  border: none;
+
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
 

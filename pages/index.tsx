@@ -1,93 +1,22 @@
 import React from 'react';
 import type { NextPage } from 'next';
-import styled from 'styled-components';
 import Link from 'next/link';
 
 import Icon from '@/components/atoms/Icon';
 
-const Wrapper = styled.div``;
-
-const MainSection = styled.section`
-  position: absolute;
-  margin-top: 52px;
-  width: 100%;
-  height: 400vh;
-
-  background: url('../imgs/LandingPageSVG.svg') no-repeat;
-  background-size: cover;
-`;
-
-const MainContainer = styled.div`
-  margin: 137px 0 0 46px;
-`;
-
-const WelcomeContainer = styled.div`
-  display: flex;
-  align-items: flex-end;
-`;
-
-const WelcomePhrase = styled.h1`
-  font-family: 'Gmarket Sans';
-  font-weight: 400;
-  font-size: 40px;
-`;
-
-const IconWrapper = styled.div`
-  margin-left: 29px;
-`;
-
-const LoginAnchor = styled.a`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 34px;
-
-  width: 200px;
-  height: 52px;
-
-  background: ${({ theme }) => theme.M_1};
-  color: ${({ theme }) => theme.S_0};
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
-  border-radius: 6px;
-  font-size: 13px;
-
-  cursor: pointer;
-`;
-
-const SubContainer = styled.div`
-  margin: 100vh auto 0 auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const AboutPhrase = styled.h2`
-  margin-bottom: 117px;
-
-  font-weight: 900;
-  font-size: 36px;
-
-  color: ${({ theme }) => theme.S_0};
-`;
-
-const BoxWrapper = styled.div`
-  display: flex;
-`;
-
-const Box = styled.div`
-  width: 432px;
-  height: 694px;
-
-  background: ${({ theme }) => theme.S_2};
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 51px;
-
-  & ~ & {
-    margin-left: 53px;
-  }
-`;
+import {
+  AboutPhrase,
+  Box,
+  BoxWrapper,
+  IconWrapper,
+  LoginAnchor,
+  MainContainer,
+  MainSection,
+  SubContainer,
+  WelcomeContainer,
+  WelcomePhrase,
+  Wrapper,
+} from '@/styles/pages/LandingPage/style';
 
 const LandingPage: NextPage = () => (
   <Wrapper>

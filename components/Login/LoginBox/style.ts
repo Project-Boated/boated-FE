@@ -19,7 +19,7 @@ export const SeaWaveWrapper = styled.div`
   svg {
     position: absolute;
     top: -4px;
-    left: -3px;
+    left: -4px;
   }
 `;
 

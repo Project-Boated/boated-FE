@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
+import { NextPage } from 'next';
 
 import { createProject } from '@/lib/api/projects';
 
 import CreateBox from '@/components/project/CreateBox';
 
-import { Wrapper } from '@/styles/pages/Project/style';
+import AppLayoutSub from '@/components/common/AppLayoutSub';
 
 export interface RequiredInfoState {
   name: string;
@@ -22,7 +23,7 @@ export interface OptionalInfoState {
   minute: string;
 }
 
-const projectCreatePage = () => {
+const projectCreatePage: NextPage = () => {
   const router = useRouter();
 
   const [isRight, setIsRight] = useState<boolean>(false);
@@ -79,7 +80,7 @@ const projectCreatePage = () => {
   }, [requiredInfo, optionalInfo]);
 
   return (
-    <Wrapper>
+    <AppLayoutSub>
       <CreateBox
         isRight={isRight}
         requiredInfo={requiredInfo}
@@ -89,7 +90,7 @@ const projectCreatePage = () => {
         setOptionalInfo={setOptionalInfo}
         onClickSubmit={onClickSubmit}
       />
-    </Wrapper>
+    </AppLayoutSub>
   );
 };
 
