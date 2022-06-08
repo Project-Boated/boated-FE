@@ -17,8 +17,8 @@ const AppLayoutSub = ({ children }: AppLayoutSubProps) => {
     <Wrapper>
       <ChildrenContainer>{children}</ChildrenContainer>
       <BackgroundContainer>
-        <BackgroundSeaWave src="/imgs/SubAppLayoutSeaWave.svg" />
-        <BackgroundRectangle src="/imgs/SubAppLayoutRectangle.svg" />
+        <BackgroundSeaWave />
+        <BackgroundRectangle />
       </BackgroundContainer>
     </Wrapper>
   );
