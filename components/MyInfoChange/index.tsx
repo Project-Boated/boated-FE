@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 
-import { getMe, isNicknameDuplicated, postProfileImg, putProfileNickname } from '@/lib/api/user';
+import { getMe, isNicknameDuplicated, postProfileImg, putProfileNickname } from '@/lib/api/profile';
 
 import useDebounce from '@/hooks/useDebounce';
 
@@ -87,7 +87,7 @@ const MyInfoChange = () => {
     }
     putProfileNickname({ nickname }).then((res) => {
       if (res.statusCode === 200) {
-        router.push('/project/create');
+        router.push('/');
       }
     });
   };
@@ -124,14 +124,19 @@ const MyInfoChange = () => {
           <NicknameTitleWrapper>
             <Text fontSize={14}>닉네임</Text>
           </NicknameTitleWrapper>
-          <NicknameInput value={nickname} onChange={onChangeNickname} />
+          <div>
+            <NicknameInput value={nickname} onChange={onChangeNickname} />
+            <NicknameWarningTextWrapper>
+              {debounceNickname && (
+                <Text fontSize={10} color={isDuplicated ? Theme.W_1 : Theme.P_2}>
+                  {isDuplicated ? '*이미 존재하는 닉네임이에요!' : '멋진 닉네임이에요!'}
+                </Text>
+              )}
+            </NicknameWarningTextWrapper>
+          </div>
           <LoadingWrapper>{isLoading && <Icon width={30} height={30} icon="Loading" />}</LoadingWrapper>
         </NicknameInputWrapper>
-        <NicknameWarningTextWrapper isDuplicated={isDuplicated}>
-          <Text fontSize={10} color={Theme.W_1}>
-            *이미 존재하는 닉네임이에요!
-          </Text>
-        </NicknameWarningTextWrapper>
+
         <ButtonWrapper>
           <Button width={200} height={52} onClick={onClickSubmitNickname}>
             회원가입하기
