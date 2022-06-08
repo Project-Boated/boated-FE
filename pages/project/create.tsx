@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
+import { AxiosError } from 'axios';
 
 import { createProject } from '@/lib/api/projects';
 
@@ -27,6 +28,7 @@ const projectCreatePage: NextPage = () => {
   const router = useRouter();
 
   const [isRight, setIsRight] = useState<boolean>(false);
+  const [isProjectNameDuplicated, setIsProjectNameDuplicated] = useState<boolean>(false);
 
   const [requiredInfo, setRequiredInfo] = useState<RequiredInfoState>({
     name: '',
@@ -50,6 +52,13 @@ const projectCreatePage: NextPage = () => {
 
     const tempOptionalInfoValues = Object.values(tempOptionalInfo);
 
+    const dateObject = new Date();
+    const today = {
+      year: dateObject.getFullYear(),
+      month: dateObject.getMonth() + 1,
+      date: dateObject.getDate(),
+    };
+
     if (name === '') {
       alert('프로젝트 이름을 작성해주세요!');
       return;
@@ -67,16 +76,43 @@ const projectCreatePage: NextPage = () => {
       }
     }
 
+    // if (today.year > Number(year)) {
+    //   alert('지난 연도를 선택할 수 없습니다!');
+    //   return;
+    // }
+
+    // if (today.year === Number(year)) {
+    //   if (today.month > Number(month)) {
+    //     alert('지난 월을 선택할 수 없습니다!');
+    //     return;
+    //   }
+
+    //   if (today.month === Number(month) && today.date > Number(date)) {
+    //     alert('지난 날짜를 선택할 수 없습니다!');
+    //     return;
+    //   }
+    // }
+
     createProject({
       name,
       description,
-      deadline: `${year}-${month}-${date}-${hour}-${minute}-00`,
+      deadline: year && `${year}-${month}-${date} ${hour}:${minute}:00`,
     })
       .then((res) => {
         alert('프로젝트가 생성되었습니다!');
         router.push(`/project/${res.data.id}`);
       })
-      .catch((e) => console.log(e));
+      .catch((e: AxiosError) => {
+        if (!e.response) return;
+
+        const { data } = e.response;
+
+        if (data.statusCode === 'P001') {
+          setIsProjectNameDuplicated(true);
+        }
+
+        alert(data.message);
+      });
   }, [requiredInfo, optionalInfo]);
 
   return (
@@ -85,6 +121,7 @@ const projectCreatePage: NextPage = () => {
         isRight={isRight}
         requiredInfo={requiredInfo}
         optionalInfo={optionalInfo}
+        isProjectNameDuplicated={isProjectNameDuplicated}
         setIsRight={setIsRight}
         setRequiredInfo={setRequiredInfo}
         setOptionalInfo={setOptionalInfo}
