@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { yearList, monthList, dateList, amHourList, pmHourList, minuteList } from '@/lib/constants/dropdownList';
 
@@ -29,10 +29,11 @@ import {
   StyledTextArea,
 } from './style';
 
-interface Props {
+export interface Props {
   isRight: boolean;
   requiredInfo: RequiredInfoState;
   optionalInfo: OptionalInfoState;
+  isProjectNameDuplicated: boolean;
   setIsRight: React.Dispatch<React.SetStateAction<boolean>>;
   setRequiredInfo: React.Dispatch<React.SetStateAction<RequiredInfoState>>;
   setOptionalInfo: React.Dispatch<React.SetStateAction<OptionalInfoState>>;
@@ -43,19 +44,23 @@ const CreateBox = ({
   isRight,
   requiredInfo,
   optionalInfo,
+  isProjectNameDuplicated,
   setIsRight,
   setRequiredInfo,
   setOptionalInfo,
   onClickSubmit,
 }: Props) => {
-  const onChangeRequiredInfo = (e: React.ChangeEvent<any>) => {
-    const { name, value } = e.target;
+  const onChangeRequiredInfo = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+      const { name, value } = e.target;
 
-    setRequiredInfo((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+      setRequiredInfo((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    },
+    [requiredInfo],
+  );
 
   return (
     <Wrapper>
@@ -89,9 +94,11 @@ const CreateBox = ({
             value={requiredInfo.name}
             onChange={onChangeRequiredInfo}
           />
-          <Text color={Theme.W_1} fontSize={8} fontWeight={400}>
-            중복된 이름이에요!
-          </Text>
+          {isProjectNameDuplicated && (
+            <Text color={Theme.W_1} fontSize={8} fontWeight={400}>
+              중복된 이름이에요!
+            </Text>
+          )}
         </ProjectNameContainer>
         <ProjectDueDateContainer>
           <Text fontSize={14}>프로젝트 기한</Text>
