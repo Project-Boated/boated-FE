@@ -55,12 +55,15 @@ export const ImageInput = styled.input`
 `;
 
 export const NicknameInputWrapper = styled.div`
-  margin: 56px 35px 0 0;
+  position: relative;
+
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+
+  margin: 56px 35px 0 0;
 `;
 export const NicknameTitleWrapper = styled.div`
-  margin-right: 33px;
+  margin: 10px 33px 0px 0px;
 `;
 
 export const NicknameInput = styled.input`
@@ -85,13 +88,12 @@ export const NicknameInput = styled.input`
 
 export const LoadingWrapper = styled.div`
   position: absolute;
-  right: 15px;
+  top: 5px;
+  right: -30px;
 `;
 
-export const NicknameWarningTextWrapper = styled.div<{ isDuplicated: boolean }>`
-  visibility: ${(props) => (props.isDuplicated ? 'visible' : 'hidden')};
-
-  margin: 8px 220px 0 0;
+export const NicknameWarningTextWrapper = styled.div`
+  margin: 8px 0px 0 0;
 `;
 
 export const ButtonWrapper = styled.div`
