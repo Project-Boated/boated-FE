@@ -7,22 +7,9 @@ pipeline {
                 slackSend (channel: '#jenkins', color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
             }
         }
-        stage('Make Docker Image') {
+        stage('Server Work') {
             steps {
-                sh 'docker build -t boated-fe .'
-                sh 'docker save -o boated-fe.tar boated-fe'
-            }
-        }
-        stage('Transfer Image To Server') {
-            steps {
-                sh 'scp boated-fe.tar ubuntu@15.164.89.188:/home/ubuntu/boated'
-                sh 'ssh ubuntu@15.164.89.188 "cd boated ; sh boated.sh"'
-            }
-        }
-        stage('Delete Docker Image') {
-            steps {
-                sh 'docker rmi boated-be'
-                sh 'rm boated-be.tar'
+                sh 'ssh ubuntu@15.164.89.188 "cd boated ; sh boated-fe.sh"'
             }
         }
     }
