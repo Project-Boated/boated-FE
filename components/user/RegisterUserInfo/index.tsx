@@ -2,56 +2,33 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 
-import { getMe, isNicknameDuplicated, postProfileImg, putProfileNickname } from '@/lib/api/profile';
-
-import useDebounce from '@/hooks/useDebounce';
+import { getMe, postProfileImg, putProfileNickname } from '@/lib/api/profile';
 
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
 import Button from '@/components/atoms/Button';
 
-import Theme from '@/styles/Theme';
+import NicknameInput from '@/components/user/NicknameInput';
 
 import {
   ImageInput,
-  NicknameInput,
-  NicknameInputWrapper,
-  NicknameTitleWrapper,
-  NicknameWarningTextWrapper,
   ProfileChangeWrapper,
   ProfileImage,
   SeaIconWrapper,
   SettingIconLabel,
   ButtonWrapper,
-  LoadingWrapper,
   Wrapper,
 } from './style';
 
-const MyInfoChange = () => {
+const RegisterUserInfo = () => {
   const [nickname, setNickname] = useState<string>('');
   const [profileImageUrl, setProfileImageUrl] = useState<string>('/imgs/defaultProfileImg.png');
   const [isDuplicated, setIsDuplicated] = useState<boolean>(false);
 
   const router = useRouter();
 
-  const [isLoading, debounceNickname] = useDebounce<string>(nickname, 500);
-
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
-  };
-
-  const checkNicknameDuplicated = (nickname: string) => {
-    if (nickname === '') {
-      return;
-    }
-
-    isNicknameDuplicated({ nickname }).then((res) => {
-      if (res.data.duplicated) {
-        setIsDuplicated(true);
-        return;
-      }
-      setIsDuplicated(false);
-    });
   };
 
   const fetchProfileImage = async () => {
@@ -97,11 +74,6 @@ const MyInfoChange = () => {
     fetchProfileImage();
   }, []);
 
-  // 닉네임 중복체크 디바운스
-  useEffect(() => {
-    checkNicknameDuplicated(debounceNickname);
-  }, [debounceNickname]);
-
   return (
     <Wrapper>
       <SeaIconWrapper>
@@ -120,23 +92,12 @@ const MyInfoChange = () => {
           onChange={onChangeImg}
         />
         <Text fontSize={14}>프로필 이미지</Text>
-        <NicknameInputWrapper>
-          <NicknameTitleWrapper>
-            <Text fontSize={14}>닉네임</Text>
-          </NicknameTitleWrapper>
-          <div>
-            <NicknameInput value={nickname} onChange={onChangeNickname} />
-            <NicknameWarningTextWrapper>
-              {debounceNickname && (
-                <Text fontSize={10} color={isDuplicated ? Theme.W_1 : Theme.P_2}>
-                  {isDuplicated ? '*이미 존재하는 닉네임이에요!' : '멋진 닉네임이에요!'}
-                </Text>
-              )}
-            </NicknameWarningTextWrapper>
-          </div>
-          <LoadingWrapper>{isLoading && <Icon width={30} height={30} icon="Loading" />}</LoadingWrapper>
-        </NicknameInputWrapper>
-
+        <NicknameInput
+          value={nickname}
+          isDuplicated={isDuplicated}
+          setIsDuplicated={setIsDuplicated}
+          onChange={onChangeNickname}
+        />
         <ButtonWrapper>
           <Button width={200} height={52} onClick={onClickSubmitNickname}>
             회원가입하기
@@ -147,4 +108,4 @@ const MyInfoChange = () => {
   );
 };
 
-export default MyInfoChange;
+export default RegisterUserInfo;

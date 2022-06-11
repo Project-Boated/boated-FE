@@ -54,48 +54,6 @@ export const ImageInput = styled.input`
   display: none;
 `;
 
-export const NicknameInputWrapper = styled.div`
-  position: relative;
-
-  display: flex;
-  align-items: flex-start;
-
-  margin: 56px 35px 0 0;
-`;
-export const NicknameTitleWrapper = styled.div`
-  margin: 10px 33px 0px 0px;
-`;
-
-export const NicknameInput = styled.input`
-  width: 380px;
-  height: 40px;
-
-  background: ${({ theme }) => theme.S_0};
-  border: ${({ theme }) => theme.S_4};
-  color: ${({ theme }) => theme.S_4};
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 6px;
-
-  font-weight: 400;
-  font-size: 14px;
-
-  padding: 0 13px;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-export const LoadingWrapper = styled.div`
-  position: absolute;
-  top: 5px;
-  right: -30px;
-`;
-
-export const NicknameWarningTextWrapper = styled.div`
-  margin: 8px 0px 0 0;
-`;
-
 export const ButtonWrapper = styled.div`
   margin-top: 70px;
 `;
