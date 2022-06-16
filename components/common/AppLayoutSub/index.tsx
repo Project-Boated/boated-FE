@@ -1,5 +1,7 @@
 import React from 'react';
 
+import GNB from '@/components/common/GNB';
+
 import {
   BackgroundContainer,
   BackgroundRectangle,
@@ -15,6 +17,7 @@ interface AppLayoutSubProps {
 const AppLayoutSub = ({ children }: AppLayoutSubProps) => {
   return (
     <Wrapper>
+      <GNB />
       <ChildrenContainer>{children}</ChildrenContainer>
       <BackgroundContainer>
         <BackgroundSeaWave />
