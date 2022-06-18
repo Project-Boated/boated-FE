@@ -15,7 +15,7 @@ import {
   NicknameInputWrapper,
   NicknameTitleWrapper,
   NicknameWarningTextWrapper,
-} from '@/components/user/NicknameInput/style';
+} from '@/components/common/NicknameInput/style';
 
 export interface NicknameInputProps {
   value: string;

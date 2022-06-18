@@ -1,10 +1,12 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
 
-import { getMe, postProfileImg } from '@/lib/api/profile';
+import { getMe } from '@/lib/api/profile';
 
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
+
+import { ImgObject } from '@/components/user/RegisterUserInfo';
 
 import {
   ImageInput,
@@ -12,15 +14,16 @@ import {
   SettingIconLabel,
   TextWrapper,
   UserProfileWrapper,
-} from '@/components/user/UserProfile/style';
+} from '@/components/common/UserProfile/style';
 
 export interface UserProfileProps {
   isChangeProfile?: boolean;
+  imgObject: ImgObject;
+  setImgObject: React.Dispatch<React.SetStateAction<ImgObject>>;
 }
 
-const UserProfile = ({ isChangeProfile }: UserProfileProps) => {
+const UserProfile = ({ isChangeProfile, imgObject, setImgObject }: UserProfileProps) => {
   const [nickname, setNickname] = useState<string>('');
-  const [profileImageUrl, setProfileImageUrl] = useState<string>('/imgs/defaultProfileImg.png');
 
   const fetchProfileImage = async () => {
     try {
@@ -29,10 +32,10 @@ const UserProfile = ({ isChangeProfile }: UserProfileProps) => {
       setNickname(response.nickname);
 
       if (response.profileImageUrl === null) {
-        setProfileImageUrl('/imgs/defaultProfileImg.png');
+        setImgObject({ ...imgObject, imgSrc: '/imgs/defaultProfileImg.png' });
         return;
       }
-      setProfileImageUrl(response.profileImageUrl);
+      setImgObject({ ...imgObject, imgSrc: response.profileImageUrl });
     } catch (e: unknown) {
       const error = e as AxiosError;
       alert(JSON.stringify(error.response?.data.message));
@@ -42,12 +45,9 @@ const UserProfile = ({ isChangeProfile }: UserProfileProps) => {
   const onChangeImg = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files) {
-      const formData = new FormData();
       const image = files[0];
 
-      formData.append('file', image);
-
-      postProfileImg(formData).then(() => fetchProfileImage());
+      setImgObject({ imgSrc: URL.createObjectURL(image), imgTargetFile: image });
     }
   };
 
@@ -58,7 +58,7 @@ const UserProfile = ({ isChangeProfile }: UserProfileProps) => {
 
   return (
     <UserProfileWrapper>
-      <ProfileImage src="/imgs/defaultProfileImg.png" alt="profileImg" />
+      <ProfileImage src={imgObject.imgSrc} alt="profileImg" />
       {isChangeProfile ? (
         <>
           <SettingIconLabel htmlFor="profileImg">

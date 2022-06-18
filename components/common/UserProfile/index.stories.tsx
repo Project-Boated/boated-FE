@@ -1,11 +1,11 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 
-import UserProfile, { UserProfileProps } from '@/components/user/UserProfile';
+import UserProfile, { UserProfileProps } from '@/components/common/UserProfile';
 
 export default {
   component: UserProfile,
-  title: 'user/UserProfile',
+  title: 'common/UserProfile',
 };
 
 const Template: Story<UserProfileProps> = (args: UserProfileProps) => <UserProfile {...args} />;
