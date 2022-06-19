@@ -1,5 +1,6 @@
 import React from 'react';
 import { Story } from '@storybook/react';
+
 import RegisterUserInfo from '@/components/user/RegisterUserInfo';
 
 export default {
