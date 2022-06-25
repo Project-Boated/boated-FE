@@ -59,10 +59,9 @@ export const ProfileWrapper = styled.div`
   cursor: pointer;
 `;
 
-export const ProfileImg = styled.div`
+export const ProfileImg = styled.img`
   width: 30px;
   height: 30px;
 
-  border: 1px solid black;
   border-radius: 50%;
 `;

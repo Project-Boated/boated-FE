@@ -13,8 +13,11 @@ import {
   Tab,
   Wrapper,
 } from '@/components/common/GNB/style';
+import useGetMyInfo from '@/hooks/useGetMyInfo';
 
 const GNB = () => {
+  const { data, isLoading } = useGetMyInfo();
+
   return (
     <Wrapper>
       <Container>
@@ -33,8 +36,8 @@ const GNB = () => {
           </Tab>
         </IconWrapper>
         <ProfileWrapper>
-          <ProfileImg />
-          <Text fontSize={13}>O 유지영님</Text>
+          <ProfileImg src={data.profileImageUrl} />
+          <Text fontSize={13}>{data.nickname}</Text>
         </ProfileWrapper>
       </Container>
     </Wrapper>
