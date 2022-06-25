@@ -1,6 +1,8 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import { patchProfile } from '@/lib/api/profile';
+
+import useGetMyInfo from '@/hooks/useGetMyInfo';
 
 import Button from '@/components/atoms/Button';
 
@@ -11,12 +13,21 @@ import { Container, Wrapper } from '@/components/user/ChangeUserInfo/style';
 import { ImgObject } from '@/components/user/RegisterUserInfo';
 
 const ChangeUserInfo = () => {
+  const { data, isLoading } = useGetMyInfo();
+
   const [nickname, setNickname] = useState<string>('');
+
   const [imgObject, setImgObject] = useState<ImgObject>({
     imgSrc: '/imgs/defaultProfileImg.png',
   });
 
   const [isDuplicated, setIsDuplicated] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setNickname(data.nickname);
+    }
+  }, [isLoading]);
 
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);

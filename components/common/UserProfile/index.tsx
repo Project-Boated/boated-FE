@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { AxiosError } from 'axios';
 
-import { getMe } from '@/lib/api/profile';
+import useGetMyInfo from '@/hooks/useGetMyInfo';
 
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
@@ -25,22 +24,7 @@ export interface UserProfileProps {
 const UserProfile = ({ isChangeProfile, imgObject, setImgObject }: UserProfileProps) => {
   const [nickname, setNickname] = useState<string>('');
 
-  const fetchProfileImage = async () => {
-    try {
-      const response = await getMe();
-
-      setNickname(response.nickname);
-
-      if (response.profileImageUrl === null) {
-        setImgObject({ ...imgObject, imgSrc: '/imgs/defaultProfileImg.png' });
-        return;
-      }
-      setImgObject({ ...imgObject, imgSrc: response.profileImageUrl });
-    } catch (e: unknown) {
-      const error = e as AxiosError;
-      alert(JSON.stringify(error.response?.data.message));
-    }
-  };
+  const { data, isLoading } = useGetMyInfo();
 
   const onChangeImg = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
@@ -53,8 +37,12 @@ const UserProfile = ({ isChangeProfile, imgObject, setImgObject }: UserProfilePr
 
   // 맨 처음 카카오 이미지를 위해 사용자 정보 불러오기
   useEffect(() => {
-    fetchProfileImage();
-  }, []);
+    if (!isLoading) {
+      setNickname(data.nickname);
+
+      setImgObject({ ...imgObject, imgSrc: data.profileImageUrl });
+    }
+  }, [isLoading]);
 
   return (
     <UserProfileWrapper>
