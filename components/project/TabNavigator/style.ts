@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   padding: 0px 5px;
 `;
 
-export const TabItem = styled.div<{ isSelected: boolean; onClick: any }>`
+export const TabItem = styled.div<{ isSelected: boolean }>`
   cursor: pointer;
 
   position: relative;
