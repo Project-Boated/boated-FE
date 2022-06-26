@@ -1,3 +1,3 @@
 export * from './common';
 export * from './error';
-export * from './project';
+export * from './projects';
