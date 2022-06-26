@@ -44,7 +44,7 @@ const RegisterUserInfo = () => {
 
     patchProfile(formData).then((res) => {
       if (res.statusCode === 200) {
-        router.push('/');
+        router.push('/project');
       }
     });
   };
