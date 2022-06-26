@@ -16,7 +16,7 @@ export const DefaultTitleWrapper = styled.div<DropDownSize>`
   justify-content: center;
 
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 6px;
+  border-radius: ${({ borderRadius }) => borderRadius}px;
   background-color: ${Theme.S_0};
 
   .default-title-container {
@@ -48,6 +48,17 @@ export const DefaultTitleWrapper = styled.div<DropDownSize>`
     `};
 
   ${({ type }) =>
+    type === 'size-88' &&
+    css`
+      width: 88px;
+      height: 28px;
+
+      .default-title-container {
+        width: 69px;
+      }
+    `}
+
+  ${({ type }) =>
     type === 'size-72' &&
     css`
       width: 72px;
@@ -59,9 +70,9 @@ export const DefaultTitleWrapper = styled.div<DropDownSize>`
     `};
 `;
 
-export const RefWrapper = styled.div`
+export const RefWrapper = styled.div<DropDownSize>`
   position: absolute;
-  top: 40px;
+  top: ${({ type }) => (type === 'size-88' ? 28 : 40)}px;
   z-index: 10;
 
   width: inherit;
@@ -75,12 +86,12 @@ export const SelectListWrapper = styled.ul<DropDownSize>`
   flex-direction: column;
 
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 6px;
+  border-radius: ${({ borderRadius }) => borderRadius}px;
   background-color: ${Theme.S_0};
 
   padding: 15px 0;
 
-  height: 260px;
+  height: ${({ type }) => (type === 'size-88' ? 84 : 260)}px;
 
   & > :not(:last-child) {
     margin-bottom: 15px;
@@ -107,6 +118,16 @@ export const SelectListWrapper = styled.ul<DropDownSize>`
     `};
 
   ${({ type }) =>
+    type === 'size-88' &&
+    css`
+      width: 88px;
+
+      li {
+        width: 100%;
+      }
+    `}
+
+  ${({ type }) =>
     type === 'size-72' &&
     css`
       width: 72px;
@@ -117,7 +138,7 @@ export const SelectListWrapper = styled.ul<DropDownSize>`
     `};
 `;
 
-export const SelectItemWrapper = styled.li<{ isSelected: boolean }>`
+export const SelectItemWrapper = styled.li<DropDownSize & { isSelected: boolean }>`
   cursor: pointer;
 
   display: flex;
@@ -126,10 +147,11 @@ export const SelectItemWrapper = styled.li<{ isSelected: boolean }>`
   border-radius: 6px;
   background-color: ${({ isSelected }) => isSelected && Theme.M_1};
 
+  font-size: ${({ type }) => (type === 'size-88' ? 10 : 14)}px;
   color: ${({ isSelected }) => isSelected && Theme.S_0};
 
   width: 50px;
-  min-height: 40px;
+  min-height: ${({ type }) => (type === 'size-88' ? 16 : 40)}px;
 
   padding-left: 13px;
 

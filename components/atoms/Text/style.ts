@@ -8,4 +8,6 @@ export const Wrapper = styled.span<TextProps>`
   font-weight: ${({ fontWeight }) => fontWeight};
   line-height: ${({ lineHeight }) => lineHeight}px;
   font-family: ${({ fontFamily }) => fontFamily};
+
+  text-decoration-line: ${({ hasUnderline }) => hasUnderline && 'underline'};
 `;

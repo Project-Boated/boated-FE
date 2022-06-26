@@ -10,6 +10,7 @@ export interface TextProps {
   fontWeight?: number;
   lineHeight?: number;
   fontFamily?: 'Noto Sans KR' | 'Gmarket Sans';
+  hasUnderline?: boolean;
   children: React.ReactText;
 }
 
@@ -19,10 +20,18 @@ const Text = ({
   fontWeight = 400,
   lineHeight = 20,
   fontFamily = 'Noto Sans KR',
+  hasUnderline = false,
   children,
 }: TextProps) => {
   return (
-    <Wrapper color={color} fontSize={fontSize} fontWeight={fontWeight} lineHeight={lineHeight} fontFamily={fontFamily}>
+    <Wrapper
+      color={color}
+      fontSize={fontSize}
+      fontWeight={fontWeight}
+      lineHeight={lineHeight}
+      fontFamily={fontFamily}
+      hasUnderline={hasUnderline}
+    >
       {children}
     </Wrapper>
   );

@@ -22,7 +22,15 @@ interface ScrollToProps {
   itemRef: React.RefObject<HTMLLIElement>;
 }
 
-const DropDown = ({ type, defaultTitle, target, selectList, selectedItem, setSelectedItem }: DropDownProps) => {
+const DropDown = ({
+  type,
+  borderRadius = 6,
+  defaultTitle,
+  target,
+  selectList,
+  selectedItem,
+  setSelectedItem,
+}: DropDownProps) => {
   const selectListRef = useRef<HTMLUListElement>(null);
   const [isShowList, setIsShowList] = useDetectOutsideClick(selectListRef);
 
@@ -68,19 +76,20 @@ const DropDown = ({ type, defaultTitle, target, selectList, selectedItem, setSel
 
   return (
     <Wrapper>
-      <DefaultTitleWrapper type={type} onClick={onClickDropDown}>
+      <DefaultTitleWrapper type={type} borderRadius={borderRadius} onClick={onClickDropDown}>
         <div className="default-title-container">
-          <Text fontSize={14}>{selectedItem || defaultTitle}</Text>
-          <Icon icon="Arrow" />
+          <Text fontSize={type === 'size-88' ? 10 : 14}>{selectedItem || defaultTitle}</Text>
+          <Icon icon="Arrow" width={type === 'size-88' ? 8 : 12} height={type === 'size-88' ? 5 : 8} />
         </div>
       </DefaultTitleWrapper>
       {isShowList && (
-        <RefWrapper>
-          <SelectListWrapper ref={selectListRef} type={type}>
+        <RefWrapper type={type}>
+          <SelectListWrapper ref={selectListRef} type={type} borderRadius={borderRadius}>
             {selectList.map((item, idx) => (
               <SelectItemWrapper
                 key={idx}
                 ref={isSelected(item, selectedItem) ? selectedItemRef : null}
+                type={type}
                 isSelected={isSelected(item, selectedItem)}
                 onClick={onClickListItem}
               >
