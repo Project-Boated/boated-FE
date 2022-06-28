@@ -8,7 +8,7 @@ const useGetMyInfo = () => {
   const { data, isLoading, error } = useQuery(KEY, getMe);
 
   return {
-    data: data !== undefined && data,
+    myInfo: data !== undefined && data,
     isLoading,
     error,
   };

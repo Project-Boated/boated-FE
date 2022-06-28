@@ -9,7 +9,7 @@ export const NicknameInputWrapper = styled.div`
   margin: 56px 35px 0 0;
 `;
 export const NicknameTitleWrapper = styled.div`
-  margin: 10px 33px 0px 0px;
+  margin: 10px 33px 0 0;
 `;
 
 export const LoadingWrapper = styled.div`
@@ -19,5 +19,5 @@ export const LoadingWrapper = styled.div`
 `;
 
 export const NicknameWarningTextWrapper = styled.div`
-  margin: 8px 0px 0 0;
+  margin-top: 8px;
 `;

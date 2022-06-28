@@ -5,3 +5,10 @@ export interface PostProfileNicknameDuplicatedRequestProps {
 export interface PostProfileNicknameDuplicatedResponse {
   duplicated: boolean;
 }
+
+export interface GetUserProfileResponse {
+  username: string;
+  nickname: string;
+  profileImageUrl: string;
+  roles: Array<string>;
+}

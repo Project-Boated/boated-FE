@@ -13,7 +13,7 @@ import { Container, Wrapper } from '@/components/user/ChangeUserInfo/style';
 import { ImgObject } from '@/components/user/RegisterUserInfo';
 
 const ChangeUserInfo = () => {
-  const { data, isLoading } = useGetMyInfo();
+  const { myInfo, isLoading } = useGetMyInfo();
 
   const [nickname, setNickname] = useState<string>('');
 
@@ -25,7 +25,7 @@ const ChangeUserInfo = () => {
 
   useEffect(() => {
     if (!isLoading) {
-      setNickname(data.nickname);
+      setNickname(myInfo.nickname);
     }
   }, [isLoading]);
 

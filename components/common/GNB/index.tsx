@@ -17,7 +17,7 @@ import {
 } from '@/components/common/GNB/style';
 
 const GNB = () => {
-  const { data } = useGetMyInfo();
+  const { myInfo } = useGetMyInfo();
 
   return (
     <Wrapper>
@@ -29,7 +29,7 @@ const GNB = () => {
               <Icon icon="BoatedSignature" width={92} height={30} />
             </IconAnchor>
           </Link>
-          {data && (
+          {myInfo && (
             <>
               <Tab>
                 <Text fontSize={13}>Project</Text>
@@ -40,10 +40,10 @@ const GNB = () => {
             </>
           )}
         </IconWrapper>
-        {data && (
+        {myInfo && (
           <ProfileWrapper>
-            <ProfileImg src={data.profileImageUrl} />
-            <Text fontSize={13}>{data.nickname}</Text>
+            <ProfileImg src={myInfo.profileImageUrl} />
+            <Text fontSize={13}>{myInfo.nickname}</Text>
           </ProfileWrapper>
         )}
       </Container>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { NextPage } from 'next';
-import styled from 'styled-components';
 
 import AppLayoutSub from '@/components/common/AppLayoutSub';
 

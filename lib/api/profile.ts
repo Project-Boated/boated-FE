@@ -2,6 +2,7 @@ import client from '@/lib/api/client';
 import request from '@/lib/api/request';
 
 import {
+  GetUserProfileResponse,
   PostProfileNicknameDuplicatedRequestProps,
   PostProfileNicknameDuplicatedResponse,
 } from '@/lib/api/types/profile';
@@ -15,7 +16,7 @@ const profileUrl = {
   patchProfile: profileBaseUrl,
 };
 
-export const getMe = () => client.get(profileUrl.getMe).then((res) => res.data);
+export const getMe = () => request<GetUserProfileResponse>('GET', profileUrl.getMe).then((res) => res.data);
 
 export const isNicknameDuplicated = ({ nickname }: PostProfileNicknameDuplicatedRequestProps) =>
   request<PostProfileNicknameDuplicatedResponse, PostProfileNicknameDuplicatedRequestProps>(

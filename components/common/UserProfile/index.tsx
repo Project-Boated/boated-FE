@@ -24,7 +24,7 @@ export interface UserProfileProps {
 const UserProfile = ({ isChangeProfile, imgObject, setImgObject }: UserProfileProps) => {
   const [nickname, setNickname] = useState<string>('');
 
-  const { data, isLoading } = useGetMyInfo();
+  const { myInfo, isLoading } = useGetMyInfo();
 
   const onChangeImg = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
@@ -38,9 +38,9 @@ const UserProfile = ({ isChangeProfile, imgObject, setImgObject }: UserProfilePr
   // 맨 처음 카카오 이미지를 위해 사용자 정보 불러오기
   useEffect(() => {
     if (!isLoading) {
-      setNickname(data.nickname);
+      setNickname(myInfo.nickname);
 
-      setImgObject({ ...imgObject, imgSrc: data.profileImageUrl });
+      setImgObject({ ...imgObject, imgSrc: myInfo.profileImageUrl });
     }
   }, [isLoading]);
 
