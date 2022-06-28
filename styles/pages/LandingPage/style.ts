@@ -4,7 +4,6 @@ export const Wrapper = styled.div``;
 
 export const MainSection = styled.section`
   position: absolute;
-  margin-top: 52px;
   width: 100%;
   height: 400vh;
 

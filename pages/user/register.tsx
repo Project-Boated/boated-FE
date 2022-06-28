@@ -1,16 +1,16 @@
 import React from 'react';
 import { NextPage } from 'next';
 
-import MyInfoChange from '@/components/MyInfoChange';
+import RegisterUserInfo from '@/components/user/RegisterUserInfo';
 
 import AppLayoutSub from '@/components/common/AppLayoutSub';
 
-const MyInfoChangePage: NextPage = () => {
+const RegisterUserInfoPage: NextPage = () => {
   return (
     <AppLayoutSub>
-      <MyInfoChange />
+      <RegisterUserInfo />
     </AppLayoutSub>
   );
 };
 
-export default MyInfoChangePage;
+export default RegisterUserInfoPage;
