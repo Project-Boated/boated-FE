@@ -3,12 +3,19 @@ import { AxiosResponse } from 'axios';
 
 import request from './request';
 
-import { PostProjectRequestProps, PostProjectResponse, GetProjectsResponse } from './types';
+import {
+  PostProjectRequestProps,
+  PostProjectResponse,
+  GetProjectMyProps,
+  GetProjectsResponse,
+  GetProjectMyResponse,
+} from './types';
 
 const projectsBaseUrl = '/api/projects';
 
 const projectsUrl = {
   projects: projectsBaseUrl,
+  projectsMy: `${projectsBaseUrl}/my`,
   projectsMyCaptain: `${projectsBaseUrl}/my/captain`,
   projectsMyCaptainTerminated: `${projectsBaseUrl}/my/captain/terminated`,
   projectsMyCrew: `${projectsBaseUrl}/my/crew`,
@@ -21,6 +28,11 @@ export const createProject = ({ name, description, deadline }: PostProjectReques
     description,
     deadline,
   });
+
+export const getProjectMy = (params: GetProjectMyProps) =>
+  request<GetProjectMyResponse, null, GetProjectMyProps>('GET', projectsUrl.projectsMy, null, params).then(
+    (res) => res.data,
+  );
 
 export const getProjectsMyCaptain = () =>
   request<GetProjectsResponse>('GET', projectsUrl.projectsMyCaptain).then((res) => res.data.projects);
