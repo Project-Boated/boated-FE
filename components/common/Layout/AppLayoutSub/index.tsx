@@ -12,7 +12,7 @@ const AppLayoutSub = ({ children }: Children) => {
     <Wrapper>
       <GNB />
       <ChildrenContainer height="100vh">{children}</ChildrenContainer>
-      <BackgroundContainer>
+      <BackgroundContainer bottom="-20vh">
         <BackgroundSeaWave />
         <BackgroundRectangle />
       </BackgroundContainer>

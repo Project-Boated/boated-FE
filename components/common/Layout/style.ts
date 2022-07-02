@@ -11,11 +11,11 @@ export const ChildrenContainer = styled.div<{ height?: string }>`
   height: ${({ height }) => height};
 `;
 
-export const BackgroundContainer = styled.div`
+export const BackgroundContainer = styled.div<{ bottom: string }>`
   position: absolute;
 
   width: 100%;
 
-  bottom: -20vh;
+  bottom: ${({ bottom }) => bottom};
   z-index: -999;
 `;

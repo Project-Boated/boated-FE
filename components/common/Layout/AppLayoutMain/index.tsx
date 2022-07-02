@@ -12,7 +12,7 @@ const AppLayoutMain = ({ children }: Children) => {
     <Wrapper>
       <GNB />
       <ChildrenContainer>{children}</ChildrenContainer>
-      <BackgroundContainer>
+      <BackgroundContainer bottom="-35vh">
         <BackgroundSeaWave />
       </BackgroundContainer>
     </Wrapper>

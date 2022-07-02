@@ -6,7 +6,7 @@ export const MainWrapper = styled.main`
 
   width: 1318px;
   margin: 0 auto;
-  margin-top: 64px;
+  margin-top: 128px;
 `;
 
 export const MainContentsWrapper = styled.section``;
