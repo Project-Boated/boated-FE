@@ -7,7 +7,7 @@ import { createProject } from '@/lib/api/projects';
 
 import CreateBox from '@/components/project/CreateBox';
 
-import AppLayoutSub from '@/components/common/AppLayoutSub';
+import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
 
 export interface RequiredInfoState {
   name: string;
