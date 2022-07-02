@@ -22,6 +22,28 @@ export interface ProjectInfoState {
   totalDay: number;
 }
 
+export interface GetProjectMyProps {
+  captain: 'term' | 'not-term' | undefined;
+  crew: 'term' | 'not-term' | undefined;
+  page: number;
+  size: number;
+  sort:
+    | 'name,asc'
+    | 'name,desc'
+    | 'deadline,asc'
+    | 'deadline,desc'
+    | 'createdDate,asc'
+    | 'createdDate,desc'
+    | undefined;
+}
+
 export interface GetProjectsResponse {
   projects: Array<ProjectInfoState>;
+}
+
+export interface GetProjectMyResponse {
+  page: number;
+  size: number;
+  hasNext: boolean;
+  content: Array<ProjectInfoState>;
 }

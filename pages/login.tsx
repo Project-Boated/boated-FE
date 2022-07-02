@@ -5,7 +5,8 @@ import { AxiosError } from 'axios';
 
 import { kakaoLogin } from '@/lib/api/auth';
 
-import AppLayoutSub from '@/components/common/AppLayoutSub';
+import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
+
 import LoginBox from '@/components/Login/LoginBox';
 
 const LoginPage: NextPage = () => {

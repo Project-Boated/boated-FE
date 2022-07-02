@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 
 import RegisterUserInfo from '@/components/user/RegisterUserInfo';
 
-import AppLayoutSub from '@/components/common/AppLayoutSub';
+import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
 
 const RegisterUserInfoPage: NextPage = () => {
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NextPage } from 'next';
 
-import AppLayoutSub from '@/components/common/AppLayoutSub';
+import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
 
 import ChangeUserInfo from '@/components/user/ChangeUserInfo';
 import ProfileNavigator from '@/components/user/ProfileNavigator';

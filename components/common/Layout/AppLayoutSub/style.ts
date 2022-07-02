@@ -1,25 +1,5 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div``;
-
-export const ChildrenContainer = styled.div`
-  height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const BackgroundContainer = styled.div`
-  position: absolute;
-
-  width: 100%;
-
-  bottom: -20vh;
-  z-index: -999;
-`;
-
 export const BackgroundSeaWave = styled.div`
   display: flex;
 
