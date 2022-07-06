@@ -41,10 +41,12 @@ const GNB = () => {
           )}
         </IconWrapper>
         {myInfo && (
-          <ProfileWrapper>
-            <ProfileImg src={myInfo.profileImageUrl} />
-            <Text fontSize={13}>{myInfo.nickname}</Text>
-          </ProfileWrapper>
+          <Link href="/user/change">
+            <ProfileWrapper>
+              <ProfileImg src={myInfo.profileImageUrl} />
+              <Text fontSize={13}>{myInfo.nickname}</Text>
+            </ProfileWrapper>
+          </Link>
         )}
       </Container>
     </Wrapper>

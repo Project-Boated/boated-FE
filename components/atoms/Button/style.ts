@@ -13,6 +13,8 @@ export const Wrapper = styled.button<SizeProps & Props>`
 
   border: none;
 
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
 

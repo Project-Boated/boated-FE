@@ -9,6 +9,8 @@ import {
   GetProjectMyProps,
   GetProjectsResponse,
   GetProjectMyResponse,
+  GetProjectsInvitesResponse,
+  PostProjectsInviteStatusRequestProps,
 } from './types';
 
 const projectsBaseUrl = '/api/projects';
@@ -20,6 +22,10 @@ const projectsUrl = {
   projectsMyCaptainTerminated: `${projectsBaseUrl}/my/captain/terminated`,
   projectsMyCrew: `${projectsBaseUrl}/my/crew`,
   projectsMyCrewTerminated: `${projectsBaseUrl}/my/crew/terminated`,
+
+  projectsInvites: '/api/account/invitations',
+  projectsInvitesAccept: ({ id }: PostProjectsInviteStatusRequestProps) => `/api/account/invitations/${id}/accept`,
+  projectsInvitesReject: ({ id }: PostProjectsInviteStatusRequestProps) => `/api/account/invitations/${id}/reject`,
 };
 
 export const createProject = ({ name, description, deadline }: PostProjectRequestProps) =>
@@ -45,3 +51,12 @@ export const getProjectsMyCrew = () =>
 
 export const getProjectsMyCrewTerminated = () =>
   request<GetProjectsResponse>('GET', projectsUrl.projectsMyCrewTerminated).then((res) => res.data.projects);
+
+export const getProjectsInvite = () =>
+  request<GetProjectsInvitesResponse>('GET', projectsUrl.projectsInvites).then((res) => res.data.invitations);
+
+export const postProjectsInviteAccept = ({ id }: PostProjectsInviteStatusRequestProps) =>
+  request('POST', projectsUrl.projectsInvitesAccept({ id }));
+
+export const postProjectsInviteReject = ({ id }: PostProjectsInviteStatusRequestProps) =>
+  request('POST', projectsUrl.projectsInvitesReject({ id }));

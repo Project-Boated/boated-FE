@@ -47,3 +47,18 @@ export interface GetProjectMyResponse {
   hasNext: boolean;
   content: Array<ProjectInfoState>;
 }
+export interface ProjectInviteState {
+  id: number;
+  createdDate: string;
+  name: string;
+  description: string;
+  captainNickname: string;
+}
+
+export interface GetProjectsInvitesResponse {
+  invitations: Array<ProjectInviteState>;
+}
+
+export interface PostProjectsInviteStatusRequestProps {
+  id: number;
+}
