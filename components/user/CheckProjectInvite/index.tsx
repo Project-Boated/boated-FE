@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useQuery } from 'react-query';
 import { AxiosError } from 'axios';
 
@@ -21,7 +21,7 @@ import Theme from '@/styles/Theme';
 const CheckProjectInvite = () => {
   const { data } = useQuery(queryKeys.PROJECTS_INVITES, () => getProjectsInvite());
 
-  const onClickInviteButton = (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
+  const onClickInviteButton = useCallback((event: React.MouseEvent<HTMLButtonElement>, id: number) => {
     const currentTarget: HTMLButtonElement = event.currentTarget;
 
     if (currentTarget.innerText === '수락') {
@@ -33,7 +33,7 @@ const CheckProjectInvite = () => {
     postProjectsInviteReject({ id })
       .then(() => alert('프로젝트를 거절했습니다.'))
       .catch((e: AxiosError) => alert(JSON.stringify(e.response?.data.message)));
-  };
+  }, []);
 
   return (
     <Wrapper>
@@ -69,54 +69,6 @@ const CheckProjectInvite = () => {
             </ProjectInviteWrapper>
           );
         })}
-      {/* <ProjectInviteWrapper>
-        <ProjectInviteTitleContainer>
-          <BoatedCircle />
-          <Text>프로젝트뭉리ㅓㅇㄷ거ㅔ메ㅓㅣㅣ</Text>
-        </ProjectInviteTitleContainer>
-        <Button width={115} height={59} fontSize={15}>
-          수락
-        </Button>
-        <Button width={115} height={59} fontSize={15} backgroundColor={Theme.S_0} fontColor={Theme.W_1}>
-          거절
-        </Button>
-      </ProjectInviteWrapper>
-      <ProjectInviteWrapper>
-        <ProjectInviteTitleContainer>
-          <BoatedCircle />
-          <Text>프로젝트뭉리ㅓㅇㄷ거ㅔ메ㅓㅣㅣ</Text>
-        </ProjectInviteTitleContainer>
-        <Button width={115} height={59} fontSize={15}>
-          수락
-        </Button>
-        <Button width={115} height={59} fontSize={15} backgroundColor={Theme.S_0} fontColor={Theme.W_1}>
-          거절
-        </Button>
-      </ProjectInviteWrapper>
-      <ProjectInviteWrapper>
-        <ProjectInviteTitleContainer>
-          <BoatedCircle />
-          <Text>프로젝트뭉리ㅓㅇㄷ거ㅔ메ㅓㅣㅣ</Text>
-        </ProjectInviteTitleContainer>
-        <Button width={115} height={59} fontSize={15}>
-          수락
-        </Button>
-        <Button width={115} height={59} fontSize={15} backgroundColor={Theme.S_0} fontColor={Theme.W_1}>
-          거절
-        </Button>
-      </ProjectInviteWrapper>
-      <ProjectInviteWrapper>
-        <ProjectInviteTitleContainer>
-          <BoatedCircle />
-          <Text>프로젝트뭉리ㅓㅇㄷ거ㅔ메ㅓㅣㅣ</Text>
-        </ProjectInviteTitleContainer>
-        <Button width={115} height={59} fontSize={15}>
-          수락
-        </Button>
-        <Button width={115} height={59} fontSize={15} backgroundColor={Theme.S_0} fontColor={Theme.W_1}>
-          거절
-        </Button>
-      </ProjectInviteWrapper> */}
     </Wrapper>
   );
 };
