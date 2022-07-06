@@ -47,6 +47,8 @@ export interface GetProjectMyResponse {
   hasNext: boolean;
   content: Array<ProjectInfoState>;
 }
+
+// 프로젝트 초대 확인, 승인, 거절
 export interface ProjectInviteState {
   id: number;
   createdDate: string;
@@ -61,4 +63,24 @@ export interface GetProjectsInvitesResponse {
 
 export interface PostProjectsInviteStatusRequestProps {
   id: number;
+}
+
+// 프로젝트 칸반 불러오기, lane 추가, 삭제
+export interface TaskState {
+  id: number;
+  name: string;
+  description: string;
+  deadline: string;
+  dday: number;
+  fileCount: number;
+}
+
+export interface KanbanColumnState {
+  id: number;
+  name: string;
+  tasks: Array<TaskState>;
+}
+
+export interface ProjectKanbanResponse {
+  lanes: Array<KanbanColumnState>;
 }

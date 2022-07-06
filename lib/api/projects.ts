@@ -52,6 +52,7 @@ export const getProjectsMyCrew = () =>
 export const getProjectsMyCrewTerminated = () =>
   request<GetProjectsResponse>('GET', projectsUrl.projectsMyCrewTerminated).then((res) => res.data.projects);
 
+// 프로젝트 초대 확인, 승인, 거절
 export const getProjectsInvite = () =>
   request<GetProjectsInvitesResponse>('GET', projectsUrl.projectsInvites).then((res) => res.data.invitations);
 
@@ -60,3 +61,5 @@ export const postProjectsInviteAccept = ({ id }: PostProjectsInviteStatusRequest
 
 export const postProjectsInviteReject = ({ id }: PostProjectsInviteStatusRequestProps) =>
   request('POST', projectsUrl.projectsInvitesReject({ id }));
+
+// 프로젝트 칸판 불러오기, lane 추가, 삭제
