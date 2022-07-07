@@ -1,5 +1,5 @@
 import React from 'react';
-import { Droppable } from 'react-beautiful-dnd';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 import { KanbanColumnState } from '@/lib/api/types';
 
@@ -10,27 +10,35 @@ import { KanbanContainer, KanbanHeader, Wrapper } from '@/components/common/Kanb
 
 import Theme from '@/styles/Theme';
 
-const KanbanColumn = ({ id, name, tasks }: KanbanColumnState) => {
+interface KanbanColumnProps extends KanbanColumnState {
+  index: number;
+}
+
+const KanbanColumn = ({ id, name, tasks, index }: KanbanColumnProps) => {
   return (
-    <Wrapper>
-      <KanbanHeader>
-        <Text fontSize={14} fontFamily={'Gmarket Sans'} color={Theme.S_0}>
-          {name}
-        </Text>
-      </KanbanHeader>
-      <Droppable droppableId={String(id)}>
-        {(provided) => (
-          <KanbanContainer {...provided.droppableProps} ref={provided.innerRef}>
-            <>
-              {tasks.map((task, index) => (
-                <Task key={task.id} index={index} task={task} />
-              ))}
-              {provided.placeholder}
-            </>
-          </KanbanContainer>
-        )}
-      </Droppable>
-    </Wrapper>
+    <Draggable draggableId={String(id)} index={index}>
+      {(provided) => (
+        <Wrapper {...provided.draggableProps} ref={provided.innerRef}>
+          <KanbanHeader {...provided.dragHandleProps}>
+            <Text fontSize={14} fontFamily={'Gmarket Sans'} color={Theme.S_0}>
+              {name}
+            </Text>
+          </KanbanHeader>
+          <Droppable droppableId={String(id)} type="task">
+            {(provided) => (
+              <KanbanContainer {...provided.droppableProps} ref={provided.innerRef}>
+                <>
+                  {tasks.map((task, index) => (
+                    <Task key={task.id} index={index} task={task} />
+                  ))}
+                  {provided.placeholder}
+                </>
+              </KanbanContainer>
+            )}
+          </Droppable>
+        </Wrapper>
+      )}
+    </Draggable>
   );
 };
 

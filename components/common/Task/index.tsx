@@ -22,4 +22,4 @@ const Task = ({ index, task }: TaskProps) => {
   );
 };
 
-export default Task;
+export default React.memo(Task);
