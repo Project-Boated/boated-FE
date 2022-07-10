@@ -66,6 +66,11 @@ export interface PostProjectsInviteStatusRequestProps {
 }
 
 // 프로젝트 칸반 불러오기, lane 추가, 삭제
+
+export interface AssignedAccount {
+  id: number;
+  nickname: string;
+}
 export interface TaskState {
   id: number;
   name: string;
@@ -73,6 +78,7 @@ export interface TaskState {
   deadline: string;
   dday: number;
   fileCount: number;
+  assignedAccounts: Array<AssignedAccount>;
 }
 
 export interface KanbanColumnState {
