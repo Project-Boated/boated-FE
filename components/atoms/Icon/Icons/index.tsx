@@ -9,3 +9,4 @@ export { default as Arrow } from './Arrow';
 export { default as Loading } from './Loading';
 export { default as Triangle } from './Triangle';
 export { default as Search } from './Search';
+export { default as CaptainExchange } from './CaptainExchange';
