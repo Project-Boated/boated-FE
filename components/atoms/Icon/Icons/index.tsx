@@ -14,3 +14,4 @@ export { default as Clock } from './Clock';
 export { default as Calendar } from './Calendar';
 export { default as Plus } from './Plus';
 export { default as X } from './X';
+export { default as XIcon } from './XIcon';
