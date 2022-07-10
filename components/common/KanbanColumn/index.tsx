@@ -16,7 +16,7 @@ interface KanbanColumnProps extends KanbanColumnState {
 
 const KanbanColumn = ({ id, name, tasks, index }: KanbanColumnProps) => {
   return (
-    <Draggable draggableId={String(id)} index={index}>
+    <Draggable draggableId={name} index={index}>
       {(provided) => (
         <Wrapper {...provided.draggableProps} ref={provided.innerRef}>
           <KanbanHeader {...provided.dragHandleProps}>

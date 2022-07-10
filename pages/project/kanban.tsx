@@ -7,6 +7,7 @@ import KanbanColumn from '@/components/common/KanbanColumn';
 import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
 
 const Wrapper = styled.div`
+  margin-top: 300px;
   display: flex;
   gap: 20px;
 `;
@@ -15,15 +16,30 @@ const KanbanTestPage: NextPage = () => {
   const [data, setData] = useState([
     {
       id: 1,
-      name: '1번 레인',
+      name: '대기중',
       tasks: [
         {
           id: 4,
-          name: 'Test Task 1',
-          description: 'Test Description',
-          deadline: '123',
-          dday: 456,
+          name: 'Test Task 1ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ',
+          description: 'Test Description ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㄴ',
+          deadline: '2022.07.21.',
+          dday: 3,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+            {
+              id: 3,
+              nickname: '계대환',
+            },
+            {
+              id: 4,
+              nickname: '김범준',
+            },
+          ],
         },
         {
           id: 5,
@@ -32,6 +48,13 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
         },
         {
           id: 6,
@@ -40,6 +63,13 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
         },
         {
           id: 7,
@@ -48,6 +78,13 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
         },
         {
           id: 9,
@@ -56,12 +93,19 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
         },
       ],
     },
     {
       id: 2,
-      name: '2번 레인',
+      name: '진행중',
       tasks: [
         {
           id: 10,
@@ -70,6 +114,13 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
         },
         {
           id: 11,
@@ -78,6 +129,13 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
         },
         {
           id: 12,
@@ -86,6 +144,13 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
         },
         {
           id: 13,
@@ -94,12 +159,19 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
         },
       ],
     },
     {
       id: 3,
-      name: '3번 레인',
+      name: '확인중',
       tasks: [
         {
           id: 14,
@@ -108,6 +180,13 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
         },
         {
           id: 15,
@@ -116,6 +195,13 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
         },
         {
           id: 16,
@@ -124,93 +210,52 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
         },
+      ],
+    },
+    {
+      id: 4,
+      name: '완료',
+      tasks: [
         {
           id: 17,
-          name: 'Test Task 4',
+          name: 'Test Task 1',
           description: 'Test Description',
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
+        },
+        {
+          id: 18,
+          name: 'Test Task 2',
+          description: 'Test Description',
+          deadline: '123',
+          dday: 456,
+          fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
         },
       ],
     },
-    // {
-    //   id: 4,
-    //   name: '4번 레인',
-    //   tasks: [
-    //     {
-    //       id: 1,
-    //       name: 'Test Task 1',
-    //       description: 'Test Description',
-    //       deadline: '123',
-    //       dday: 456,
-    //       fileCount: 5,
-    //     },
-    //     {
-    //       id: 2,
-    //       name: 'Test Task 2',
-    //       description: 'Test Description',
-    //       deadline: '123',
-    //       dday: 456,
-    //       fileCount: 5,
-    //     },
-    //     {
-    //       id: 3,
-    //       name: 'Test Task 3',
-    //       description: 'Test Description',
-    //       deadline: '123',
-    //       dday: 456,
-    //       fileCount: 5,
-    //     },
-    //     {
-    //       id: 4,
-    //       name: 'Test Task 4',
-    //       description: 'Test Description',
-    //       deadline: '123',
-    //       dday: 456,
-    //       fileCount: 5,
-    //     },
-    //   ],
-    // },
-    // {
-    //   id: 5,
-    //   name: '5번 레인',
-    //   tasks: [
-    //     {
-    //       id: 1,
-    //       name: 'Test Task 1',
-    //       description: 'Test Description',
-    //       deadline: '123',
-    //       dday: 456,
-    //       fileCount: 5,
-    //     },
-    //     {
-    //       id: 2,
-    //       name: 'Test Task 2',
-    //       description: 'Test Description',
-    //       deadline: '123',
-    //       dday: 456,
-    //       fileCount: 5,
-    //     },
-    //     {
-    //       id: 3,
-    //       name: 'Test Task 3',
-    //       description: 'Test Description',
-    //       deadline: '123',
-    //       dday: 456,
-    //       fileCount: 5,
-    //     },
-    //     {
-    //       id: 4,
-    //       name: 'Test Task 4',
-    //       description: 'Test Description',
-    //       deadline: '123',
-    //       dday: 456,
-    //       fileCount: 5,
-    //     },
-    //   ],
-    // },
   ]);
 
   const onDragEnd = useCallback(
@@ -219,14 +264,17 @@ const KanbanTestPage: NextPage = () => {
       // destination은 도착, source은 출발
       // droppableId는 컬럼의 id
       // key, id값 모두 고유해야 이상하게 작동을 안함.
+      // 그래서 column의 id는 name으로 해주었다.
 
       const { destination, source, draggableId, type } = result;
+
       if (!destination) return;
       if (destination.droppableId === source.droppableId && source.index === destination.index) return;
 
+      // 컬럼 자를 움직일때
       if (type === 'column') {
         const newColumn = [...data];
-        const targetColumn = [...newColumn.filter((column) => column.id === Number(draggableId))][0];
+        const targetColumn = [...newColumn.filter((column) => column.name === draggableId)][0];
         newColumn.splice(source.index, 1);
         newColumn.splice(destination.index, 0, targetColumn);
 
@@ -284,8 +332,6 @@ const KanbanTestPage: NextPage = () => {
   );
 
   resetServerContext();
-
-  console.log(data);
 
   return (
     <AppLayoutMain>
