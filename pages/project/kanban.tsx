@@ -256,6 +256,42 @@ const KanbanTestPage: NextPage = () => {
         },
       ],
     },
+    // {
+    //   id: 5,
+    //   name: '완료',
+    //   tasks: [
+    //     {
+    //       id: 18,
+    //       name: 'Test Task 1',
+    //       description: 'Test Description',
+    //       deadline: '123',
+    //       dday: 456,
+    //       fileCount: 5,
+    //       assignedAccounts: [
+    //         { id: 1, nickname: '박성호' },
+    //         {
+    //           id: 2,
+    //           nickname: '윤준서',
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       id: 19,
+    //       name: 'Test Task 2',
+    //       description: 'Test Description',
+    //       deadline: '123',
+    //       dday: 456,
+    //       fileCount: 5,
+    //       assignedAccounts: [
+    //         { id: 1, nickname: '박성호' },
+    //         {
+    //           id: 2,
+    //           nickname: '윤준서',
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
   ]);
 
   const onDragEnd = useCallback(
