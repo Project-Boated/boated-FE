@@ -11,3 +11,9 @@ export default {
 const Template: Story<UserProfileProps> = (args: UserProfileProps) => <UserProfile {...args} />;
 
 export const Default = Template.bind({});
+Default.args = {
+  isChangeProfile: true,
+  imgObject: {
+    imgSrc: '/imgs/defaultProfileImg.png',
+  },
+};
