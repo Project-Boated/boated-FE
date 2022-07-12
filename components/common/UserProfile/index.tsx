@@ -18,10 +18,11 @@ import {
 export interface UserProfileProps {
   isChangeProfile?: boolean;
   imgObject: ImgObject;
+  children: React.ReactNode;
   setImgObject: React.Dispatch<React.SetStateAction<ImgObject>>;
 }
 
-const UserProfile = ({ isChangeProfile, imgObject, setImgObject }: UserProfileProps) => {
+const UserProfile = ({ isChangeProfile, imgObject, children, setImgObject }: UserProfileProps) => {
   const [nickname, setNickname] = useState<string>('');
 
   const { myInfo, isLoading } = useGetMyInfo();
@@ -37,6 +38,7 @@ const UserProfile = ({ isChangeProfile, imgObject, setImgObject }: UserProfilePr
 
   // 맨 처음 카카오 이미지를 위해 사용자 정보 불러오기
   useEffect(() => {
+    if (!myInfo) return;
     if (!isLoading) {
       setNickname(myInfo.nickname);
 
@@ -59,7 +61,7 @@ const UserProfile = ({ isChangeProfile, imgObject, setImgObject }: UserProfilePr
             name="imgSrc"
             onChange={onChangeImg}
           />
-          <Text fontSize={14}>프로필 이미지</Text>
+          <Text fontSize={14}>{children}</Text>
         </>
       ) : (
         <>
