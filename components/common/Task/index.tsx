@@ -22,7 +22,7 @@ import {
 
 import Theme from '@/styles/Theme';
 
-interface TaskProps {
+export interface TaskProps {
   index: number;
   task: TaskState;
 }

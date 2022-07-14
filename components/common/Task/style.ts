@@ -7,8 +7,8 @@ export const Wrapper = styled.div`
 
   margin-top: 19px;
 
-  min-width: 227px;
-  min-height: 186px;
+  width: 227px;
+  height: 186px;
 
   background: ${Theme.S_0};
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
