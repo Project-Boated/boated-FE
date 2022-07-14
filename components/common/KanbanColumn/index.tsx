@@ -10,7 +10,7 @@ import { KanbanContainer, KanbanHeader, Wrapper } from '@/components/common/Kanb
 
 import Theme from '@/styles/Theme';
 
-interface KanbanColumnProps extends KanbanColumnState {
+export interface KanbanColumnProps extends KanbanColumnState {
   index: number;
 }
 
