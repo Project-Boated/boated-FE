@@ -95,13 +95,13 @@ const Task = ({ index, task }: TaskProps) => {
                 })}
               </EllipsisSpanWrapper>
             </AssignedAccountsContainer>
-            <TaskDescription>
+            {/* <TaskDescription>
               <EllipsisSpanWrapper>
                 <Text fontWeight={400} fontSize={12} color={Theme.P_1}>
                   {task.description}
                 </Text>
               </EllipsisSpanWrapper>
-            </TaskDescription>
+            </TaskDescription> */}
           </ContentsWrapper>
         </Wrapper>
       )}

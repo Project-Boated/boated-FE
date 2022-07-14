@@ -34,7 +34,9 @@ export const TaskNameContainer = styled.div`
   display: flex;
   align-items: center;
 
-  width: 193px;
+  margin-top: 10px;
+
+  width: 200px;
 `;
 
 export const TextContainer = styled.div`
@@ -53,7 +55,7 @@ export const DivEnd = styled.div`
 export const AssignedAccountsContainer = styled.div`
   width: 170px;
 
-  margin-top: 20px;
+  margin-top: 50px;
   gap: 6px;
 
   display: flex;

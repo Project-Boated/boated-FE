@@ -2,17 +2,53 @@ import React, { useCallback, useState } from 'react';
 import { NextPage } from 'next';
 import { DragDropContext, Droppable, DropResult, resetServerContext } from 'react-beautiful-dnd';
 import styled from 'styled-components';
+import { useQuery } from 'react-query';
+
+import * as queryKeys from '@/lib/constants/queryKeys';
+import { getProjectsKanban, postProjectsKanbanLaneChange } from '@/lib/api/projects';
+
+import Text from '@/components/atoms/Text';
+import Button from '@/components/atoms/Button';
 
 import KanbanColumn from '@/components/common/KanbanColumn';
 import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
 
 const Wrapper = styled.div`
   margin-top: 300px;
+`;
+
+const KanbanWrapper = styled.div`
+  max-width: 1045px;
+
+  overflow-x: auto;
+`;
+
+const Container = styled.div`
   display: flex;
   gap: 20px;
 `;
 
+const TaskTextWrapper = styled.div`
+  margin-bottom: 20px;
+`;
+
+const ButtonWrapper = styled.div`
+  margin-top: 28px;
+
+  float: right;
+`;
+
 const KanbanTestPage: NextPage = () => {
+  const projectId = 1;
+
+  const {
+    isLoading,
+    error,
+    data: kanbanData,
+  } = useQuery(`${queryKeys.PROJECTS_KANBAN}/${projectId}`, () => getProjectsKanban({ id: projectId }));
+
+  console.log(kanbanData);
+
   const [data, setData] = useState([
     {
       id: 1,
@@ -258,7 +294,7 @@ const KanbanTestPage: NextPage = () => {
     },
     // {
     //   id: 5,
-    //   name: '완료',
+    //   name: '미공개',
     //   tasks: [
     //     {
     //       id: 18,
@@ -295,7 +331,7 @@ const KanbanTestPage: NextPage = () => {
   ]);
 
   const onDragEnd = useCallback(
-    (result: DropResult) => {
+    async (result: DropResult) => {
       // draggableId는 드래그 하려는 컴포넌트의 등록해놨던 id. 여기선 task의 id
       // destination은 도착, source은 출발
       // droppableId는 컬럼의 id
@@ -313,6 +349,12 @@ const KanbanTestPage: NextPage = () => {
         const targetColumn = [...newColumn.filter((column) => column.name === draggableId)][0];
         newColumn.splice(source.index, 1);
         newColumn.splice(destination.index, 0, targetColumn);
+
+        await postProjectsKanbanLaneChange({
+          id: projectId,
+          originalIndex: source.index,
+          changeIndex: destination.index,
+        });
 
         setData([...newColumn]);
         return;
@@ -371,18 +413,30 @@ const KanbanTestPage: NextPage = () => {
 
   return (
     <AppLayoutMain>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="all-columns" direction="horizontal" type="column">
-          {(provided) => (
-            <Wrapper {...provided.droppableProps} ref={provided.innerRef}>
-              {data.map((data, index) => (
-                <KanbanColumn key={data.id} id={data.id} name={data.name} tasks={data.tasks} index={index} />
-              ))}
-              {provided.placeholder}
-            </Wrapper>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <Wrapper>
+        <TaskTextWrapper>
+          <Text fontSize={20}>Task</Text>
+        </TaskTextWrapper>
+        <KanbanWrapper>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="all-columns" direction="horizontal" type="column">
+              {(provided) => (
+                <Container {...provided.droppableProps} ref={provided.innerRef}>
+                  {data.map((data, index) => (
+                    <KanbanColumn key={data.id} id={data.id} name={data.name} tasks={data.tasks} index={index} />
+                  ))}
+                  {provided.placeholder}
+                </Container>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </KanbanWrapper>
+        <ButtonWrapper>
+          <Button width={200} height={52}>
+            Task 추가하기
+          </Button>
+        </ButtonWrapper>
+      </Wrapper>
     </AppLayoutMain>
   );
 };
