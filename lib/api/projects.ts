@@ -14,6 +14,7 @@ import {
   GetProjectKanbanResponse,
   ProjectsIdProps,
   PostProjectsKanbanRequestProps,
+  PostProjectsKanbanChangeRequestProps,
 } from './types';
 
 const projectsBaseUrl = '/api/projects';
@@ -32,6 +33,8 @@ const projectsUrl = {
 
   projectsKanban: ({ id }: ProjectsIdProps) => `${projectsBaseUrl}/${id}/kanban`,
   projectsKanbanLane: ({ id }: ProjectsIdProps) => `${projectsBaseUrl}/${id}/kanban/lanes`,
+  projectsKanbanLaneChange: ({ id, originalIndex, changeIndex }: PostProjectsKanbanChangeRequestProps) =>
+    `${projectsBaseUrl}/${id}/kanban/lanes/change/${originalIndex}/${changeIndex}`,
 };
 
 export const createProject = ({ name, description, deadline }: PostProjectRequestProps) =>
@@ -77,3 +80,11 @@ export const postProjectsKanbanLane = ({ id, name }: PostProjectsKanbanRequestPr
 
 export const deleteProjectsKanbanLane = ({ id }: ProjectsIdProps) =>
   request('DELETE', projectsUrl.projectsKanbanLane({ id }));
+
+export const postProjectsKanbanLaneChange = ({
+  id,
+  originalIndex,
+  changeIndex,
+}: PostProjectsKanbanChangeRequestProps) => {
+  request('POST', projectsUrl.projectsKanbanLaneChange({ id, originalIndex, changeIndex }));
+};

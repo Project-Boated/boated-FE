@@ -70,9 +70,13 @@ export interface ProjectsIdProps {
   id: number;
 }
 
-export interface PostProjectsKanbanRequestProps {
-  id: number;
+export interface PostProjectsKanbanRequestProps extends ProjectsIdProps {
   name: string;
+}
+
+export interface PostProjectsKanbanChangeRequestProps extends ProjectsIdProps {
+  originalIndex: number;
+  changeIndex: number;
 }
 
 export interface AssignedAccount {
