@@ -10,8 +10,10 @@ import { getProjectsKanban, postProjectsKanbanLaneChange } from '@/lib/api/proje
 import Text from '@/components/atoms/Text';
 import Button from '@/components/atoms/Button';
 
-import KanbanColumn from '@/components/common/KanbanColumn';
 import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
+
+import KanbanColumn from '@/components/project/Kanban/KanbanColumn';
+import Modal from '@/components/common/Modal';
 
 const Wrapper = styled.div`
   margin-top: 300px;
@@ -49,10 +51,12 @@ const KanbanTestPage: NextPage = () => {
 
   console.log(kanbanData);
 
+  // const [data, setData] = useState(kanbanData);
+
   const [data, setData] = useState([
     {
       id: 1,
-      name: '대기중',
+      name: 'READY',
       tasks: [
         {
           id: 4,
@@ -141,7 +145,7 @@ const KanbanTestPage: NextPage = () => {
     },
     {
       id: 2,
-      name: '진행중',
+      name: 'PROCESS',
       tasks: [
         {
           id: 10,
@@ -207,7 +211,7 @@ const KanbanTestPage: NextPage = () => {
     },
     {
       id: 3,
-      name: '확인중',
+      name: 'CHECKING',
       tasks: [
         {
           id: 14,
@@ -258,7 +262,7 @@ const KanbanTestPage: NextPage = () => {
     },
     {
       id: 4,
-      name: '완료',
+      name: 'COMPLETE',
       tasks: [
         {
           id: 17,
@@ -292,42 +296,42 @@ const KanbanTestPage: NextPage = () => {
         },
       ],
     },
-    // {
-    //   id: 5,
-    //   name: '미공개',
-    //   tasks: [
-    //     {
-    //       id: 18,
-    //       name: 'Test Task 1',
-    //       description: 'Test Description',
-    //       deadline: '123',
-    //       dday: 456,
-    //       fileCount: 5,
-    //       assignedAccounts: [
-    //         { id: 1, nickname: '박성호' },
-    //         {
-    //           id: 2,
-    //           nickname: '윤준서',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       id: 19,
-    //       name: 'Test Task 2',
-    //       description: 'Test Description',
-    //       deadline: '123',
-    //       dday: 456,
-    //       fileCount: 5,
-    //       assignedAccounts: [
-    //         { id: 1, nickname: '박성호' },
-    //         {
-    //           id: 2,
-    //           nickname: '윤준서',
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
+    {
+      id: 5,
+      name: '미공개',
+      tasks: [
+        {
+          id: 18,
+          name: 'Test Task 1',
+          description: 'Test Description',
+          deadline: '123',
+          dday: 456,
+          fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
+        },
+        {
+          id: 19,
+          name: 'Test Task 2',
+          description: 'Test Description',
+          deadline: '123',
+          dday: 456,
+          fileCount: 5,
+          assignedAccounts: [
+            { id: 1, nickname: '박성호' },
+            {
+              id: 2,
+              nickname: '윤준서',
+            },
+          ],
+        },
+      ],
+    },
   ]);
 
   const onDragEnd = useCallback(
@@ -411,33 +415,51 @@ const KanbanTestPage: NextPage = () => {
 
   resetServerContext();
 
+  // if (error) {
+  //   return <div>error</div>;
+  // }
+
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
+
   return (
-    <AppLayoutMain>
-      <Wrapper>
-        <TaskTextWrapper>
-          <Text fontSize={20}>Task</Text>
-        </TaskTextWrapper>
-        <KanbanWrapper>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="all-columns" direction="horizontal" type="column">
-              {(provided) => (
-                <Container {...provided.droppableProps} ref={provided.innerRef}>
-                  {data.map((data, index) => (
-                    <KanbanColumn key={data.id} id={data.id} name={data.name} tasks={data.tasks} index={index} />
-                  ))}
-                  {provided.placeholder}
-                </Container>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </KanbanWrapper>
-        <ButtonWrapper>
-          <Button width={200} height={52}>
-            Task 추가하기
-          </Button>
-        </ButtonWrapper>
-      </Wrapper>
-    </AppLayoutMain>
+    <>
+      <AppLayoutMain>
+        <Wrapper>
+          <TaskTextWrapper>
+            <Text fontSize={20}>Task</Text>
+          </TaskTextWrapper>
+          <KanbanWrapper>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="all-columns" direction="horizontal" type="column">
+                {(provided) => (
+                  <Container {...provided.droppableProps} ref={provided.innerRef}>
+                    {data.map((column, index) => (
+                      <KanbanColumn
+                        key={column.id}
+                        id={column.id}
+                        name={column.name}
+                        tasks={column.tasks}
+                        index={index}
+                        dataLength={data.length}
+                      />
+                    ))}
+                    {provided.placeholder}
+                  </Container>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </KanbanWrapper>
+          <ButtonWrapper>
+            <Button width={200} height={52}>
+              Task 추가하기
+            </Button>
+          </ButtonWrapper>
+        </Wrapper>
+      </AppLayoutMain>
+      <Modal>123</Modal>
+    </>
   );
 };
 
