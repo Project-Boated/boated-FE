@@ -55,7 +55,9 @@ const RegisterUserInfo = () => {
         <Icon icon="SeaWaveMedium" width={916} height={586} />
       </SeaIconWrapper>
       <ProfileChangeWrapper>
-        <UserProfile isChangeProfile imgObject={imgObject} setImgObject={setImgObject} />
+        <UserProfile isChangeProfile imgObject={imgObject} setImgObject={setImgObject}>
+          프로필 이미지
+        </UserProfile>
         <NicknameInput
           value={nickname}
           isDuplicated={isDuplicated}

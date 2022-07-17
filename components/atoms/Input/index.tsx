@@ -9,11 +9,12 @@ export interface InputProps {
   width: number;
   height: number;
   value: string;
+  maxLength?: number;
   placeholder?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ type, id, name, width, height, value, placeholder, onChange }: InputProps) => {
+const Input = ({ type, id, name, width, height, value, maxLength, placeholder, onChange }: InputProps) => {
   return (
     <StyledInput
       type={type}
@@ -21,6 +22,7 @@ const Input = ({ type, id, name, width, height, value, placeholder, onChange }: 
       name={name}
       width={width}
       height={height}
+      maxLength={maxLength}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
@@ -28,4 +30,4 @@ const Input = ({ type, id, name, width, height, value, placeholder, onChange }: 
   );
 };
 
-export default Input;
+export default React.memo(Input);

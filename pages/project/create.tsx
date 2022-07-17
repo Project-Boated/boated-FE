@@ -9,20 +9,7 @@ import CreateBox from '@/components/project/CreateBox';
 
 import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
 
-export interface RequiredInfoState {
-  name: string;
-  description: string;
-  [key: string]: string;
-}
-
-export interface OptionalInfoState {
-  year: string;
-  month: string;
-  date: string;
-  type?: 'AM' | 'PM';
-  hour: string;
-  minute: string;
-}
+import { RequiredInfo, OptionalInfo } from '@/types/project';
 
 const projectCreatePage: NextPage = () => {
   const router = useRouter();
@@ -30,12 +17,12 @@ const projectCreatePage: NextPage = () => {
   const [isRight, setIsRight] = useState<boolean>(false);
   const [isProjectNameDuplicated, setIsProjectNameDuplicated] = useState<boolean>(false);
 
-  const [requiredInfo, setRequiredInfo] = useState<RequiredInfoState>({
+  const [requiredInfo, setRequiredInfo] = useState<RequiredInfo>({
     name: '',
     description: '',
   });
 
-  const [optionalInfo, setOptionalInfo] = useState<OptionalInfoState>({
+  const [optionalInfo, setOptionalInfo] = useState<OptionalInfo>({
     year: '',
     month: '',
     date: '',

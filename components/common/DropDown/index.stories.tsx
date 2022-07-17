@@ -17,4 +17,5 @@ YearDropDown.args = {
   type: 'size-176',
   defaultTitle: 'YYYY',
   selectList: yearList,
+  target: 'year',
 };

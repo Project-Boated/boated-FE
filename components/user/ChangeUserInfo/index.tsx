@@ -24,6 +24,7 @@ const ChangeUserInfo = () => {
   const [isDuplicated, setIsDuplicated] = useState<boolean>(false);
 
   useEffect(() => {
+    if (!myInfo) return;
     if (!isLoading) {
       setNickname(myInfo.nickname);
     }
@@ -56,7 +57,9 @@ const ChangeUserInfo = () => {
   return (
     <Wrapper>
       <Container>
-        <UserProfile isChangeProfile imgObject={imgObject} setImgObject={setImgObject} />
+        <UserProfile isChangeProfile imgObject={imgObject} setImgObject={setImgObject}>
+          프로필 이미지
+        </UserProfile>
         <NicknameInput
           value={nickname}
           isDuplicated={isDuplicated}
