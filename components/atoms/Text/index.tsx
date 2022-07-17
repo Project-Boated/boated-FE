@@ -11,7 +11,7 @@ export interface TextProps {
   lineHeight?: number;
   fontFamily?: 'Noto Sans KR' | 'Gmarket Sans';
   hasUnderline?: boolean;
-  children: React.ReactText;
+  children: React.ReactNode;
 }
 
 const Text = ({
