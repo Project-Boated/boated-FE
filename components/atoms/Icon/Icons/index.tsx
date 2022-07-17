@@ -10,3 +10,7 @@ export { default as Loading } from './Loading';
 export { default as Triangle } from './Triangle';
 export { default as Search } from './Search';
 export { default as CaptainExchange } from './CaptainExchange';
+export { default as Clock } from './Clock';
+export { default as Calendar } from './Calendar';
+export { default as Plus } from './Plus';
+export { default as X } from './X';

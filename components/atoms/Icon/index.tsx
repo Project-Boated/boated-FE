@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import * as icons from '@/components/atoms/Icon/Icons';
 
@@ -7,6 +7,7 @@ interface IIconWrapperProps {
   width?: number;
   height?: number;
   rotate?: number;
+  isButton?: boolean;
 }
 
 const IconWrapper = styled.div<IIconWrapperProps>`
@@ -21,23 +22,26 @@ const IconWrapper = styled.div<IIconWrapperProps>`
   ${(props) =>
     props.rotate && {
       transform: `rotate(${props.rotate}deg)`,
-    }}
+    }};
+  ${(props) =>
+    props.isButton &&
+    css`
+      cursor: pointer;
+    `}
 `;
 
 type IconOption = keyof typeof icons;
 
-interface IIconProps {
+interface IIconProps extends IIconWrapperProps {
   icon: IconOption;
-  width?: number;
-  height?: number;
-  rotate?: number;
+  color?: string;
 }
 
-const Icon = ({ icon, width, height, rotate, ...props }: IIconProps) => {
+const Icon = ({ icon, width, height, rotate, isButton = false, ...props }: IIconProps) => {
   const IconComponent = icons[icon];
 
   return (
-    <IconWrapper {...props} width={width} height={height} rotate={rotate}>
+    <IconWrapper {...props} width={width} height={height} rotate={rotate} isButton={isButton}>
       <IconComponent {...props} />
     </IconWrapper>
   );
