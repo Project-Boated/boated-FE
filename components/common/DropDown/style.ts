@@ -68,15 +68,38 @@ export const DefaultTitleWrapper = styled.div<DropDownSize>`
         width: 52px;
       }
     `};
+
+  ${({ type }) =>
+    type === 'size-47' &&
+    css`
+      width: 47px;
+      height: 22px;
+
+      .default-title-container {
+        width: 34px;
+      }
+    `}
 `;
 
 export const RefWrapper = styled.div<DropDownSize>`
   position: absolute;
-  top: ${({ type }) => (type === 'size-88' ? 28 : 40)}px;
+  top: 40px;
   z-index: 10;
 
   width: inherit;
   height: 0;
+
+  ${({ type }) =>
+    type === 'size-88' &&
+    css`
+      top: 28px;
+    `}
+
+  ${({ type }) =>
+    type === 'size-47' &&
+    css`
+      top: 23px;
+    `}
 `;
 
 export const SelectListWrapper = styled.ul<DropDownSize>`
@@ -136,6 +159,16 @@ export const SelectListWrapper = styled.ul<DropDownSize>`
         width: 100%;
       }
     `};
+
+  ${({ type }) =>
+    type === 'size-47' &&
+    css`
+      width: 47px;
+
+      li {
+        width: 100%;
+      }
+    `}
 `;
 
 export const SelectItemWrapper = styled.li<DropDownSize & { isSelected: boolean }>`
@@ -147,11 +180,11 @@ export const SelectItemWrapper = styled.li<DropDownSize & { isSelected: boolean 
   border-radius: 6px;
   background-color: ${({ isSelected }) => isSelected && Theme.M_1};
 
-  font-size: ${({ type }) => (type === 'size-88' ? 10 : 14)}px;
+  font-size: ${({ type }) => (type === 'size-88' || type === 'size-47' ? 10 : 14)}px;
   color: ${({ isSelected }) => isSelected && Theme.S_0};
 
   width: 50px;
-  min-height: ${({ type }) => (type === 'size-88' ? 16 : 40)}px;
+  min-height: ${({ type }) => (type === 'size-88' || type === 'size-47' ? 16 : 40)}px;
 
   padding-left: 13px;
 

@@ -78,8 +78,12 @@ const DropDown = ({
     <Wrapper>
       <DefaultTitleWrapper type={type} borderRadius={borderRadius} onClick={onClickDropDown}>
         <div className="default-title-container">
-          <Text fontSize={type === 'size-88' ? 10 : 14}>{selectedItem || defaultTitle}</Text>
-          <Icon icon="Arrow" width={type === 'size-88' ? 8 : 12} height={type === 'size-88' ? 5 : 8} />
+          <Text fontSize={type === 'size-88' || type === 'size-47' ? 10 : 14}>{selectedItem || defaultTitle}</Text>
+          <Icon
+            icon="Arrow"
+            width={type === 'size-88' || type === 'size-47' ? 8 : 12}
+            height={type === 'size-88' || type === 'size-47' ? 5 : 8}
+          />
         </div>
       </DefaultTitleWrapper>
       {isShowList && (
