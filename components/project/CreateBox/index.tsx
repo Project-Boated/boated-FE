@@ -6,13 +6,14 @@ import Icon from '@/components/atoms/Icon';
 import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
 import Button from '@/components/atoms/Button';
+import Textarea from '@/components/atoms/Textarea';
 
 import DropDown from '@/components/common/DropDown';
 import ToggleSwitch from '@/components/common/ToggleSwitch';
 
 import Theme from '@/styles/Theme';
 
-import { RequiredInfoState, OptionalInfoState } from '@/pages/project/create';
+import { RequiredInfo, OptionalInfo } from '@/types/project';
 
 import {
   Wrapper,
@@ -26,17 +27,16 @@ import {
   DateWrapper,
   TimeWrapper,
   ProjectDescriptionContainer,
-  StyledTextArea,
 } from './style';
 
 export interface Props {
   isRight: boolean;
-  requiredInfo: RequiredInfoState;
-  optionalInfo: OptionalInfoState;
+  requiredInfo: RequiredInfo;
+  optionalInfo: OptionalInfo;
   isProjectNameDuplicated: boolean;
   setIsRight: React.Dispatch<React.SetStateAction<boolean>>;
-  setRequiredInfo: React.Dispatch<React.SetStateAction<RequiredInfoState>>;
-  setOptionalInfo: React.Dispatch<React.SetStateAction<OptionalInfoState>>;
+  setRequiredInfo: React.Dispatch<React.SetStateAction<RequiredInfo>>;
+  setOptionalInfo: React.Dispatch<React.SetStateAction<OptionalInfo>>;
   onClickSubmit: () => void;
 }
 
@@ -159,9 +159,12 @@ const CreateBox = ({
           <StyledLabel htmlFor="description">
             프로젝트 소개 <span className="is-required">*</span>
           </StyledLabel>
-          <StyledTextArea
+          <Textarea
+            width={566}
+            height={108}
             id="description"
             name="description"
+            maxLength={255}
             value={requiredInfo.description}
             onChange={onChangeRequiredInfo}
           />
