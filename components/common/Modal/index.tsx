@@ -1,5 +1,6 @@
-import Icon from '@/components/atoms/Icon';
 import React from 'react';
+
+import Icon from '@/components/atoms/Icon';
 
 import * as Styled from './styled';
 

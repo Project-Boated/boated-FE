@@ -40,4 +40,6 @@ export const KanbanContainer = styled.div`
 export const IconContainer = styled.div`
   position: absolute;
   right: 5px;
+
+  cursor: pointer;
 `;
