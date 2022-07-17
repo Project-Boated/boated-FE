@@ -15,3 +15,5 @@ export { default as Calendar } from './Calendar';
 export { default as Plus } from './Plus';
 export { default as X } from './X';
 export { default as XIcon } from './XIcon';
+export { default as KanbanColumndAdd } from './KanbanColumnAdd';
+export { default as KanbanColumnDelete } from './KanbanColumnDelete';
