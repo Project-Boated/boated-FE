@@ -2,11 +2,11 @@ import React from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Story } from '@storybook/react';
 
-import KanbanColumn, { KanbanColumnProps } from '@/components/common/KanbanColumn';
+import KanbanColumn, { KanbanColumnProps } from '@/components/project/Kanban/KanbanColumn';
 
 export default {
   component: KanbanColumn,
-  title: 'common/KanbanColumn',
+  title: 'project/Kanban/KanbanColumn',
 };
 
 const Template: Story<KanbanColumnProps> = (args: KanbanColumnProps) => (

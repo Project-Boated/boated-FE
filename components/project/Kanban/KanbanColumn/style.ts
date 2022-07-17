@@ -8,6 +8,8 @@ export const Wrapper = styled.div`
 `;
 
 export const KanbanHeader = styled.div`
+  position: relative;
+
   width: 246px;
   height: 37px;
 
@@ -33,4 +35,9 @@ export const KanbanContainer = styled.div`
 
   background: ${Theme.S_1};
   border-radius: 8px;
+`;
+
+export const IconContainer = styled.div`
+  position: absolute;
+  right: 5px;
 `;

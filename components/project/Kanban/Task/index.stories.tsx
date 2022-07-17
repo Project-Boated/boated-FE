@@ -2,11 +2,11 @@ import React from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Story } from '@storybook/react';
 
-import Task, { TaskProps } from '@/components/common/Task';
+import Task, { TaskProps } from '@/components/project/Kanban/Task';
 
 export default {
   component: Task,
-  title: 'common/Task',
+  title: 'project/Kanban/Task',
 };
 
 const Template: Story<TaskProps> = (args: TaskProps) => (
