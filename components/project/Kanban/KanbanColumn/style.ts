@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import Theme from '@/styles/Theme';
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -37,7 +37,7 @@ export const KanbanContainer = styled.div`
   border-radius: 8px;
 `;
 
-export const IconContainer = styled.div`
+export const IconWrapper = styled.div`
   position: absolute;
   right: 5px;
 

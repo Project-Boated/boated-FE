@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 import { KanbanColumnState } from '@/lib/api/types';
@@ -8,9 +8,9 @@ import Icon from '@/components/atoms/Icon';
 
 import Task from '@/components/project/Kanban/Task';
 
-import * as Styled from './style';
-
 import Theme from '@/styles/Theme';
+
+import * as Styled from './style';
 
 export interface KanbanColumnProps extends KanbanColumnState {
   index: number;
@@ -18,27 +18,27 @@ export interface KanbanColumnProps extends KanbanColumnState {
 }
 
 const KanbanColumn = ({ id, name, tasks, index, dataLength }: KanbanColumnProps) => {
-  const isCustomLane = useCallback((columnName: string) => {
-    if (columnName === 'READY' || columnName === 'PROCESS' || columnName === 'CHECKING' || columnName === 'COMPLETE') {
+  const isCustomLane = useMemo(() => {
+    if (name === 'READY' || name === 'PROCESS' || name === 'CHECKING' || name === 'COMPLETE') {
       return false;
     }
     return true;
-  }, []);
+  }, [name]);
 
   return (
     <Draggable draggableId={name} index={index}>
       {(provided) => (
-        <Styled.Wrapper {...provided.draggableProps} ref={provided.innerRef}>
+        <Styled.Container {...provided.draggableProps} ref={provided.innerRef}>
           <Styled.KanbanHeader {...provided.dragHandleProps}>
             {dataLength === 4 && index === 3 && (
-              <Styled.IconContainer>
+              <Styled.IconWrapper>
                 <Icon icon="KanbanColumndAdd" />
-              </Styled.IconContainer>
+              </Styled.IconWrapper>
             )}
-            {isCustomLane(name) && (
-              <Styled.IconContainer>
+            {isCustomLane && (
+              <Styled.IconWrapper>
                 <Icon icon="KanbanColumnDelete" />
-              </Styled.IconContainer>
+              </Styled.IconWrapper>
             )}
             <Text fontSize={14} fontFamily={'Gmarket Sans'} color={Theme.S_0}>
               {name}
@@ -56,7 +56,7 @@ const KanbanColumn = ({ id, name, tasks, index, dataLength }: KanbanColumnProps)
               </Styled.KanbanContainer>
             )}
           </Droppable>
-        </Styled.Wrapper>
+        </Styled.Container>
       )}
     </Draggable>
   );

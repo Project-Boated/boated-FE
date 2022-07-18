@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
 import { TaskState } from '@/lib/api/types';
@@ -6,9 +6,9 @@ import { TaskState } from '@/lib/api/types';
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
 
-import * as Styled from './style';
-
 import Theme from '@/styles/Theme';
+
+import * as Styled from './style';
 
 export interface TaskProps {
   index: number;
@@ -16,16 +16,26 @@ export interface TaskProps {
 }
 
 const Task = ({ index, task }: TaskProps) => {
+  const [isIconVisible, setIsIconVisible] = useState(false);
+
   //Task 삭제 함수
   const onClickTaskDelete = () => {};
 
   return (
     <Draggable draggableId={String(task.id)} index={index}>
       {(provided) => (
-        <Styled.Wrapper {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-          <Styled.IconWrapper onClick={onClickTaskDelete}>
-            <Icon icon="XIcon" />
-          </Styled.IconWrapper>
+        <Styled.Wrapper
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+          onMouseEnter={() => setIsIconVisible(true)}
+          onMouseLeave={() => setIsIconVisible(false)}
+        >
+          {isIconVisible && (
+            <Styled.IconWrapper onClick={onClickTaskDelete}>
+              <Icon icon="X" />
+            </Styled.IconWrapper>
+          )}
           <Styled.ContentsWrapper>
             <Styled.TaskNameContainer>
               <Styled.EllipsisSpanWrapper>
