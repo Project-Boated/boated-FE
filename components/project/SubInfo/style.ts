@@ -11,7 +11,7 @@ export const Container = styled.div`
   width: 298px;
   height: 53px;
 
-  ${boxDesign}
+  ${boxDesign()}
 
   & > :first-child {
     margin-right: 9px;

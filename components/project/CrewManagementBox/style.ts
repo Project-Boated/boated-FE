@@ -10,7 +10,7 @@ export const Container = styled.div`
   width: 370px;
   height: 700px;
 
-  ${boxDesign}
+  ${boxDesign()}
 `;
 
 export const InnerContainer = styled.div`
@@ -56,5 +56,5 @@ export const CrewItem = styled.li`
 
   padding: 0 10px;
 
-  ${boxDesign};
+  ${boxDesign()};
 `;
