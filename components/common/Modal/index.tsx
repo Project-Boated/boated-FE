@@ -2,7 +2,7 @@ import React from 'react';
 
 import Icon from '@/components/atoms/Icon';
 
-import * as Styled from './styled';
+import * as Styled from './style';
 
 interface ModalProps {
   children: React.ReactNode;
@@ -13,12 +13,12 @@ interface ModalProps {
 const Modal = ({ children, width = 729, height = 258 }: ModalProps) => {
   return (
     <Styled.Background>
-      <Styled.Wrapper width={width} height={height}>
+      <Styled.Container width={width} height={height}>
         <Styled.XIconWrapper>
-          <Icon icon="XIcon" />
+          <Icon icon="X" />
         </Styled.XIconWrapper>
         {children}
-      </Styled.Wrapper>
+      </Styled.Container>
     </Styled.Background>
   );
 };
