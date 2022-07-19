@@ -25,12 +25,12 @@ const CheckProjectInvite = () => {
     const currentTarget: HTMLButtonElement = event.currentTarget;
 
     if (currentTarget.innerText === '수락') {
-      postProjectsInviteAccept({ id })
+      postProjectsInviteAccept(id)
         .then(() => alert('프로젝트를 수락했습니다.'))
         .catch((e: AxiosError) => alert(JSON.stringify(e.response?.data.message)));
       return;
     }
-    postProjectsInviteReject({ id })
+    postProjectsInviteReject(id)
       .then(() => alert('프로젝트를 거절했습니다.'))
       .catch((e: AxiosError) => alert(JSON.stringify(e.response?.data.message)));
   }, []);

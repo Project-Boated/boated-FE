@@ -47,7 +47,7 @@ const KanbanTestPage: NextPage = () => {
     isLoading,
     error,
     data: kanbanData,
-  } = useQuery(`${queryKeys.PROJECTS_KANBAN}/${projectId}`, () => getProjectsKanban({ id: projectId }));
+  } = useQuery(`${queryKeys.PROJECTS_KANBAN}/${projectId}`, () => getProjectsKanban(projectId));
 
   console.log(kanbanData);
 
@@ -458,7 +458,7 @@ const KanbanTestPage: NextPage = () => {
           </ButtonWrapper>
         </Wrapper>
       </AppLayoutMain>
-      <Modal>123</Modal>
+      {/* <Modal>123</Modal> */}
     </>
   );
 };

@@ -10,9 +10,7 @@ import {
   GetProjectsResponse,
   GetProjectMyResponse,
   GetProjectsInvitesResponse,
-  PostProjectsInviteStatusRequestProps,
   GetProjectKanbanResponse,
-  ProjectsIdProps,
   PostProjectsKanbanRequestProps,
   PostProjectsKanbanChangeRequestProps,
 } from './types';
@@ -28,11 +26,11 @@ const projectsUrl = {
   projectsMyCrewTerminated: `${projectsBaseUrl}/my/crew/terminated`,
 
   projectsInvites: '/api/account/invitations',
-  projectsInvitesAccept: ({ id }: PostProjectsInviteStatusRequestProps) => `/api/account/invitations/${id}/accept`,
-  projectsInvitesReject: ({ id }: PostProjectsInviteStatusRequestProps) => `/api/account/invitations/${id}/reject`,
+  projectsInvitesAccept: (id: number) => `/api/account/invitations/${id}/accept`,
+  projectsInvitesReject: (id: number) => `/api/account/invitations/${id}/reject`,
 
-  projectsKanban: ({ id }: ProjectsIdProps) => `${projectsBaseUrl}/${id}/kanban`,
-  projectsKanbanLane: ({ id }: ProjectsIdProps) => `${projectsBaseUrl}/${id}/kanban/lanes`,
+  projectsKanban: (id: number) => `${projectsBaseUrl}/${id}/kanban`,
+  projectsKanbanLane: (id: number) => `${projectsBaseUrl}/${id}/kanban/lanes`,
   projectsKanbanLaneChange: ({ id, originalIndex, changeIndex }: PostProjectsKanbanChangeRequestProps) =>
     `${projectsBaseUrl}/${id}/kanban/lanes/change/${originalIndex}/${changeIndex}`,
 };
@@ -65,21 +63,18 @@ export const getProjectsMyCrewTerminated = () =>
 export const getProjectsInvite = () =>
   request<GetProjectsInvitesResponse>('GET', projectsUrl.projectsInvites).then((res) => res.data.invitations);
 
-export const postProjectsInviteAccept = ({ id }: PostProjectsInviteStatusRequestProps) =>
-  request('POST', projectsUrl.projectsInvitesAccept({ id }));
+export const postProjectsInviteAccept = (id: number) => request('POST', projectsUrl.projectsInvitesAccept(id));
 
-export const postProjectsInviteReject = ({ id }: PostProjectsInviteStatusRequestProps) =>
-  request('POST', projectsUrl.projectsInvitesReject({ id }));
+export const postProjectsInviteReject = (id: number) => request('POST', projectsUrl.projectsInvitesReject(id));
 
 // 프로젝트 칸반 불러오기, lane 추가, 삭제
-export const getProjectsKanban = ({ id }: ProjectsIdProps) =>
-  request<GetProjectKanbanResponse>('GET', projectsUrl.projectsKanban({ id })).then((res) => res.data.lanes);
+export const getProjectsKanban = (id: number) =>
+  request<GetProjectKanbanResponse>('GET', projectsUrl.projectsKanban(id)).then((res) => res.data.lanes);
 
 export const postProjectsKanbanLane = ({ id, name }: PostProjectsKanbanRequestProps) =>
-  request('POST', projectsUrl.projectsKanbanLane({ id }), { name });
+  request('POST', projectsUrl.projectsKanbanLane(id), { name });
 
-export const deleteProjectsKanbanLane = ({ id }: ProjectsIdProps) =>
-  request('DELETE', projectsUrl.projectsKanbanLane({ id }));
+export const deleteProjectsKanbanLane = (id: number) => request('DELETE', projectsUrl.projectsKanbanLane(id));
 
 export const postProjectsKanbanLaneChange = ({
   id,
