@@ -15,19 +15,19 @@ export const ProjectProfileContainer = styled.div`
   width: inherit;
   height: 150px;
 
-  ${boxDesign}
+  ${boxDesign()}
 `;
 
 export const SideTab = styled.ul`
   width: inherit;
   height: 333px;
 
-  ${boxDesign}
+  ${boxDesign()}
 `;
 
 export const CalendarWrapper = styled.div`
   width: inherit;
   height: 326px;
 
-  ${boxDesign}
+  ${boxDesign()}
 `;

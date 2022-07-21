@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  reactStrictMode: true,
+  // react-beautiful-dnd 위해서 헤제
+  // reactStrictMode: true,
   env: {
     CLIENT_URL: process.env.CLIENT_URL,
     SERVER_URL: process.env.SERVER_URL,
