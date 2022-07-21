@@ -5,18 +5,20 @@ import styled from 'styled-components';
 import { useQuery } from 'react-query';
 
 import * as queryKeys from '@/lib/constants/queryKeys';
-import { getProjectsKanban, postProjectsKanbanLaneChange } from '@/lib/api/projects';
+import { getProjectsKanban, postProjectsKanbanLaneChange, postProjectsTaskChange } from '@/lib/api/projects';
+
+import useModal from '@/hooks/useModal';
 
 import Text from '@/components/atoms/Text';
 import Button from '@/components/atoms/Button';
 
 import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
-
-import KanbanColumn from '@/components/project/Kanban/KanbanColumn';
 import Modal from '@/components/common/Modal';
 
+import KanbanColumn from '@/components/project/Kanban/KanbanColumn';
+
 const Wrapper = styled.div`
-  margin-top: 300px;
+  margin-top: 50px;
 `;
 
 const KanbanWrapper = styled.div`
@@ -42,6 +44,8 @@ const ButtonWrapper = styled.div`
 
 const KanbanTestPage: NextPage = () => {
   const projectId = 1;
+
+  const { isShowModal, closeModal, openModal } = useModal();
 
   const {
     isLoading,
@@ -301,7 +305,7 @@ const KanbanTestPage: NextPage = () => {
       name: '미공개',
       tasks: [
         {
-          id: 18,
+          id: 19,
           name: 'Test Task 1',
           description: 'Test Description',
           deadline: '123',
@@ -316,7 +320,7 @@ const KanbanTestPage: NextPage = () => {
           ],
         },
         {
-          id: 19,
+          id: 20,
           name: 'Test Task 2',
           description: 'Test Description',
           deadline: '123',
@@ -354,13 +358,13 @@ const KanbanTestPage: NextPage = () => {
         newColumn.splice(source.index, 1);
         newColumn.splice(destination.index, 0, targetColumn);
 
+        setData([...newColumn]);
+
         await postProjectsKanbanLaneChange({
           id: projectId,
           originalIndex: source.index,
           changeIndex: destination.index,
         });
-
-        setData([...newColumn]);
         return;
       }
 
@@ -375,6 +379,7 @@ const KanbanTestPage: NextPage = () => {
         const targetTask = [...destinationTaskList.filter((task) => task.id === Number(draggableId))][0];
         destinationTaskList.splice(source.index, 1);
         destinationTaskList.splice(destination.index, 0, targetTask);
+
         setData((prev) => [
           ...prev.map((column) => {
             if (column.id === destinationColumn.id) {
@@ -386,6 +391,13 @@ const KanbanTestPage: NextPage = () => {
             return column;
           }),
         ]);
+
+        await postProjectsTaskChange({
+          projectId,
+          laneId: Number(source.droppableId),
+          originalIndex: source.index,
+          changeIndex: destination.index,
+        });
         return;
       }
       // 한 컬럼에서 다른 컬럼으로 task 이동시킬때
@@ -452,13 +464,19 @@ const KanbanTestPage: NextPage = () => {
             </DragDropContext>
           </KanbanWrapper>
           <ButtonWrapper>
-            <Button width={200} height={52}>
+            <Button
+              width={200}
+              height={52}
+              onClick={() => {
+                openModal();
+              }}
+            >
               Task 추가하기
             </Button>
           </ButtonWrapper>
         </Wrapper>
       </AppLayoutMain>
-      {/* <Modal>123</Modal> */}
+      {isShowModal && <Modal closeModal={closeModal}>Example</Modal>}
     </>
   );
 };
