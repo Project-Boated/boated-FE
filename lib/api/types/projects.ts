@@ -102,3 +102,10 @@ export interface KanbanColumnState {
 export interface GetProjectKanbanResponse {
   lanes: Array<KanbanColumnState>;
 }
+
+export interface PostProjectsKanbanTaskChangeProps {
+  projectId: number;
+  laneId: number;
+  originalIndex: number;
+  changeIndex: number;
+}

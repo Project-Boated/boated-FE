@@ -13,6 +13,7 @@ import {
   GetProjectKanbanResponse,
   PostProjectsKanbanRequestProps,
   PostProjectsKanbanChangeRequestProps,
+  PostProjectsKanbanTaskChangeProps,
 } from './types';
 
 const projectsBaseUrl = '/api/projects';
@@ -33,6 +34,9 @@ const projectsUrl = {
   projectsKanbanLane: (id: number) => `${projectsBaseUrl}/${id}/kanban/lanes`,
   projectsKanbanLaneChange: ({ id, originalIndex, changeIndex }: PostProjectsKanbanChangeRequestProps) =>
     `${projectsBaseUrl}/${id}/kanban/lanes/change/${originalIndex}/${changeIndex}`,
+
+  projectsKanbanTaskChange: ({ projectId, laneId, originalIndex, changeIndex }: PostProjectsKanbanTaskChangeProps) =>
+    `${projectsBaseUrl}/${projectId}/kanban/lanes/${laneId}/tasks/change/${originalIndex}/${changeIndex}`,
 };
 
 export const createProject = ({ name, description, deadline }: PostProjectRequestProps) =>
@@ -83,3 +87,11 @@ export const postProjectsKanbanLaneChange = ({
 }: PostProjectsKanbanChangeRequestProps) => {
   request('POST', projectsUrl.projectsKanbanLaneChange({ id, originalIndex, changeIndex }));
 };
+
+export const postProjectsTaskChange = ({
+  projectId,
+  laneId,
+  originalIndex,
+  changeIndex,
+}: PostProjectsKanbanTaskChangeProps) =>
+  request('POST', projectsUrl.projectsKanbanTaskChange({ projectId, laneId, originalIndex, changeIndex }));
