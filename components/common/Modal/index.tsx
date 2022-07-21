@@ -14,9 +14,9 @@ interface ModalProps {
 
 const Modal = ({ children, width = 729, height = 258, borderRadius = 37, closeModal }: ModalProps) => {
   return (
-    <Styled.Background onClick={() => closeModal()}>
+    <Styled.Background onClick={closeModal}>
       <Styled.Container width={width} height={height} borderRadius={borderRadius}>
-        <Styled.XIconWrapper onClick={() => closeModal()}>
+        <Styled.XIconWrapper onClick={closeModal}>
           <Icon icon="X" />
         </Styled.XIconWrapper>
         {children}

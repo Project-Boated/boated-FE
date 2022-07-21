@@ -464,13 +464,7 @@ const KanbanTestPage: NextPage = () => {
             </DragDropContext>
           </KanbanWrapper>
           <ButtonWrapper>
-            <Button
-              width={200}
-              height={52}
-              onClick={() => {
-                openModal();
-              }}
-            >
+            <Button width={200} height={52} onClick={openModal}>
               Task 추가하기
             </Button>
           </ButtonWrapper>
