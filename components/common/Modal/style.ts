@@ -7,8 +7,8 @@ import { boxDesign } from '@/styles/common';
 export const Background = styled.div`
   position: absolute;
 
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 150vh;
 
   left: 0px;
   top: 0px;
@@ -28,7 +28,7 @@ export const Container = styled.div<SizeProps>`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
 
-  ${boxDesign(37)}
+  ${({ borderRadius }) => boxDesign(borderRadius)};
 `;
 
 export const XIconWrapper = styled.div`

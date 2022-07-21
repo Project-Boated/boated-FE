@@ -4,6 +4,7 @@ export interface DropDownSize {
 }
 
 export interface SizeProps {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
+  borderRadius?: number;
 }
