@@ -42,12 +42,20 @@ export const IconAnchor = styled.a`
   cursor: pointer;
 `;
 
-export const Tab = styled.div`
+export const TabContainer = styled.ul`
+  display: flex;
+`;
+
+export const Tab = styled.li`
   width: 184px;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
 `;
 
 export const ProfileWrapper = styled.div`

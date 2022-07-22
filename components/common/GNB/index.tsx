@@ -12,6 +12,7 @@ import {
   IconWrapper,
   ProfileImg,
   ProfileWrapper,
+  TabContainer,
   Tab,
   Wrapper,
 } from '@/components/common/GNB/style';
@@ -30,14 +31,16 @@ const GNB = () => {
             </IconAnchor>
           </Link>
           {myInfo && (
-            <>
+            <TabContainer>
               <Tab>
-                <Text fontSize={13}>Project</Text>
+                <Link href="/project">
+                  <a>Project</a>
+                </Link>
               </Tab>
               <Tab>
                 <Text fontSize={13}>배정된 Task</Text>
               </Tab>
-            </>
+            </TabContainer>
           )}
         </IconWrapper>
         {myInfo && (
