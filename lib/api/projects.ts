@@ -1,6 +1,3 @@
-import client from '@/lib/api/client';
-import { AxiosResponse } from 'axios';
-
 import request from './request';
 
 import {
@@ -34,7 +31,6 @@ const projectsUrl = {
   projectsKanbanLane: (id: number) => `${projectsBaseUrl}/${id}/kanban/lanes`,
   projectsKanbanLaneChange: ({ id, originalIndex, changeIndex }: PostProjectsKanbanChangeRequestProps) =>
     `${projectsBaseUrl}/${id}/kanban/lanes/change/${originalIndex}/${changeIndex}`,
-
   projectsKanbanTaskChange: ({ projectId, laneId, originalIndex, changeIndex }: PostProjectsKanbanTaskChangeProps) =>
     `${projectsBaseUrl}/${projectId}/kanban/lanes/${laneId}/tasks/change/${originalIndex}/${changeIndex}`,
 };
