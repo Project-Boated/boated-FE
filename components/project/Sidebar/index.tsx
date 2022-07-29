@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Calendar from '@/components/common/Calendar';
+import Calendar from '@/components/date/Calendar';
 
 import * as Styled from './style';
 
