@@ -6,9 +6,10 @@ import Input from '@/components/atoms/Input';
 import Textarea from '@/components/atoms/Textarea';
 
 import InfoTitle from '@/components/project/InfoTitle';
-import Calendar from '@/components/project/Calendar';
-import TimeTableSelector from '@/components/project/TimeTableSelector';
-import TimePicker from '@/components/project/TimePicker';
+
+import TimeTableSelector from '@/components/common/TimeTableSelector';
+import TimePicker from '@/components/common/TimePicker';
+import Calendar from '@/components/common/Calendar';
 
 import { RequiredInfo } from '@/types/project';
 
