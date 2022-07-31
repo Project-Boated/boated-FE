@@ -14,8 +14,8 @@ export interface DdayBarProps {
 const DdayBar = ({ dday, totalDay }: DdayBarProps) => {
   return (
     <Wrapper>
-      <Container dday={dday} percentage={Math.ceil((dday / totalDay) * 100)} />
-      <Text fontSize={15}>D-</Text>
+      <Container dday={dday} percentage={Math.ceil((Math.abs(dday) / totalDay) * 100)} />
+      <Text fontSize={15}>D{dday > 0 && '+'}</Text>
       <Text color={dday === 1 ? Theme.W_1 : Theme.M_1} fontSize={15}>
         {dday}
       </Text>
