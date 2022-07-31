@@ -16,3 +16,4 @@ export { default as Plus } from './Plus';
 export { default as X } from './X';
 export { default as KanbanColumndAdd } from './KanbanColumnAdd';
 export { default as KanbanColumnDelete } from './KanbanColumnDelete';
+export { default as BackgroundX } from './BackgroundX';
