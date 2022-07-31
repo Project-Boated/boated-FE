@@ -25,6 +25,10 @@ export const Background = styled.div`
 export const Container = styled.div<SizeProps>`
   position: relative;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
 
