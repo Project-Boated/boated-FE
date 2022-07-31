@@ -26,6 +26,27 @@ export const DefaultTitleWrapper = styled.div<DropDownSize>`
   }
 
   ${({ type }) =>
+    type === 'size-357' &&
+    css`
+      width: 357;
+      height: 40px;
+
+      .default-title-container {
+        width: 322px;
+      }
+    `}
+
+  ${({ type }) =>
+    type === 'size-264' &&
+    css`
+      width: 264px;
+      height: 40px;
+
+      .default-title-container {
+        width: 237px;
+      }
+    `}
+  ${({ type }) =>
     type === 'size-176' &&
     css`
       width: 176px;
@@ -116,58 +137,55 @@ export const SelectListWrapper = styled.ul<DropDownSize>`
 
   height: ${({ type }) => (type === 'size-88' ? 84 : 260)}px;
 
+  li {
+    width: 100%;
+  }
+
   & > :not(:last-child) {
     margin-bottom: 15px;
   }
 
   ${({ type }) =>
+    type === 'size-357' &&
+    css`
+      width: 357px;
+      height: auto;
+    `}
+
+  ${({ type }) =>
+    type === 'size-264' &&
+    css`
+      width: 264px;
+    `}
+
+  ${({ type }) =>
     type === 'size-176' &&
     css`
       width: 176px;
-
-      li {
-        width: 100%;
-      }
     `};
 
   ${({ type }) =>
     type === 'size-110' &&
     css`
       width: 110px;
-
-      li {
-        width: 100%;
-      }
     `};
 
   ${({ type }) =>
     type === 'size-88' &&
     css`
       width: 88px;
-
-      li {
-        width: 100%;
-      }
     `}
 
   ${({ type }) =>
     type === 'size-72' &&
     css`
       width: 72px;
-
-      li {
-        width: 100%;
-      }
     `};
 
   ${({ type }) =>
     type === 'size-47' &&
     css`
       width: 47px;
-
-      li {
-        width: 100%;
-      }
     `}
 `;
 
