@@ -5,7 +5,7 @@ import TimeTableSelector, { TimeTableSelectorProps } from '.';
 
 export default {
   component: TimeTableSelector,
-  title: 'project/TimeTableSelector',
+  title: 'date/TimeTableSelector',
 };
 
 const Template: Story<TimeTableSelectorProps> = (args: TimeTableSelectorProps) => <TimeTableSelector {...args} />;
