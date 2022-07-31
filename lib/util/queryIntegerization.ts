@@ -10,7 +10,7 @@ export default (query: Query) => {
     captain: query.captain === undefined ? null : query.captain,
     crew: query.crew === undefined ? null : query.crew,
     page: query.page === undefined || +query.page < 0 ? 0 : +query.page,
-    size: query.size === undefined || +query.size < 1 ? 1 : +query.size,
+    size: query.size === undefined || +query.size < 1 ? 10 : +query.size,
     sort: query.sort === undefined ? null : query.sort,
   };
 };
