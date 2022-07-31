@@ -5,6 +5,11 @@ import Button, { Props } from '@/components/atoms/Button';
 
 import { SizeProps } from '@/types/size';
 
+export default {
+  component: Button,
+  title: 'atoms/Button',
+};
+
 const Template: Story<SizeProps & Props> = (args: SizeProps & Props) => <Button {...args} />;
 
 export const ProjectCreateButton = Template.bind({});
