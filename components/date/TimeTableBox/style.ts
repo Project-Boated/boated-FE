@@ -10,6 +10,6 @@ export const Container = styled.div`
 
 export const SelectorContainer = styled.div`
   & > :first-child {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 `;

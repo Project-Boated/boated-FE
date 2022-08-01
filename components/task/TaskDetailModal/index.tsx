@@ -119,7 +119,7 @@ const TaskDetailModal = () => {
               <Styled.FileListContainer
                 onDragOver={(e) => handleDrag(e, 'over')}
                 onDrop={(e) => handleDrag(e, 'drop')}
-              ></Styled.FileListContainer>
+              />
             </Styled.RegisteredFileContainer>
           </Styled.RightContainer>
         </Styled.FlexContainer>
