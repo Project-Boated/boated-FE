@@ -5,7 +5,7 @@ import Calendar from '.';
 
 export default {
   component: Calendar,
-  title: 'project/Calendar',
+  title: 'date/Calendar',
 };
 
 const Template = () => <Calendar />;

@@ -5,7 +5,7 @@ import TimePicker, { TimePickerProps } from '.';
 
 export default {
   component: TimePicker,
-  title: 'project/TimePicker',
+  title: 'date/TimePicker',
 };
 
 const Template: Story<TimePickerProps> = (args: TimePickerProps) => <TimePicker {...args} />;
