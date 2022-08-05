@@ -88,3 +88,42 @@ export const EllipsisSpanWrapper = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
+
+export const MoreContainer = styled.div`
+  position: absolute;
+
+  top: 29px;
+  left: 55px;
+
+  width: 163px;
+  height: 79px;
+
+  background: ${Theme.S_0};
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  z-index: 0;
+`;
+
+export const FavoriteAddWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  padding: 10px 12px;
+
+  border-bottom: 1px solid ${Theme.S_2};
+
+  height: 39px;
+
+  cursor: pointer;
+`;
+
+export const TaskRemoveWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  padding: 10px 12px;
+
+  height: 39px;
+
+  cursor: pointer;
+`;

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
 import { TaskState } from '@/lib/api/types';
 
 import useModal from '@/hooks/useModal';
+import useDetectOutsideClick from '@/hooks/useDetectOutside';
 
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
@@ -22,7 +23,16 @@ export interface TaskProps {
 const Task = ({ index, task }: TaskProps) => {
   const [isIconVisible, setIsIconVisible] = useState(false);
 
+  const ref = useRef();
+
+  const [isMoreClicked, setIsMoreClicked] = useDetectOutsideClick(ref, false);
+
   const { isShowModal, closeModal, openModal } = useModal();
+
+  const onClickTaskRemoveWrapper = () => {
+    openModal();
+    setIsMoreClicked(false);
+  };
 
   return (
     <>
@@ -37,9 +47,19 @@ const Task = ({ index, task }: TaskProps) => {
             onMouseLeave={() => setIsIconVisible(false)}
           >
             {isIconVisible && (
-              <Styled.IconWrapper onClick={openModal}>
+              <Styled.IconWrapper onClick={() => setIsMoreClicked(true)}>
                 <Icon icon="MoreDot" />
               </Styled.IconWrapper>
+            )}
+            {isMoreClicked && (
+              <Styled.MoreContainer ref={ref}>
+                <Styled.FavoriteAddWrapper>
+                  <Text>즐겨찾기에 추가</Text>
+                </Styled.FavoriteAddWrapper>
+                <Styled.TaskRemoveWrapper onClick={onClickTaskRemoveWrapper}>
+                  <Text>삭제하기</Text>
+                </Styled.TaskRemoveWrapper>
+              </Styled.MoreContainer>
             )}
             <Styled.ContentsWrapper>
               <Styled.TaskNameContainer>
