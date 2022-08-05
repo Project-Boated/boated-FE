@@ -111,5 +111,8 @@ export interface GetProjectKanbanResponse {
 
 export interface PostProjectsKanbanTaskChangeProps extends Omit<PostProjectsKanbanChangeRequestProps, 'id'> {
   projectId: number;
-  laneId: number;
+  originalLaneId: number;
+  originalTaskIndex: number;
+  changeLaneId: number;
+  changeTaskIndex: number;
 }

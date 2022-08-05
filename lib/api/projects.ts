@@ -36,8 +36,15 @@ const projectsUrl = {
   projectsKanbanLane: (id: number) => `${projectsBaseUrl}/${id}/kanban/lanes`,
   projectsKanbanLaneChange: ({ id, originalIndex, changeIndex }: PostProjectsKanbanChangeRequestProps) =>
     `${projectsBaseUrl}/${id}/kanban/lanes/change/${originalIndex}/${changeIndex}`,
-  projectsKanbanTaskChange: ({ projectId, laneId, originalIndex, changeIndex }: PostProjectsKanbanTaskChangeProps) =>
-    `${projectsBaseUrl}/${projectId}/kanban/lanes/${laneId}/tasks/change/${originalIndex}/${changeIndex}`,
+
+  projectsKanbanTaskChange: ({
+    projectId,
+    originalLaneId,
+    originalTaskIndex,
+    changeLaneId,
+    changeTaskIndex,
+  }: PostProjectsKanbanTaskChangeProps) =>
+    `${projectsBaseUrl}/${projectId}/kanban/lanes/tasks/change/${originalLaneId}/${originalTaskIndex}/${changeLaneId}/${changeTaskIndex}`,
 };
 
 export const createProject = ({ name, description, deadline }: PostProjectRequestProps) =>
@@ -96,8 +103,18 @@ export const postProjectsKanbanLaneChange = ({
 
 export const postProjectsTaskChange = ({
   projectId,
-  laneId,
-  originalIndex,
-  changeIndex,
+  originalLaneId,
+  originalTaskIndex,
+  changeLaneId,
+  changeTaskIndex,
 }: PostProjectsKanbanTaskChangeProps) =>
-  request('POST', projectsUrl.projectsKanbanTaskChange({ projectId, laneId, originalIndex, changeIndex }));
+  request(
+    'POST',
+    projectsUrl.projectsKanbanTaskChange({
+      projectId,
+      originalLaneId,
+      originalTaskIndex,
+      changeLaneId,
+      changeTaskIndex,
+    }),
+  );
