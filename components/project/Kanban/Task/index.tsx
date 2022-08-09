@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
+import { deleteProjectsKanbanTaskLike, postProjectsKanbanTaskLike } from '@/lib/api/projects';
 import { TaskState } from '@/lib/api/types';
 
 import useModal from '@/hooks/useModal';
@@ -21,9 +22,10 @@ export interface TaskProps {
 }
 
 const Task = ({ index, task }: TaskProps) => {
+  const projectId = 1;
   const [isIconVisible, setIsIconVisible] = useState(false);
 
-  const ref = useRef();
+  const ref = useRef(null);
 
   const [isMoreClicked, setIsMoreClicked] = useDetectOutsideClick(ref, false);
 
@@ -31,6 +33,16 @@ const Task = ({ index, task }: TaskProps) => {
 
   const onClickTaskRemoveWrapper = () => {
     openModal();
+    setIsMoreClicked(false);
+  };
+
+  const onClickTaskLike = async () => {
+    if (task.like) {
+      await deleteProjectsKanbanTaskLike({ projectId, taskId: task.id });
+      setIsMoreClicked(false);
+      return;
+    }
+    await postProjectsKanbanTaskLike({ projectId, taskId: task.id });
     setIsMoreClicked(false);
   };
 
@@ -46,15 +58,24 @@ const Task = ({ index, task }: TaskProps) => {
             onMouseEnter={() => setIsIconVisible(true)}
             onMouseLeave={() => setIsIconVisible(false)}
           >
+            {task.like ? (
+              <Styled.LikeIconWrapper onClick={onClickTaskLike}>
+                <Icon icon="TaskFavoriteBlue" />
+              </Styled.LikeIconWrapper>
+            ) : (
+              <Styled.LikeIconWrapper onClick={onClickTaskLike}>
+                <Icon icon="TaskFavoriteGrey" />
+              </Styled.LikeIconWrapper>
+            )}
             {isIconVisible && (
-              <Styled.IconWrapper onClick={() => setIsMoreClicked(true)}>
+              <Styled.DottedIconWrapper onClick={() => setIsMoreClicked(true)}>
                 <Icon icon="MoreDot" />
-              </Styled.IconWrapper>
+              </Styled.DottedIconWrapper>
             )}
             {isMoreClicked && (
               <Styled.MoreContainer ref={ref}>
-                <Styled.FavoriteAddWrapper>
-                  <Text>즐겨찾기에 추가</Text>
+                <Styled.FavoriteAddWrapper onClick={onClickTaskLike}>
+                  <Text>{task.like ? '즐겨찾기 삭제' : '즐겨찾기에 추가'}</Text>
                 </Styled.FavoriteAddWrapper>
                 <Styled.TaskRemoveWrapper onClick={onClickTaskRemoveWrapper}>
                   <Text>삭제하기</Text>

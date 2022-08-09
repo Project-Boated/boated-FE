@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useQuery } from 'react-query';
 
 import * as queryKeys from '@/lib/constants/queryKeys';
-import { getProjectsKanban, postProjectsKanbanLaneChange, postProjectsTaskChange } from '@/lib/api/projects';
+import { getProjectsKanban, postProjectsKanbanLaneChange, postProjectsKanbanTaskChange } from '@/lib/api/projects';
 
 import useModal from '@/hooks/useModal';
 
@@ -67,6 +67,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '2022.07.21.',
           dday: 3,
           fileCount: 5,
+          like: true,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -90,6 +91,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: true,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -105,6 +107,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: false,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -120,6 +123,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: false,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -135,6 +139,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: false,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -156,6 +161,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: false,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -171,6 +177,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: false,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -186,6 +193,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: false,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -201,6 +209,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: false,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -222,6 +231,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: true,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -237,6 +247,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: false,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -252,6 +263,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: false,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -273,6 +285,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: true,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -288,6 +301,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: false,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -309,6 +323,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: false,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -324,6 +339,7 @@ const KanbanTestPage: NextPage = () => {
           deadline: '123',
           dday: 456,
           fileCount: 5,
+          like: false,
           assignedAccounts: [
             { id: 1, nickname: '박성호' },
             {
@@ -390,7 +406,7 @@ const KanbanTestPage: NextPage = () => {
           }),
         ]);
 
-        await postProjectsTaskChange({
+        await postProjectsKanbanTaskChange({
           projectId,
           originalLaneId: Number(source.droppableId),
           originalTaskIndex: source.index,
@@ -422,7 +438,7 @@ const KanbanTestPage: NextPage = () => {
         }),
       ]);
 
-      await postProjectsTaskChange({
+      await postProjectsKanbanTaskChange({
         projectId,
         originalLaneId: Number(source.droppableId),
         originalTaskIndex: source.index,
