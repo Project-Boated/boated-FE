@@ -11,15 +11,16 @@ import useModal from '@/hooks/useModal';
 
 import Text from '@/components/atoms/Text';
 import Button from '@/components/atoms/Button';
+import Icon from '@/components/atoms/Icon';
 
 import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
-import Modal from '@/components/common/Modal';
 
+import KanbanColumnAddModal from '@/components/project/Kanban/KanbanColumnAddModal';
 import KanbanColumn from '@/components/project/Kanban/KanbanColumn';
 
-const Wrapper = styled.div`
-  margin-top: 50px;
-`;
+import Theme from '@/styles/Theme';
+
+const Wrapper = styled.div``;
 
 const KanbanWrapper = styled.div`
   max-width: 1045px;
@@ -33,7 +34,30 @@ const Container = styled.div`
 `;
 
 const TaskTextWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   margin-bottom: 20px;
+`;
+
+const ColumnAddContainer = styled.div`
+  box-sizing: border-box;
+
+  width: 101px;
+  height: 25px;
+
+  padding: 7px 2px 7px 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: ${Theme.S_0};
+  border: 1px solid ${Theme.M_1};
+  border-radius: 17.5px;
+
+  cursor: pointer;
 `;
 
 const ButtonWrapper = styled.div`
@@ -45,7 +69,7 @@ const ButtonWrapper = styled.div`
 const KanbanTestPage: NextPage = () => {
   const projectId = 1;
 
-  // const { isShowModal, closeModal, openModal } = useModal();
+  const { isShowModal, closeModal, openModal } = useModal();
 
   const {
     isLoading,
@@ -365,7 +389,7 @@ const KanbanTestPage: NextPage = () => {
       if (!destination) return;
       if (destination.droppableId === source.droppableId && source.index === destination.index) return;
 
-      // 컬럼 자를 움직일때
+      // 컬럼을 움직일때
       if (type === 'column') {
         const newColumn = [...data];
         const targetColumn = [...newColumn.filter((column) => column.name === draggableId)][0];
@@ -375,10 +399,11 @@ const KanbanTestPage: NextPage = () => {
         setData([...newColumn]);
 
         await postProjectsKanbanLaneChange({
-          id: projectId,
+          projectId,
           originalIndex: source.index,
           changeIndex: destination.index,
         });
+
         return;
       }
 
@@ -460,10 +485,15 @@ const KanbanTestPage: NextPage = () => {
   // }
 
   return (
-    <AppLayoutMain>
+    <AppLayoutMain height="110vh" bottom="-45vh">
       <Wrapper>
+        {isShowModal && <KanbanColumnAddModal closeModal={closeModal} />}
         <TaskTextWrapper>
           <Text fontSize={20}>Task</Text>
+          <ColumnAddContainer onClick={openModal}>
+            <Text fontSize={11}>레인 추가하기</Text>
+            <Icon width={18} height={18} icon="KanbanColumnAdd" />
+          </ColumnAddContainer>
         </TaskTextWrapper>
         <KanbanWrapper>
           <DragDropContext onDragEnd={onDragEnd}>
