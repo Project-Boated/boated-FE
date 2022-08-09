@@ -45,15 +45,13 @@ const ButtonWrapper = styled.div`
 const KanbanTestPage: NextPage = () => {
   const projectId = 1;
 
-  const { isShowModal, closeModal, openModal } = useModal();
+  // const { isShowModal, closeModal, openModal } = useModal();
 
   const {
     isLoading,
     error,
     data: kanbanData,
   } = useQuery(`${queryKeys.PROJECTS_KANBAN}/${projectId}`, () => getProjectsKanban(projectId));
-
-  console.log(kanbanData);
 
   // const [data, setData] = useState(kanbanData);
 
@@ -394,10 +392,12 @@ const KanbanTestPage: NextPage = () => {
 
         await postProjectsTaskChange({
           projectId,
-          laneId: Number(source.droppableId),
-          originalIndex: source.index,
-          changeIndex: destination.index,
+          originalLaneId: Number(source.droppableId),
+          originalTaskIndex: source.index,
+          changeLaneId: Number(destination.droppableId),
+          changeTaskIndex: destination.index,
         });
+
         return;
       }
       // 한 컬럼에서 다른 컬럼으로 task 이동시킬때
@@ -421,6 +421,14 @@ const KanbanTestPage: NextPage = () => {
           return column;
         }),
       ]);
+
+      await postProjectsTaskChange({
+        projectId,
+        originalLaneId: Number(source.droppableId),
+        originalTaskIndex: source.index,
+        changeLaneId: Number(destination.droppableId),
+        changeTaskIndex: destination.index,
+      });
     },
     [data],
   );
@@ -436,42 +444,39 @@ const KanbanTestPage: NextPage = () => {
   // }
 
   return (
-    <>
-      <AppLayoutMain>
-        <Wrapper>
-          <TaskTextWrapper>
-            <Text fontSize={20}>Task</Text>
-          </TaskTextWrapper>
-          <KanbanWrapper>
-            <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="all-columns" direction="horizontal" type="column">
-                {(provided) => (
-                  <Container {...provided.droppableProps} ref={provided.innerRef}>
-                    {data.map((column, index) => (
-                      <KanbanColumn
-                        key={column.id}
-                        id={column.id}
-                        name={column.name}
-                        tasks={column.tasks}
-                        index={index}
-                        dataLength={data.length}
-                      />
-                    ))}
-                    {provided.placeholder}
-                  </Container>
-                )}
-              </Droppable>
-            </DragDropContext>
-          </KanbanWrapper>
-          <ButtonWrapper>
-            <Button width={200} height={52} onClick={openModal}>
-              Task 추가하기
-            </Button>
-          </ButtonWrapper>
-        </Wrapper>
-      </AppLayoutMain>
-      {isShowModal && <Modal closeModal={closeModal}>Example</Modal>}
-    </>
+    <AppLayoutMain>
+      <Wrapper>
+        <TaskTextWrapper>
+          <Text fontSize={20}>Task</Text>
+        </TaskTextWrapper>
+        <KanbanWrapper>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="all-columns" direction="horizontal" type="column">
+              {(provided) => (
+                <Container {...provided.droppableProps} ref={provided.innerRef}>
+                  {data.map((column, index) => (
+                    <KanbanColumn
+                      key={column.id}
+                      id={column.id}
+                      name={column.name}
+                      tasks={column.tasks}
+                      index={index}
+                      dataLength={data.length}
+                    />
+                  ))}
+                  {provided.placeholder}
+                </Container>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </KanbanWrapper>
+        <ButtonWrapper>
+          <Button width={200} height={52}>
+            Task 추가하기
+          </Button>
+        </ButtonWrapper>
+      </Wrapper>
+    </AppLayoutMain>
   );
 };
 
