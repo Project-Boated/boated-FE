@@ -98,6 +98,7 @@ export interface TaskState extends Id {
   dday: number;
   fileCount: number;
   assignedAccounts: Array<AssignedAccount>;
+  like: boolean;
 }
 
 export interface KanbanColumnState extends Id {
@@ -115,4 +116,10 @@ export interface PostProjectsKanbanTaskChangeProps extends Omit<PostProjectsKanb
   originalTaskIndex: number;
   changeLaneId: number;
   changeTaskIndex: number;
+}
+
+// task 찜하기
+export interface PostProjectsKanbanTaskLikeProps {
+  projectId: number;
+  taskId: number;
 }

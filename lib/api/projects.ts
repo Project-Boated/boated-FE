@@ -13,6 +13,7 @@ import {
   PostProjectsKanbanRequestProps,
   PostProjectsKanbanChangeRequestProps,
   PostProjectsKanbanTaskChangeProps,
+  PostProjectsKanbanTaskLikeProps,
 } from './types';
 
 const projectsBaseUrl = '/api/projects';
@@ -45,6 +46,9 @@ const projectsUrl = {
     changeTaskIndex,
   }: PostProjectsKanbanTaskChangeProps) =>
     `${projectsBaseUrl}/${projectId}/kanban/lanes/tasks/change/${originalLaneId}/${originalTaskIndex}/${changeLaneId}/${changeTaskIndex}`,
+
+  projectsKanbanTaskLike: ({ projectId, taskId }: PostProjectsKanbanTaskLikeProps) =>
+    `${projectsBaseUrl}/${projectId}/tasks/${taskId}/like`,
 };
 
 export const createProject = ({ name, description, deadline }: PostProjectRequestProps) =>
@@ -101,7 +105,7 @@ export const postProjectsKanbanLaneChange = ({
 }: PostProjectsKanbanChangeRequestProps) =>
   request('POST', projectsUrl.projectsKanbanLaneChange({ id, originalIndex, changeIndex }));
 
-export const postProjectsTaskChange = ({
+export const postProjectsKanbanTaskChange = ({
   projectId,
   originalLaneId,
   originalTaskIndex,
@@ -118,3 +122,10 @@ export const postProjectsTaskChange = ({
       changeTaskIndex,
     }),
   );
+
+// 칸반 테스크 찜하기
+export const postProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjectsKanbanTaskLikeProps) =>
+  request('POST', projectsUrl.projectsKanbanTaskLike({ projectId, taskId }));
+
+export const deleteProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjectsKanbanTaskLikeProps) =>
+  request('DELETE', projectsUrl.projectsKanbanTaskLike({ projectId, taskId }));
