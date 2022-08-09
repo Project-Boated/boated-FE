@@ -27,8 +27,8 @@ const projectsUrl = {
   projectsMyCrewTerminated: `${projectsBaseUrl}/my/crew/terminated`,
 
   projectsInvites: '/api/account/invitations',
-  projectsInvitesAccept: (id: number) => `/api/account/invitations/${id}/accept`,
-  projectsInvitesReject: (id: number) => `/api/account/invitations/${id}/reject`,
+  projectsInvitesAccept: (invitationId: number) => `/api/account/invitations/${invitationId}/accept`,
+  projectsInvitesReject: (invitationId: number) => `/api/account/invitations/${invitationId}/reject`,
 
   projectsById: (id: number) => `${projectsBaseUrl}/${id}`,
   projectsByIdCrews: (id: number) => `${projectsBaseUrl}/${id}/crews`,
@@ -85,9 +85,11 @@ export const getProjectsByIdCrews = (id: number) =>
 export const getProjectsInvite = () =>
   request<GetProjectsInvitesResponse>('GET', projectsUrl.projectsInvites).then((res) => res.data.invitations);
 
-export const postProjectsInviteAccept = (id: number) => request('POST', projectsUrl.projectsInvitesAccept(id));
+export const postProjectsInviteAccept = (invitationId: number) =>
+  request('POST', projectsUrl.projectsInvitesAccept(invitationId));
 
-export const postProjectsInviteReject = (id: number) => request('POST', projectsUrl.projectsInvitesReject(id));
+export const postProjectsInviteReject = (invitationId: number) =>
+  request('POST', projectsUrl.projectsInvitesReject(invitationId));
 
 // 프로젝트 칸반 불러오기, lane 추가, 삭제
 export const getProjectsKanban = (id: number) =>
