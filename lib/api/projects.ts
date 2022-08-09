@@ -92,20 +92,21 @@ export const postProjectsInviteReject = (invitationId: number) =>
   request('POST', projectsUrl.projectsInvitesReject(invitationId));
 
 // 프로젝트 칸반 불러오기, lane 추가, 삭제
-export const getProjectsKanban = (id: number) =>
-  request<GetProjectKanbanResponse>('GET', projectsUrl.projectsKanban(id)).then((res) => res.data.lanes);
+export const getProjectsKanban = (projectId: number) =>
+  request<GetProjectKanbanResponse>('GET', projectsUrl.projectsKanban(projectId)).then((res) => res.data.lanes);
 
-export const postProjectsKanbanLane = ({ id, name }: PostProjectsKanbanRequestProps) =>
-  request('POST', projectsUrl.projectsKanbanLane(id), { name });
+export const postProjectsKanbanLane = ({ projectId, name }: PostProjectsKanbanRequestProps) =>
+  request('POST', projectsUrl.projectsKanbanLane(projectId), { name });
 
 export const deleteProjectsKanbanLane = (id: number) => request('DELETE', projectsUrl.projectsKanbanLane(id));
 
 export const postProjectsKanbanLaneChange = ({
-  id,
+  projectId,
   originalIndex,
   changeIndex,
-}: PostProjectsKanbanChangeRequestProps) =>
-  request('POST', projectsUrl.projectsKanbanLaneChange({ id, originalIndex, changeIndex }));
+}: PostProjectsKanbanChangeRequestProps) => {
+  request('POST', projectsUrl.projectsKanbanLaneChange({ projectId, originalIndex, changeIndex }));
+};
 
 export const postProjectsKanbanTaskChange = ({
   projectId,
