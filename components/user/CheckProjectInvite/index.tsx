@@ -15,8 +15,32 @@ import Theme from '@/styles/Theme';
 import * as Styled from './style';
 
 const CheckProjectInvite = () => {
-  const { data } = useQuery(queryKeys.PROJECTS_INVITES, () => getProjectsInvite());
+  // const { data } = useQuery(queryKeys.PROJECTS_INVITES, () => getProjectsInvite());
   const { myInfo } = useGetMyInfo();
+
+  const data = [
+    {
+      id: 4,
+      createdDate: '2022-08-08T14:52:55.128019',
+      name: 'name',
+      description: 'description',
+      captainNickname: 'testNickname',
+    },
+    {
+      id: 4,
+      createdDate: '2022-08-08T14:52:55.128019',
+      name: 'name',
+      description: 'description',
+      captainNickname: 'testNickname',
+    },
+    {
+      id: 4,
+      createdDate: '2022-08-08T14:52:55.128019',
+      name: 'name',
+      description: 'description',
+      captainNickname: 'testNickname',
+    },
+  ];
 
   const onClickInviteButton = useCallback((event: React.MouseEvent<HTMLButtonElement>, invitationId: number) => {
     const currentTarget: HTMLButtonElement = event.currentTarget;

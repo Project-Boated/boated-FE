@@ -16,6 +16,9 @@ const ProfileNavigator = ({ tabNumber, setTabNumber }: ProfileNavigator) => {
         초대 확인하기
       </TabItem>
       <TabItem onClick={() => setTabNumber(2)} isSelected={tabNumber === 2}>
+        메달 확인하기
+      </TabItem>
+      <TabItem onClick={() => setTabNumber(3)} isSelected={tabNumber === 3}>
         탈퇴하기
       </TabItem>
     </Wrapper>

@@ -13,7 +13,7 @@ const ChangeUserInfoPage: NextPage = () => {
   const [tabNumber, setTabNumber] = useState(0);
 
   return (
-    <AppLayoutMain>
+    <AppLayoutMain height="100vh" bottom="-45vh">
       <Wrapper>
         <ProfileNavigator tabNumber={tabNumber} setTabNumber={setTabNumber} />
         {tabNumber === 0 && <ChangeUserInfo />}
