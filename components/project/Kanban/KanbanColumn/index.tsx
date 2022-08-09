@@ -32,7 +32,7 @@ const KanbanColumn = ({ id, name, tasks, index, dataLength }: KanbanColumnProps)
           <Styled.KanbanHeader {...provided.dragHandleProps}>
             {dataLength === 4 && index === 3 && (
               <Styled.IconWrapper>
-                <Icon icon="KanbanColumndAdd" />
+                <Icon icon="KanbanColumnAdd" />
               </Styled.IconWrapper>
             )}
             {isCustomLane && (
