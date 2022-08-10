@@ -1,8 +1,8 @@
 import request from './request';
 
 import {
+  Id,
   PostProjectRequestProps,
-  PostProjectResponse,
   GetProjectMyProps,
   GetProjectsResponse,
   GetProjectMyResponse,
@@ -27,6 +27,9 @@ const projectsUrl = {
   projectsInvitesAccept: (id: number) => `/api/account/invitations/${id}/accept`,
   projectsInvitesReject: (id: number) => `/api/account/invitations/${id}/reject`,
 
+  projectsById: (id: number) => `${projectsBaseUrl}/${id}`,
+  projectsByIdCrews: (id: number) => `${projectsBaseUrl}/${id}/crews`,
+
   projectsKanban: (id: number) => `${projectsBaseUrl}/${id}/kanban`,
   projectsKanbanLane: (id: number) => `${projectsBaseUrl}/${id}/kanban/lanes`,
   projectsKanbanLaneChange: ({ id, originalIndex, changeIndex }: PostProjectsKanbanChangeRequestProps) =>
@@ -36,7 +39,7 @@ const projectsUrl = {
 };
 
 export const createProject = ({ name, description, deadline }: PostProjectRequestProps) =>
-  request<PostProjectResponse, PostProjectRequestProps>('POST', projectsUrl.projects, {
+  request<Id, PostProjectRequestProps>('POST', projectsUrl.projects, {
     name,
     description,
     deadline,
