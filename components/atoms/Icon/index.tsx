@@ -3,14 +3,15 @@ import styled, { css } from 'styled-components';
 
 import * as icons from '@/components/atoms/Icon/Icons';
 
-interface IIconWrapperProps {
+interface IconWrapperProps {
   width?: number;
   height?: number;
   rotate?: number;
   isButton?: boolean;
+  onClick?: () => void;
 }
 
-const IconWrapper = styled.div<IIconWrapperProps>`
+const IconWrapper = styled.div<IconWrapperProps>`
   display: flex;
   flex-shrink: 0;
   align-items: center;
@@ -32,16 +33,16 @@ const IconWrapper = styled.div<IIconWrapperProps>`
 
 type IconOption = keyof typeof icons;
 
-interface IIconProps extends IIconWrapperProps {
+interface IconProps extends IconWrapperProps {
   icon: IconOption;
-  color?: string;
+  color?: string; // icon's color
 }
 
-const Icon = ({ icon, width, height, rotate, isButton = false, ...props }: IIconProps) => {
+const Icon = ({ icon, width, height, rotate, isButton = false, onClick, ...props }: IconProps) => {
   const IconComponent = icons[icon];
 
   return (
-    <IconWrapper {...props} width={width} height={height} rotate={rotate} isButton={isButton}>
+    <IconWrapper {...props} width={width} height={height} rotate={rotate} isButton={isButton} onClick={onClick}>
       <IconComponent {...props} />
     </IconWrapper>
   );
