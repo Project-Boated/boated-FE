@@ -6,7 +6,7 @@ import Text from '@/components/atoms/Text';
 
 import Theme from '@/styles/Theme';
 
-import * as S from './style';
+import * as Styled from './style';
 
 const Calendar = () => {
   const [isOnMount, setIsOnMount] = useState<boolean>(false);
@@ -55,7 +55,7 @@ const Calendar = () => {
 
     for (week; week <= lastWeek; week++) {
       result.push(
-        <S.WeekListContainer key={week}>
+        <Styled.WeekListContainer key={week}>
           {Array(7)
             .fill(0)
             .map((_, index) => {
@@ -65,14 +65,14 @@ const Calendar = () => {
               const date: number = Number(day.format('D'));
 
               return (
-                <S.DateWrapper key={`${year}-${month}-${date}`}>
+                <Styled.DateWrapper key={`${year}-${month}-${date}`}>
                   <Text fontSize={10} lineHeight={15}>
                     {isCurrentMonth(month, selectedMonth) && date}
                   </Text>
-                </S.DateWrapper>
+                </Styled.DateWrapper>
               );
             })}
-        </S.WeekListContainer>,
+        </Styled.WeekListContainer>,
       );
     }
 
@@ -84,18 +84,18 @@ const Calendar = () => {
   }, [isOnMount]);
 
   return (
-    <S.Container>
-      <S.InnerContainer>
+    <Styled.Container>
+      <Styled.InnerContainer>
         <Text fontSize={10}>{year}</Text>
-        <S.MonthSelectorContainer>
+        <Styled.MonthSelectorContainer>
           <Icon icon="Arrow" rotate={90} isButton onClick={onClickPrev} />
           <Text fontSize={14}>{selectedMonth}월</Text>
           <Icon icon="Arrow" rotate={270} isButton onClick={onClickNext} />
-        </S.MonthSelectorContainer>
+        </Styled.MonthSelectorContainer>
         {isOnMount && (
-          <S.Table>
+          <Styled.Table>
             <tbody>
-              <S.WeekListContainer>
+              <Styled.WeekListContainer>
                 {weekList.map((week, index) => (
                   <td key={index}>
                     <Text fontSize={10} fontWeight={700} lineHeight={15} color={index === 0 ? Theme.W_1 : Theme.M_1}>
@@ -103,13 +103,13 @@ const Calendar = () => {
                     </Text>
                   </td>
                 ))}
-              </S.WeekListContainer>
+              </Styled.WeekListContainer>
               {calendarArr()}
             </tbody>
-          </S.Table>
+          </Styled.Table>
         )}
-      </S.InnerContainer>
-    </S.Container>
+      </Styled.InnerContainer>
+    </Styled.Container>
   );
 };
 
