@@ -9,3 +9,7 @@ export interface PersonInfoState {
   id: number;
   nickname: string;
 }
+
+export interface Id {
+  id: number;
+}

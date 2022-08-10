@@ -1,4 +1,4 @@
-import { PersonInfoState } from './common';
+import { Id, PersonInfoState } from './common';
 
 export interface PostProjectRequestProps {
   name: string;
@@ -6,12 +6,7 @@ export interface PostProjectRequestProps {
   deadline?: string;
 }
 
-export interface PostProjectResponse {
-  id: number;
-}
-
-export interface ProjectInfoState {
-  id: number;
+export interface ProjectInfoState extends Id {
   name: string;
   description: string;
   deadline: string;
@@ -49,8 +44,7 @@ export interface GetProjectMyResponse {
 }
 
 // 프로젝트 초대 확인, 승인, 거절
-export interface ProjectInviteState {
-  id: number;
+export interface ProjectInviteState extends Id {
   createdDate: string;
   name: string;
   description: string;
@@ -61,30 +55,21 @@ export interface GetProjectsInvitesResponse {
   invitations: Array<ProjectInviteState>;
 }
 
-export interface PostProjectsInviteStatusRequestProps {
-  id: number;
-}
-
 // 프로젝트 칸반 불러오기, lane 추가, 삭제
-export interface ProjectsIdProps {
-  id: number;
-}
-
-export interface PostProjectsKanbanRequestProps extends ProjectsIdProps {
+export interface PostProjectsKanbanRequestProps extends Id {
   name: string;
 }
 
-export interface PostProjectsKanbanChangeRequestProps extends ProjectsIdProps {
+export interface PostProjectsKanbanChangeRequestProps extends Id {
   originalIndex: number;
   changeIndex: number;
 }
 
-export interface AssignedAccount {
-  id: number;
+export interface AssignedAccount extends Id {
   nickname: string;
 }
-export interface TaskState {
-  id: number;
+
+export interface TaskState extends Id {
   name: string;
   description: string;
   deadline: string;
@@ -93,8 +78,7 @@ export interface TaskState {
   assignedAccounts: Array<AssignedAccount>;
 }
 
-export interface KanbanColumnState {
-  id: number;
+export interface KanbanColumnState extends Id {
   name: string;
   tasks: Array<TaskState>;
 }
@@ -103,9 +87,7 @@ export interface GetProjectKanbanResponse {
   lanes: Array<KanbanColumnState>;
 }
 
-export interface PostProjectsKanbanTaskChangeProps {
+export interface PostProjectsKanbanTaskChangeProps extends Omit<PostProjectsKanbanChangeRequestProps, 'id'> {
   projectId: number;
   laneId: number;
-  originalIndex: number;
-  changeIndex: number;
 }
