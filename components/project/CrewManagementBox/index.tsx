@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { PersonInfoState, CrewState } from '@/lib/api/types';
+
 import Icon from '@/components/atoms/Icon';
 
 import InfoTitle from '@/components/project/InfoTitle';
@@ -9,8 +11,8 @@ import Theme from '@/styles/Theme';
 import * as Styled from './style';
 
 export interface CrewManagementBoxProps {
-  captain: { id: number; nickname: string };
-  crews: { id: number; username: string; nickname: string; profileImageUrl: string }[];
+  captain: PersonInfoState;
+  crews: Array<CrewState>;
 }
 
 const CrewManagementBox = ({ captain, crews }: CrewManagementBoxProps) => {
@@ -29,12 +31,16 @@ const CrewManagementBox = ({ captain, crews }: CrewManagementBoxProps) => {
             <Icon icon="Plus" isButton />
           </Styled.CrewInfoTitleContainer>
           <Styled.CrewList>
-            {crews.map((crew) => (
-              <Styled.CrewItem key={crew.id}>
-                {crew.nickname}
-                <Icon icon="X" isButton />
-              </Styled.CrewItem>
-            ))}
+            {crews.length > 0 ? (
+              crews.map((crew) => (
+                <Styled.CrewItem key={crew.id}>
+                  {crew.nickname}
+                  <Icon icon="X" isButton />
+                </Styled.CrewItem>
+              ))
+            ) : (
+              <div>팀원을 초대해보세요!</div>
+            )}
           </Styled.CrewList>
         </Styled.CrewContainer>
       </Styled.InnerContainer>
