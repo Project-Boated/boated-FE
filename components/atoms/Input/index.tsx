@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyledInput } from './style';
+import * as Styled from './style';
 
 export interface InputProps {
   type: 'text';
@@ -16,7 +16,7 @@ export interface InputProps {
 
 const Input = ({ type, id, name, width, height, value, maxLength, placeholder, onChange }: InputProps) => {
   return (
-    <StyledInput
+    <Styled.Wrapper
       type={type}
       id={id}
       name={name}
