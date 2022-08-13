@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { boxDesign } from '@/styles/common';
 import Theme from '@/styles/Theme';
 
 export const Wrapper = styled.section`
@@ -41,3 +42,32 @@ export const Container = styled.div`
 `;
 
 export const Row = styled.div``;
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 580px;
+  height: 30px;
+
+  padding-left: 15px;
+
+  font-size: 14px;
+  line-height: 20px;
+
+  ${boxDesign()}
+`;
+
+export const DescriptionWrapper = styled.div`
+  overflow-x: auto;
+
+  width: 580px;
+  height: 139px;
+
+  padding: 7px 15px 0 15px;
+
+  font-size: 14px;
+  line-height: 20px;
+
+  ${boxDesign()}
+`;
