@@ -16,7 +16,7 @@ export const SearchTabWrapper = styled.div`
 `;
 
 export const ProjectListContainer = styled.article`
-  & > :not(:last-child) {
+  & > a > div {
     margin-bottom: 16px;
   }
 `;
