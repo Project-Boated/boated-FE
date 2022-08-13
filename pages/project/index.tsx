@@ -10,7 +10,7 @@ import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
 import TabNavigator from '@/components/project/TabNavigator';
 import ProjectsTemplate from '@/components/project/Template/ProjectsTemplate';
 
-import { MainWrapper, MainContentsWrapper } from '@/styles/pages/Project/style';
+import * as Styled from '@/styles/pages/Project/style';
 
 interface ProjectPageProps {
   query: GetProjectMyProps;
@@ -18,6 +18,7 @@ interface ProjectPageProps {
 
 const ProjectPage = ({ query }: ProjectPageProps) => {
   const router = useRouter();
+
   const [selectedTab, setSelectedTab] = useState<string>('내 프로젝트');
 
   useEffect(() => {
@@ -38,15 +39,15 @@ const ProjectPage = ({ query }: ProjectPageProps) => {
 
   return (
     <AppLayoutMain>
-      <MainWrapper>
+      <Styled.MainContainer>
         <div>sidebar</div>
-        <MainContentsWrapper>
+        <Styled.MainContentsContainer>
           <TabNavigator selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
           {(selectedTab === '내 프로젝트' || selectedTab === '종료된 프로젝트 확인') && (
             <ProjectsTemplate query={query} />
           )}
-        </MainContentsWrapper>
-      </MainWrapper>
+        </Styled.MainContentsContainer>
+      </Styled.MainContainer>
     </AppLayoutMain>
   );
 };
