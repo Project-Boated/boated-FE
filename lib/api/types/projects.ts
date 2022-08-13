@@ -11,10 +11,11 @@ export interface ProjectInfoState extends Id {
   description: string;
   deadline: string;
   captain: PersonInfoState;
-  crews: Array<PersonInfoState>;
   terminated: boolean;
   dday: number;
   totalDay: number;
+  taskSize: number;
+  totalFileSize: number;
 }
 
 export interface GetProjectMyProps {
@@ -41,6 +42,16 @@ export interface GetProjectMyResponse {
   size: number;
   hasNext: boolean;
   content: Array<ProjectInfoState>;
+}
+
+export interface CrewState extends Id {
+  username: string;
+  nickname: string;
+  profileImageUrl: string | null;
+}
+
+export interface CrewsState {
+  crews: Array<CrewState>;
 }
 
 // 프로젝트 초대 확인, 승인, 거절
