@@ -12,8 +12,10 @@ import {
   GetProjectKanbanResponse,
   PostProjectsKanbanRequestProps,
   PostProjectsKanbanChangeRequestProps,
-  PostProjectsKanbanTaskChangeProps,
-  PostProjectsKanbanTaskLikeProps,
+  PostProjectsKanbanTaskChangeRequestProps,
+  PostProjectsKanbanTaskLikeRequestProps,
+  DeleteProjectsKanbanRequestProps,
+  DeleteProjectsKanbanTaskRequestProps,
 } from './types';
 
 const projectsBaseUrl = '/api/projects';
@@ -33,21 +35,25 @@ const projectsUrl = {
   projectsById: (id: number) => `${projectsBaseUrl}/${id}`,
   projectsByIdCrews: (id: number) => `${projectsBaseUrl}/${id}/crews`,
 
-  projectsKanban: (id: number) => `${projectsBaseUrl}/${id}/kanban`,
-  projectsKanbanLane: (id: number) => `${projectsBaseUrl}/${id}/kanban/lanes`,
-  projectsKanbanLaneChange: ({ id, originalIndex, changeIndex }: PostProjectsKanbanChangeRequestProps) =>
-    `${projectsBaseUrl}/${id}/kanban/lanes/change/${originalIndex}/${changeIndex}`,
+  projectsKanban: (projectId: number) => `${projectsBaseUrl}/${projectId}/kanban`,
+  projectsKanbanLane: (projectId: number) => `${projectsBaseUrl}/${projectId}/kanban/lanes`,
+  projectsKanbanLaneDelete: ({ projectId, kanbanLaneId }: DeleteProjectsKanbanRequestProps) =>
+    `${projectsBaseUrl}/${projectId}/kanban/lanes/${kanbanLaneId}`,
+  projectsKanbanLaneChange: ({ projectId, originalIndex, changeIndex }: PostProjectsKanbanChangeRequestProps) =>
+    `${projectsBaseUrl}/${projectId}/kanban/lanes/change/${originalIndex}/${changeIndex}`,
 
+  projectsKanbanTaskDelete: ({ projectId, taskId }: DeleteProjectsKanbanTaskRequestProps) =>
+    `${projectsBaseUrl}/${projectId}/kanban/lanes/tasks/${taskId}`,
   projectsKanbanTaskChange: ({
     projectId,
     originalLaneId,
     originalTaskIndex,
     changeLaneId,
     changeTaskIndex,
-  }: PostProjectsKanbanTaskChangeProps) =>
+  }: PostProjectsKanbanTaskChangeRequestProps) =>
     `${projectsBaseUrl}/${projectId}/kanban/lanes/tasks/change/${originalLaneId}/${originalTaskIndex}/${changeLaneId}/${changeTaskIndex}`,
 
-  projectsKanbanTaskLike: ({ projectId, taskId }: PostProjectsKanbanTaskLikeProps) =>
+  projectsKanbanTaskLike: ({ projectId, taskId }: PostProjectsKanbanTaskLikeRequestProps) =>
     `${projectsBaseUrl}/${projectId}/tasks/${taskId}/like`,
 };
 
@@ -98,7 +104,8 @@ export const getProjectsKanban = (projectId: number) =>
 export const postProjectsKanbanLane = ({ projectId, name }: PostProjectsKanbanRequestProps) =>
   request('POST', projectsUrl.projectsKanbanLane(projectId), { name });
 
-export const deleteProjectsKanbanLane = (id: number) => request('DELETE', projectsUrl.projectsKanbanLane(id));
+export const deleteProjectsKanbanLane = ({ projectId, kanbanLaneId }: DeleteProjectsKanbanRequestProps) =>
+  request('DELETE', projectsUrl.projectsKanbanLaneDelete({ projectId, kanbanLaneId }));
 
 export const postProjectsKanbanLaneChange = ({
   projectId,
@@ -108,13 +115,16 @@ export const postProjectsKanbanLaneChange = ({
   request('POST', projectsUrl.projectsKanbanLaneChange({ projectId, originalIndex, changeIndex }));
 };
 
+export const deleteProjectsKanbanTask = ({ projectId, taskId }: DeleteProjectsKanbanTaskRequestProps) =>
+  request('DELETE', projectsUrl.projectsKanbanTaskDelete({ projectId, taskId }));
+
 export const postProjectsKanbanTaskChange = ({
   projectId,
   originalLaneId,
   originalTaskIndex,
   changeLaneId,
   changeTaskIndex,
-}: PostProjectsKanbanTaskChangeProps) =>
+}: PostProjectsKanbanTaskChangeRequestProps) =>
   request(
     'POST',
     projectsUrl.projectsKanbanTaskChange({
@@ -127,8 +137,8 @@ export const postProjectsKanbanTaskChange = ({
   );
 
 // 칸반 테스크 찜하기
-export const postProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjectsKanbanTaskLikeProps) =>
+export const postProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjectsKanbanTaskLikeRequestProps) =>
   request('POST', projectsUrl.projectsKanbanTaskLike({ projectId, taskId }));
 
-export const deleteProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjectsKanbanTaskLikeProps) =>
+export const deleteProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjectsKanbanTaskLikeRequestProps) =>
   request('DELETE', projectsUrl.projectsKanbanTaskLike({ projectId, taskId }));
