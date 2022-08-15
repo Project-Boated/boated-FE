@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import { DragDropContext, Droppable, DropResult, resetServerContext } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
+import { useRouter } from 'next/router';
 
 import * as queryKeys from '@/lib/constants/queryKeys';
 import { getProjectsKanban, postProjectsKanbanLaneChange, postProjectsKanbanTaskChange } from '@/lib/api/projects';
@@ -14,8 +15,8 @@ import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
 
 import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
+import KanbanColumnAddModal from '@/components/common/Modal/KanbanColumnAddModal';
 
-import KanbanColumnAddModal from '@/components/project/Kanban/KanbanColumnAddModal';
 import KanbanColumn from '@/components/project/Kanban/KanbanColumn';
 
 import Theme from '@/styles/Theme';
@@ -23,6 +24,7 @@ import Theme from '@/styles/Theme';
 const Wrapper = styled.div``;
 
 const KanbanWrapper = styled.div`
+  width: 1045px;
   max-width: 1045px;
 
   overflow-x: auto;
@@ -30,6 +32,7 @@ const KanbanWrapper = styled.div`
 
 const Container = styled.div`
   display: flex;
+
   gap: 20px;
 `;
 
@@ -44,10 +47,10 @@ const TaskTextWrapper = styled.div`
 const ColumnAddContainer = styled.div`
   box-sizing: border-box;
 
-  width: 101px;
-  height: 25px;
+  width: 126px;
+  height: 33px;
 
-  padding: 7px 2px 7px 10px;
+  padding: 7px 2px 7px 12px;
 
   display: flex;
   justify-content: space-between;
@@ -67,7 +70,8 @@ const ButtonWrapper = styled.div`
 `;
 
 const KanbanTestPage: NextPage = () => {
-  const projectId = 1;
+  const router = useRouter();
+  const projectId = parseInt(router.query.id as string, 10);
 
   const { isShowModal, closeModal, openModal } = useModal();
 
@@ -490,10 +494,12 @@ const KanbanTestPage: NextPage = () => {
         {isShowModal && <KanbanColumnAddModal closeModal={closeModal} />}
         <TaskTextWrapper>
           <Text fontSize={20}>Task</Text>
-          <ColumnAddContainer onClick={openModal}>
-            <Text fontSize={11}>레인 추가하기</Text>
-            <Icon width={18} height={18} icon="KanbanColumnAdd" />
-          </ColumnAddContainer>
+          {data.length < 5 && (
+            <ColumnAddContainer onClick={openModal}>
+              <Text fontSize={14}>레인 추가하기</Text>
+              <Icon width={24} height={24} icon="KanbanColumnAdd" />
+            </ColumnAddContainer>
+          )}
         </TaskTextWrapper>
         <KanbanWrapper>
           <DragDropContext onDragEnd={onDragEnd}>
@@ -507,7 +513,7 @@ const KanbanTestPage: NextPage = () => {
                       name={column.name}
                       tasks={column.tasks}
                       index={index}
-                      dataLength={data.length}
+                      kanbanDataLength={data.length}
                     />
                   ))}
                   {provided.placeholder}
