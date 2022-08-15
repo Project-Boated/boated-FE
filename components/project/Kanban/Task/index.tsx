@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import { useRouter } from 'next/router';
 
 import { deleteProjectsKanbanTaskLike, postProjectsKanbanTaskLike } from '@/lib/api/projects';
 import { TaskState } from '@/lib/api/types';
@@ -10,7 +11,7 @@ import useDetectOutsideClick from '@/hooks/useDetectOutside';
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
 
-import TaskDeleteModal from '@/components/project/Kanban/TaskDeleteModal';
+import TaskDeleteModal from '@/components/common/Modal/TaskDeleteModal';
 
 import Theme from '@/styles/Theme';
 
@@ -22,7 +23,9 @@ export interface TaskProps {
 }
 
 const Task = ({ index, task }: TaskProps) => {
-  const projectId = 1;
+  const router = useRouter();
+  const projectId = parseInt(router.query.id as string, 10);
+
   const [isIconVisible, setIsIconVisible] = useState(false);
 
   const ref = useRef(null);
@@ -33,6 +36,7 @@ const Task = ({ index, task }: TaskProps) => {
 
   const onClickTaskRemoveWrapper = () => {
     openModal();
+    setIsIconVisible(false);
     setIsMoreClicked(false);
   };
 
@@ -40,10 +44,12 @@ const Task = ({ index, task }: TaskProps) => {
     if (task.like) {
       await deleteProjectsKanbanTaskLike({ projectId, taskId: task.id });
       setIsMoreClicked(false);
+      setIsIconVisible(false);
       return;
     }
     await postProjectsKanbanTaskLike({ projectId, taskId: task.id });
     setIsMoreClicked(false);
+    setIsIconVisible(false);
   };
 
   return (
