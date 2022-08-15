@@ -52,9 +52,6 @@ export const TitleWrapper = styled.div`
 
   padding-left: 15px;
 
-  font-size: 14px;
-  line-height: 20px;
-
   ${boxDesign()}
 `;
 
@@ -65,9 +62,6 @@ export const DescriptionWrapper = styled.div`
   height: 139px;
 
   padding: 7px 15px 0 15px;
-
-  font-size: 14px;
-  line-height: 20px;
 
   ${boxDesign()}
 `;
