@@ -6,15 +6,34 @@ import Calendar from '@/components/date/Calendar';
 import TimeTableSelector from '@/components/date/TimeTableSelector';
 import TimePicker from '@/components/date/TimePicker';
 
+import { ProjectInfoState } from '@/lib/api/types';
+
 import * as Styled from './style';
 
-const TimeTableBox = () => {
+const TimeTableBox = ({ deadline }: Partial<Pick<ProjectInfoState, 'deadline'>>) => {
   const { isShowModal: isShowCalendar, toggleModal: onClickCalendar } = useModal();
   const { isShowModal: isShowTimePicker, toggleModal: onClickTimePicker } = useModal();
 
-  const [hourType, setHourType] = useState<'AM' | 'PM'>('AM');
-  const [hour, setHour] = useState<string>('00');
-  const [minute, setMinute] = useState<string>('00');
+  let date,
+    tempYear,
+    tempMonth,
+    tempDay = '';
+  let time,
+    tempHour,
+    tempMinute,
+    tempSecond = '';
+  let tempHourType: 'AM' | 'PM' = 'AM';
+
+  if (deadline) {
+    [date, time] = deadline.split(' ');
+    [tempYear, tempMonth, tempDay] = date.split('-');
+    [tempHour, tempMinute, tempSecond] = time.split(':');
+    tempHourType = Number(tempHour) > 12 ? 'PM' : 'AM';
+  }
+
+  const [hourType, setHourType] = useState<'AM' | 'PM'>(tempHourType ?? 'AM');
+  const [hour, setHour] = useState<string>(tempHour ?? '00');
+  const [minute, setMinute] = useState<string>(tempMinute ?? '00');
 
   const isHourTypeAM: boolean = useMemo(() => hourType === 'AM', [hourType]);
 

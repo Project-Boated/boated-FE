@@ -59,7 +59,7 @@ export const WeekListContainer = styled.tr`
   }
 `;
 
-export const DateWrapper = styled.div`
+export const DateWrapper = styled.td`
   cursor: pointer;
 
   display: flex;

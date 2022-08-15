@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { useRouter } from 'next/router';
+
+import * as queryKeys from '@/lib/constants/queryKeys';
+import * as projectsAPI from '@/lib/api/projects';
 
 import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
 
@@ -12,13 +17,15 @@ import CrewManagementBox from '@/components/project/CrewManagementBox';
 import * as Styled from '@/styles/pages/Project/[id].style';
 
 const ProjectDetailPage = () => {
-  const captain = { id: 1, nickname: 'jun5e00' };
-  const crews = [
-    { id: 2, username: 'test1', nickname: 'test1', profileImageUrl: '' },
-    { id: 3, username: 'test2', nickname: 'test2', profileImageUrl: '' },
-    { id: 4, username: 'test3', nickname: 'test3', profileImageUrl: '' },
-    { id: 5, username: 'test4', nickname: 'test4', profileImageUrl: '' },
-  ];
+  const router = useRouter();
+  const id = parseInt(router.query.id as string, 10);
+
+  const { data: projectInfo } = useQuery(`${queryKeys.PROJECTS_BY_ID(id)}`, () => projectsAPI.getProjectsById(id));
+
+  const { data: crewsInfo } = useQuery(`${queryKeys.PROJECTS_BY_ID_CREWS(id)}`, () =>
+    projectsAPI.getProjectsByIdCrews(id),
+  );
+
   return (
     <AppLayoutMain height="100vh" bottom="-45vh">
       <Styled.Container>
@@ -27,17 +34,23 @@ const ProjectDetailPage = () => {
           <Text fontSize={20} lineHeight={28}>
             프로젝트 정보
           </Text>
-          <InfoBox />
+          {projectInfo && (
+            <InfoBox name={projectInfo.name} deadline={projectInfo.deadline} description={projectInfo.description} />
+          )}
           <Styled.SubInfoContainer>
-            <SubInfo>
-              <Text fontSize={14}>총 Task 개수 : (총 12 개)</Text>
-            </SubInfo>
-            <SubInfo>
-              <Text fontSize={14}>모든 파일 용량 : 100MB</Text>
-            </SubInfo>
+            {projectInfo && (
+              <>
+                <SubInfo>
+                  <Text fontSize={14}>총 Task 개수 : {`(총 ${projectInfo.taskSize} 개)`}</Text>
+                </SubInfo>
+                <SubInfo>
+                  <Text fontSize={14}>모든 파일 용량 : {projectInfo.totalFileSize}MB</Text>
+                </SubInfo>
+              </>
+            )}
           </Styled.SubInfoContainer>
         </Styled.InfoBoxContainer>
-        <CrewManagementBox captain={captain} crews={crews} />
+        {crewsInfo && projectInfo && <CrewManagementBox captain={projectInfo?.captain} crews={crewsInfo} />}
       </Styled.Container>
     </AppLayoutMain>
   );

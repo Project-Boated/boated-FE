@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import { getProjectMy } from '@/lib/api/projects';
 import { GetProjectMyProps } from '@/lib/api/types';
@@ -79,18 +80,21 @@ const ProjectsTemplate = ({ query }: ProjecTemplateProps) => {
       <ProjectListContainer>
         {data &&
           data.content.length > 0 &&
-          data.content.map(({ id, name, description, deadline, captain, crews, terminated, dday, totalDay }, index) => (
-            <ProjectItem
-              key={`PROJECT_ITEM_${id}`}
-              name={name}
-              description={description}
-              deadline={deadline}
-              captain={captain}
-              crews={crews}
-              terminated={terminated}
-              dday={dday}
-              totalDay={totalDay}
-            />
+          data.content.map(({ id, name, description, deadline, captain, crews, terminated, dday, totalDay }) => (
+            <Link href={`project/${id}`} key={`PROJECT_ITEM_${id}`}>
+              <a>
+                <ProjectItem
+                  name={name}
+                  description={description}
+                  deadline={deadline}
+                  captain={captain}
+                  crews={crews}
+                  terminated={terminated}
+                  dday={dday}
+                  totalDay={totalDay}
+                />
+              </a>
+            </Link>
           ))}
       </ProjectListContainer>
     </>

@@ -2,7 +2,9 @@ import request from './request';
 
 import {
   Id,
+  CrewsState,
   PostProjectRequestProps,
+  ProjectInfoState,
   GetProjectMyProps,
   GetProjectsResponse,
   GetProjectMyResponse,
@@ -62,6 +64,12 @@ export const getProjectsMyCrew = () =>
 export const getProjectsMyCrewTerminated = () =>
   request<GetProjectsResponse>('GET', projectsUrl.projectsMyCrewTerminated).then((res) => res.data.projects);
 
+export const getProjectsById = (id: number) =>
+  request<ProjectInfoState>('GET', projectsUrl.projectsById(id)).then((res) => res.data);
+
+export const getProjectsByIdCrews = (id: number) =>
+  request<CrewsState>('GET', projectsUrl.projectsByIdCrews(id)).then((res) => res.data.crews);
+
 // 프로젝트 초대 확인, 승인, 거절
 export const getProjectsInvite = () =>
   request<GetProjectsInvitesResponse>('GET', projectsUrl.projectsInvites).then((res) => res.data.invitations);
@@ -83,9 +91,8 @@ export const postProjectsKanbanLaneChange = ({
   id,
   originalIndex,
   changeIndex,
-}: PostProjectsKanbanChangeRequestProps) => {
+}: PostProjectsKanbanChangeRequestProps) =>
   request('POST', projectsUrl.projectsKanbanLaneChange({ id, originalIndex, changeIndex }));
-};
 
 export const postProjectsTaskChange = ({
   projectId,

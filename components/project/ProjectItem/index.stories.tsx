@@ -3,14 +3,14 @@ import { Story } from '@storybook/react';
 
 import ProjectItem from '.';
 
-import { ProjectInfoState } from '@/lib/api/types';
+import { MyProjectState } from '@/lib/api/types';
 
 export default {
   component: ProjectItem,
   title: 'project/ProjectItem',
 };
 
-const Template: Story<ProjectInfoState> = (args: ProjectInfoState) => <ProjectItem {...args} />;
+const Template: Story<MyProjectState> = (args: MyProjectState) => <ProjectItem {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -28,4 +28,5 @@ Default.args = {
     { id: 3, nickname: '팀원3' },
     { id: 4, nickname: '팀원4' },
   ],
+  deadline: '2022-08-30 17:17:17',
 };

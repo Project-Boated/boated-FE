@@ -11,10 +11,22 @@ export interface ProjectInfoState extends Id {
   description: string;
   deadline: string;
   captain: PersonInfoState;
-  crews: Array<PersonInfoState>;
   terminated: boolean;
   dday: number;
   totalDay: number;
+  taskSize: number;
+  totalFileSize: number;
+}
+
+export interface MyProjectState extends Id {
+  name: string;
+  description: string;
+  deadline: string;
+  captain: PersonInfoState;
+  crews: Array<PersonInfoState>;
+  dday: number;
+  totalDay: number;
+  terminated: boolean;
 }
 
 export interface GetProjectMyProps {
@@ -40,7 +52,17 @@ export interface GetProjectMyResponse {
   page: number;
   size: number;
   hasNext: boolean;
-  content: Array<ProjectInfoState>;
+  content: Array<MyProjectState>;
+}
+
+export interface CrewState extends Id {
+  username: string;
+  nickname: string;
+  profileImageUrl: string | null;
+}
+
+export interface CrewsState {
+  crews: Array<CrewState>;
 }
 
 // 프로젝트 초대 확인, 승인, 거절

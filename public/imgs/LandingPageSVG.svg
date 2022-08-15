@@ -18,8 +18,8 @@
 <path d="M1171.82 4517.94C1431.28 4449.9 1778.71 4440.82 1920 4444.79L1920 4678.92C1827.76 4678.92 500.446 4679.09 -1.31122e-08 4678.93C28.5337 4646.93 264.382 4620.71 465.943 4612.86C600.04 4610.33 928.952 4587.8 1171.82 4517.94Z" fill="#94B0DC"/>
 <path d="M504.365 4389.77C329.805 4267.59 95.0552 4251.38 0 4258.5L1.00015 4678.87C63.0557 4678.87 1156.31 4679.17 1493 4678.87C1473.8 4621.41 1114.88 4574.32 979.268 4560.23C889.05 4555.68 667.763 4515.23 504.365 4389.77Z" fill="#2479E0"/>
 <defs>
-<filter id="filter0_d_199_578" x="-4" y="897" width="1928" height="1929" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter0_d_199_578" x="-4" y="897" width="1928" height="1929" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feOffset/>
 <feGaussianBlur stdDeviation="2"/>

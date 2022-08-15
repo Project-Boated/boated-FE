@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MainWrapper = styled.main`
+export const MainContainer = styled.main`
   display: flex;
   justify-content: space-between;
 
@@ -9,4 +9,4 @@ export const MainWrapper = styled.main`
   margin-top: 128px;
 `;
 
-export const MainContentsWrapper = styled.section``;
+export const MainContentsContainer = styled.section``;
