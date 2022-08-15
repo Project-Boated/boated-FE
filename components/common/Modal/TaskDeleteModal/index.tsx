@@ -1,6 +1,8 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 import { TaskState } from '@/lib/api/types';
+import { deleteProjectsKanbanTask } from '@/lib/api/projects';
 
 import Button from '@/components/atoms/Button';
 import Text from '@/components/atoms/Text';
@@ -16,6 +18,14 @@ export interface TaskDeleteModalProps {
 }
 
 const TaskDeleteModal = ({ task, closeModal }: TaskDeleteModalProps) => {
+  const router = useRouter();
+  const projectId = parseInt(router.query.id as string, 10);
+
+  const onClickTaskDelete = async () => {
+    await deleteProjectsKanbanTask({ projectId, taskId: task.id });
+    closeModal();
+  };
+
   return (
     <Modal closeModal={closeModal}>
       <Styled.ContentContainer>
@@ -27,7 +37,7 @@ const TaskDeleteModal = ({ task, closeModal }: TaskDeleteModalProps) => {
           <Text>삭제하시겠습니까?</Text>
         </Styled.TextContainer>
         <Styled.ButtonContainer>
-          <Button width={200} height={52} backgroundColor={Theme.S_0} fontColor={Theme.M_1}>
+          <Button width={200} height={52} backgroundColor={Theme.S_0} fontColor={Theme.M_1} onClick={onClickTaskDelete}>
             삭제
           </Button>
           <Button width={200} height={52} onClick={closeModal}>
