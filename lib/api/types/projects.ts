@@ -18,6 +18,17 @@ export interface ProjectInfoState extends Id {
   totalFileSize: number;
 }
 
+export interface MyProjectState extends Id {
+  name: string;
+  description: string;
+  deadline: string;
+  captain: PersonInfoState;
+  crews: Array<PersonInfoState>;
+  dday: number;
+  totalDay: number;
+  terminated: boolean;
+}
+
 export interface GetProjectMyProps {
   captain: 'term' | 'not-term' | undefined;
   crew: 'term' | 'not-term' | undefined;
@@ -41,7 +52,7 @@ export interface GetProjectMyResponse {
   page: number;
   size: number;
   hasNext: boolean;
-  content: Array<ProjectInfoState>;
+  content: Array<MyProjectState>;
 }
 
 export interface CrewState extends Id {
