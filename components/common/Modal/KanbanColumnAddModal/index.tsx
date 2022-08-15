@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { postProjectsKanbanLane } from '@/lib/api/projects';
 
@@ -14,7 +15,8 @@ export interface KanbanColumnAddModal {
 }
 
 const KanbanColumnAddModal = ({ closeModal }: KanbanColumnAddModal) => {
-  const projectId = 1;
+  const router = useRouter();
+  const projectId = parseInt(router.query.id as string, 10);
 
   const [kanbanName, setKanbanName] = useState('');
 
@@ -24,6 +26,7 @@ const KanbanColumnAddModal = ({ closeModal }: KanbanColumnAddModal) => {
 
   const onClickColumnAdd = async () => {
     await postProjectsKanbanLane({ projectId, name: kanbanName });
+    closeModal();
   };
 
   return (
@@ -37,9 +40,10 @@ const KanbanColumnAddModal = ({ closeModal }: KanbanColumnAddModal) => {
             name="lane-name"
             width={566}
             height={40}
-            placeholder="새로운 레인의 이름을 입력해주세요."
+            placeholder="새로운 레인의 이름을 입력해주세요. (최대 15자)"
             value={kanbanName}
             onChange={onChangeKanbanColumnName}
+            maxLength={15}
           />
         </Styled.TextInputContainer>
 
