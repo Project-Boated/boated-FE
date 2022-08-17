@@ -3,7 +3,7 @@ export default {
   M_1: '#030E20', // Black
   M_2: '#94B0DC', // Blue
 
-  P_1: '#414D76',
+  P_1: '#1B3E77',
   P_2: '#2479E0',
   P_3: '#6BA5F2',
 

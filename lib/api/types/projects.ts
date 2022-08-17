@@ -78,11 +78,19 @@ export interface GetProjectsInvitesResponse {
 }
 
 // 프로젝트 칸반 불러오기, lane 추가, 삭제
-export interface PostProjectsKanbanRequestProps extends Id {
+export interface PutProjectsKanbanNameRequestProps {
+  projectId: number;
+  kanbanLaneId: number;
   name: string;
 }
 
-export interface PostProjectsKanbanChangeRequestProps extends Id {
+export interface DeleteProjectsKanbanRequestProps {
+  projectId: number;
+  kanbanLaneId: number;
+}
+
+export interface PostProjectsKanbanChangeRequestProps {
+  projectId: number;
   originalIndex: number;
   changeIndex: number;
 }
@@ -98,6 +106,7 @@ export interface TaskState extends Id {
   dday: number;
   fileCount: number;
   assignedAccounts: Array<AssignedAccount>;
+  like: boolean;
 }
 
 export interface KanbanColumnState extends Id {
@@ -109,7 +118,21 @@ export interface GetProjectKanbanResponse {
   lanes: Array<KanbanColumnState>;
 }
 
-export interface PostProjectsKanbanTaskChangeProps extends Omit<PostProjectsKanbanChangeRequestProps, 'id'> {
+export interface DeleteProjectsKanbanTaskRequestProps {
   projectId: number;
-  laneId: number;
+  taskId: number;
+}
+
+export interface PostProjectsKanbanTaskChangeRequestProps {
+  projectId: number;
+  originalLaneId: number;
+  originalTaskIndex: number;
+  changeLaneId: number;
+  changeTaskIndex: number;
+}
+
+// task 찜하기
+export interface PostProjectsKanbanTaskLikeRequestProps {
+  projectId: number;
+  taskId: number;
 }

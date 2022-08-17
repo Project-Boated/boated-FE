@@ -10,9 +10,12 @@ import {
   GetProjectMyResponse,
   GetProjectsInvitesResponse,
   GetProjectKanbanResponse,
-  PostProjectsKanbanRequestProps,
+  PutProjectsKanbanNameRequestProps,
   PostProjectsKanbanChangeRequestProps,
-  PostProjectsKanbanTaskChangeProps,
+  PostProjectsKanbanTaskChangeRequestProps,
+  PostProjectsKanbanTaskLikeRequestProps,
+  DeleteProjectsKanbanRequestProps,
+  DeleteProjectsKanbanTaskRequestProps,
 } from './types';
 
 const projectsBaseUrl = '/api/projects';
@@ -26,18 +29,34 @@ const projectsUrl = {
   projectsMyCrewTerminated: `${projectsBaseUrl}/my/crew/terminated`,
 
   projectsInvites: '/api/account/invitations',
-  projectsInvitesAccept: (id: number) => `/api/account/invitations/${id}/accept`,
-  projectsInvitesReject: (id: number) => `/api/account/invitations/${id}/reject`,
+  projectsInvitesAccept: (invitationId: number) => `/api/account/invitations/${invitationId}/accept`,
+  projectsInvitesReject: (invitationId: number) => `/api/account/invitations/${invitationId}/reject`,
 
   projectsById: (id: number) => `${projectsBaseUrl}/${id}`,
   projectsByIdCrews: (id: number) => `${projectsBaseUrl}/${id}/crews`,
 
-  projectsKanban: (id: number) => `${projectsBaseUrl}/${id}/kanban`,
-  projectsKanbanLane: (id: number) => `${projectsBaseUrl}/${id}/kanban/lanes`,
-  projectsKanbanLaneChange: ({ id, originalIndex, changeIndex }: PostProjectsKanbanChangeRequestProps) =>
-    `${projectsBaseUrl}/${id}/kanban/lanes/change/${originalIndex}/${changeIndex}`,
-  projectsKanbanTaskChange: ({ projectId, laneId, originalIndex, changeIndex }: PostProjectsKanbanTaskChangeProps) =>
-    `${projectsBaseUrl}/${projectId}/kanban/lanes/${laneId}/tasks/change/${originalIndex}/${changeIndex}`,
+  projectsKanban: (projectId: number) => `${projectsBaseUrl}/${projectId}/kanban`,
+  projectsKanbanLaneAdd: (projectId: number) => `${projectsBaseUrl}/${projectId}/kanban/lanes`,
+  projectsKanbanLaneNameChange: ({ projectId, kanbanLaneId }: Omit<PutProjectsKanbanNameRequestProps, 'name'>) =>
+    `${projectsBaseUrl}/${projectId}/kanban/lanes/${kanbanLaneId}`,
+  projectsKanbanLaneDelete: ({ projectId, kanbanLaneId }: DeleteProjectsKanbanRequestProps) =>
+    `${projectsBaseUrl}/${projectId}/kanban/lanes/${kanbanLaneId}`,
+  projectsKanbanLaneChange: ({ projectId, originalIndex, changeIndex }: PostProjectsKanbanChangeRequestProps) =>
+    `${projectsBaseUrl}/${projectId}/kanban/lanes/change/${originalIndex}/${changeIndex}`,
+
+  projectsKanbanTaskDelete: ({ projectId, taskId }: DeleteProjectsKanbanTaskRequestProps) =>
+    `${projectsBaseUrl}/${projectId}/kanban/lanes/tasks/${taskId}`,
+  projectsKanbanTaskChange: ({
+    projectId,
+    originalLaneId,
+    originalTaskIndex,
+    changeLaneId,
+    changeTaskIndex,
+  }: PostProjectsKanbanTaskChangeRequestProps) =>
+    `${projectsBaseUrl}/${projectId}/kanban/lanes/tasks/change/${originalLaneId}/${originalTaskIndex}/${changeLaneId}/${changeTaskIndex}`,
+
+  projectsKanbanTaskLike: ({ projectId, taskId }: PostProjectsKanbanTaskLikeRequestProps) =>
+    `${projectsBaseUrl}/${projectId}/tasks/${taskId}/like`,
 };
 
 export const createProject = ({ name, description, deadline }: PostProjectRequestProps) =>
@@ -74,30 +93,57 @@ export const getProjectsByIdCrews = (id: number) =>
 export const getProjectsInvite = () =>
   request<GetProjectsInvitesResponse>('GET', projectsUrl.projectsInvites).then((res) => res.data.invitations);
 
-export const postProjectsInviteAccept = (id: number) => request('POST', projectsUrl.projectsInvitesAccept(id));
+export const postProjectsInviteAccept = (invitationId: number) =>
+  request('POST', projectsUrl.projectsInvitesAccept(invitationId));
 
-export const postProjectsInviteReject = (id: number) => request('POST', projectsUrl.projectsInvitesReject(id));
+export const postProjectsInviteReject = (invitationId: number) =>
+  request('POST', projectsUrl.projectsInvitesReject(invitationId));
 
 // 프로젝트 칸반 불러오기, lane 추가, 삭제
-export const getProjectsKanban = (id: number) =>
-  request<GetProjectKanbanResponse>('GET', projectsUrl.projectsKanban(id)).then((res) => res.data.lanes);
+export const getProjectsKanban = (projectId: number) =>
+  request<GetProjectKanbanResponse>('GET', projectsUrl.projectsKanban(projectId)).then((res) => res.data.lanes);
 
-export const postProjectsKanbanLane = ({ id, name }: PostProjectsKanbanRequestProps) =>
-  request('POST', projectsUrl.projectsKanbanLane(id), { name });
+export const postProjectsKanbanLane = ({ projectId, name }: Omit<PutProjectsKanbanNameRequestProps, 'kanbanLaneId'>) =>
+  request('POST', projectsUrl.projectsKanbanLaneAdd(projectId), { name });
 
-export const deleteProjectsKanbanLane = (id: number) => request('DELETE', projectsUrl.projectsKanbanLane(id));
+export const putProjectsKanbanLaneName = ({ projectId, kanbanLaneId, name }: PutProjectsKanbanNameRequestProps) =>
+  request('PUT', projectsUrl.projectsKanbanLaneNameChange({ projectId, kanbanLaneId }), { name });
+
+export const deleteProjectsKanbanLane = ({ projectId, kanbanLaneId }: DeleteProjectsKanbanRequestProps) =>
+  request('DELETE', projectsUrl.projectsKanbanLaneDelete({ projectId, kanbanLaneId }));
 
 export const postProjectsKanbanLaneChange = ({
-  id,
-  originalIndex,
-  changeIndex,
-}: PostProjectsKanbanChangeRequestProps) =>
-  request('POST', projectsUrl.projectsKanbanLaneChange({ id, originalIndex, changeIndex }));
-
-export const postProjectsTaskChange = ({
   projectId,
-  laneId,
   originalIndex,
   changeIndex,
-}: PostProjectsKanbanTaskChangeProps) =>
-  request('POST', projectsUrl.projectsKanbanTaskChange({ projectId, laneId, originalIndex, changeIndex }));
+}: PostProjectsKanbanChangeRequestProps) => {
+  request('POST', projectsUrl.projectsKanbanLaneChange({ projectId, originalIndex, changeIndex }));
+};
+
+export const deleteProjectsKanbanTask = ({ projectId, taskId }: DeleteProjectsKanbanTaskRequestProps) =>
+  request('DELETE', projectsUrl.projectsKanbanTaskDelete({ projectId, taskId }));
+
+export const postProjectsKanbanTaskChange = ({
+  projectId,
+  originalLaneId,
+  originalTaskIndex,
+  changeLaneId,
+  changeTaskIndex,
+}: PostProjectsKanbanTaskChangeRequestProps) =>
+  request(
+    'POST',
+    projectsUrl.projectsKanbanTaskChange({
+      projectId,
+      originalLaneId,
+      originalTaskIndex,
+      changeLaneId,
+      changeTaskIndex,
+    }),
+  );
+
+// 칸반 테스크 찜하기
+export const postProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjectsKanbanTaskLikeRequestProps) =>
+  request('POST', projectsUrl.projectsKanbanTaskLike({ projectId, taskId }));
+
+export const deleteProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjectsKanbanTaskLikeRequestProps) =>
+  request('DELETE', projectsUrl.projectsKanbanTaskLike({ projectId, taskId }));

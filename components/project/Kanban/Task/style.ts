@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { boxDesign } from '@/styles/common';
+
 import Theme from '@/styles/Theme';
 
 export const Wrapper = styled.div`
@@ -15,7 +17,15 @@ export const Wrapper = styled.div`
   border-radius: 8px;
 `;
 
-export const IconWrapper = styled.div`
+export const LikeIconWrapper = styled.div`
+  position: absolute;
+
+  left: 14px;
+
+  cursor: pointer;
+`;
+
+export const DottedIconWrapper = styled.div`
   position: absolute;
 
   top: 7px;
@@ -34,7 +44,7 @@ export const TaskNameContainer = styled.div`
   display: flex;
   align-items: center;
 
-  margin-top: 10px;
+  margin-top: 16px;
 
   width: 200px;
 `;
@@ -43,7 +53,7 @@ export const TextContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  margin-top: 15px;
+  margin-top: 30px;
 `;
 
 export const TextBlock = styled.div``;
@@ -55,7 +65,7 @@ export const DivEnd = styled.div`
 export const AssignedAccountsContainer = styled.div`
   width: 170px;
 
-  margin-top: 50px;
+  margin-top: 30px;
   gap: 6px;
 
   display: flex;
@@ -87,4 +97,42 @@ export const EllipsisSpanWrapper = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+`;
+
+export const MoreContainer = styled.div`
+  position: absolute;
+
+  top: 29px;
+  left: 55px;
+
+  width: 163px;
+  height: 79px;
+
+  ${boxDesign()};
+
+  z-index: 0;
+`;
+
+export const FavoriteAddWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  padding: 10px 12px;
+
+  border-bottom: 1px solid ${Theme.S_2};
+
+  height: 39px;
+
+  cursor: pointer;
+`;
+
+export const TaskRemoveWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  padding: 10px 12px;
+
+  height: 39px;
+
+  cursor: pointer;
 `;

@@ -43,3 +43,17 @@ export const IconWrapper = styled.div`
 
   cursor: pointer;
 `;
+
+export const HeaderChangeInput = styled.input`
+  width: 230px;
+  height: 30px;
+
+  text-align: center;
+
+  outline: none;
+  background: ${Theme.M_1};
+  color: ${Theme.S_0};
+
+  font-family: 'Gmarket Sans';
+  font-size: 14px;
+`;

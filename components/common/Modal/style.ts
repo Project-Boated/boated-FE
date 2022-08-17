@@ -5,10 +5,10 @@ import { SizeProps } from '@/types/size';
 import { boxDesign } from '@/styles/common';
 
 export const Background = styled.div`
-  position: absolute;
+  position: fixed;
 
-  width: 100vw;
-  height: 150vh;
+  width: 100%;
+  height: 100%;
 
   left: 0px;
   top: 0px;
@@ -20,6 +20,13 @@ export const Background = styled.div`
   z-index: 1000;
 
   background: rgba(3, 14, 32, 0.36);
+`;
+
+export const Overlay = styled.div`
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
 `;
 
 export const Container = styled.div<SizeProps>`
