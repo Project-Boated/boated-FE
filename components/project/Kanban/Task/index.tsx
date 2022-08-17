@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
 
 import { deleteProjectsKanbanTaskLike, postProjectsKanbanTaskLike } from '@/lib/api/projects';
 import { TaskState } from '@/lib/api/types';
@@ -26,7 +27,7 @@ const Task = ({ index, task }: TaskProps) => {
   const router = useRouter();
   const projectId = parseInt(router.query.id as string, 10);
 
-  const [isIconVisible, setIsIconVisible] = useState(false);
+  const [isDottedIconVisible, setIsDottedIconVisible] = useState(false);
 
   const moreContainerRef = useRef(null);
 
@@ -36,21 +37,34 @@ const Task = ({ index, task }: TaskProps) => {
 
   const onClickTaskRemoveWrapper = () => {
     openModal();
-    setIsIconVisible(false);
+    setIsDottedIconVisible(false);
     setIsMoreClicked(false);
   };
 
   const onClickTaskLike = async () => {
-    if (task.like) {
-      await deleteProjectsKanbanTaskLike({ projectId, taskId: task.id });
+    try {
+      if (task.like) {
+        await deleteProjectsKanbanTaskLike({ projectId, taskId: task.id });
+        setIsMoreClicked(false);
+        setIsDottedIconVisible(false);
+        return;
+      }
+      await postProjectsKanbanTaskLike({ projectId, taskId: task.id });
       setIsMoreClicked(false);
-      setIsIconVisible(false);
+      setIsDottedIconVisible(false);
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      alert(JSON.stringify(error.response?.data.message));
+    }
+  };
+
+  const onMouseDottedIcon = useCallback(() => {
+    if (!isDottedIconVisible) {
+      setIsDottedIconVisible(true);
       return;
     }
-    await postProjectsKanbanTaskLike({ projectId, taskId: task.id });
-    setIsMoreClicked(false);
-    setIsIconVisible(false);
-  };
+    setIsDottedIconVisible(true);
+  }, [setIsDottedIconVisible]);
 
   return (
     <>
@@ -61,19 +75,13 @@ const Task = ({ index, task }: TaskProps) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            onMouseEnter={() => setIsIconVisible(true)}
-            onMouseLeave={() => setIsIconVisible(false)}
+            onMouseEnter={onMouseDottedIcon}
+            onMouseLeave={onMouseDottedIcon}
           >
-            {task.like ? (
-              <Styled.LikeIconWrapper onClick={onClickTaskLike}>
-                <Icon icon="TaskFavoriteBlue" />
-              </Styled.LikeIconWrapper>
-            ) : (
-              <Styled.LikeIconWrapper onClick={onClickTaskLike}>
-                <Icon icon="TaskFavoriteGrey" />
-              </Styled.LikeIconWrapper>
-            )}
-            {isIconVisible && (
+            <Styled.LikeIconWrapper onClick={onClickTaskLike}>
+              <Icon icon="TaskFavorite" color={task.like ? Theme.P_1 : Theme.S_2} />
+            </Styled.LikeIconWrapper>
+            {isDottedIconVisible && (
               <Styled.DottedIconWrapper onClick={() => setIsMoreClicked(true)}>
                 <Icon icon="MoreDot" />
               </Styled.DottedIconWrapper>

@@ -18,5 +18,4 @@ export { default as KanbanColumnAdd } from './KanbanColumnAdd';
 export { default as KanbanColumnDelete } from './KanbanColumnDelete';
 export { default as BackgroundX } from './BackgroundX';
 export { default as MoreDot } from './MoreDot';
-export { default as TaskFavoriteBlue } from './TaskFavoriteBlue';
-export { default as TaskFavoriteGrey } from './TaskFavoriteGrey';
+export { default as TaskFavorite } from './TaskFavorite';

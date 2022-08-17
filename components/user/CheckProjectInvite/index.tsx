@@ -15,32 +15,8 @@ import Theme from '@/styles/Theme';
 import * as Styled from './style';
 
 const CheckProjectInvite = () => {
-  // const { data } = useQuery(queryKeys.PROJECTS_INVITES, () => getProjectsInvite());
+  const { data } = useQuery(queryKeys.PROJECTS_INVITES, () => getProjectsInvite());
   const { myInfo } = useGetMyInfo();
-
-  const data = [
-    {
-      id: 4,
-      createdDate: '2022-08-08T14:52:55.128019',
-      name: 'name',
-      description: 'description',
-      captainNickname: 'testNickname',
-    },
-    {
-      id: 4,
-      createdDate: '2022-08-08T14:52:55.128019',
-      name: 'name',
-      description: 'description',
-      captainNickname: 'testNickname',
-    },
-    {
-      id: 4,
-      createdDate: '2022-08-08T14:52:55.128019',
-      name: 'name',
-      description: 'description',
-      captainNickname: 'testNickname',
-    },
-  ];
 
   const onClickInviteButton = useCallback((event: React.MouseEvent<HTMLButtonElement>, invitationId: number) => {
     const currentTarget: HTMLButtonElement = event.currentTarget;
@@ -57,14 +33,14 @@ const CheckProjectInvite = () => {
   }, []);
 
   return (
-    <Styled.Wrapper>
-      <Styled.TitleContainer>
+    <Styled.Container>
+      <Styled.TitleWrapper>
         <Text fontSize={20}>초대 받은 프로젝트</Text>
-      </Styled.TitleContainer>
+      </Styled.TitleWrapper>
       {data &&
         data.map((invitation) => {
           return (
-            <Styled.ProjectInviteWrapper>
+            <Styled.ProjectInviteContainer>
               <Styled.ProjectInviteTitleContainer>
                 <Styled.IconNameContainer>
                   <Styled.BoatedCircle />
@@ -102,10 +78,10 @@ const CheckProjectInvite = () => {
               >
                 거절
               </Button>
-            </Styled.ProjectInviteWrapper>
+            </Styled.ProjectInviteContainer>
           );
         })}
-    </Styled.Wrapper>
+    </Styled.Container>
   );
 };
 

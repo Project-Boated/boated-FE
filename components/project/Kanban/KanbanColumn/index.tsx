@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
 
 import { KanbanColumnState } from '@/lib/api/types';
 import { putProjectsKanbanLaneName } from '@/lib/api/projects';
@@ -32,8 +33,8 @@ const KanbanColumn = ({ id, name, tasks, index, kanbanDataLength }: KanbanColumn
   const kanbanHeaderRef = useRef<HTMLDivElement>(null);
   const kanbanHeaderInputRef = useRef<HTMLInputElement>(null);
 
-  const [changedHeaderName, setIsChangedHeaderName] = useState(name);
-  const [isIconVisible, setIsIconVisible] = useState(false);
+  const [changedHeaderName, setChangedHeaderName] = useState(name);
+  const [isDeleteIconVisible, setIsDeleteIconVisible] = useState(false);
 
   const useDetectHeaderOutsideClick: any = (el: React.RefObject<HTMLDivElement>, initialState: boolean) => {
     const [isActive, setIsActive] = useState(initialState);
@@ -45,7 +46,12 @@ const KanbanColumn = ({ id, name, tasks, index, kanbanDataLength }: KanbanColumn
 
           // 기존 이름과 바뀐 이름이 다르면 API 요청
           if (name !== changedHeaderName) {
-            await putProjectsKanbanLaneName({ projectId, kanbanLaneId: id, name: changedHeaderName });
+            try {
+              await putProjectsKanbanLaneName({ projectId, kanbanLaneId: id, name: changedHeaderName });
+            } catch (e: unknown) {
+              const error = e as AxiosError;
+              alert(JSON.stringify(error.response?.data.message));
+            }
           }
         }
       };
@@ -65,12 +71,12 @@ const KanbanColumn = ({ id, name, tasks, index, kanbanDataLength }: KanbanColumn
   const [isEditable, setIsEditable] = useDetectHeaderOutsideClick(kanbanHeaderRef, false);
 
   const onChangeHeaderName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChangedHeaderName(e.target.value);
+    setChangedHeaderName(e.target.value);
   };
 
   const onDoubleClickHeaderName = () => {
     setIsEditable(true);
-    setIsIconVisible(false);
+    setIsDeleteIconVisible(false);
   };
 
   // current가 있을때 focus
@@ -96,11 +102,11 @@ const KanbanColumn = ({ id, name, tasks, index, kanbanDataLength }: KanbanColumn
             <Styled.KanbanHeader
               ref={kanbanHeaderRef}
               {...provided.dragHandleProps}
-              onMouseEnter={() => isEditable || setIsIconVisible(true)}
-              onMouseLeave={() => setIsIconVisible(false)}
+              onMouseEnter={() => isEditable || setIsDeleteIconVisible(true)}
+              onMouseLeave={() => setIsDeleteIconVisible(false)}
               onDoubleClick={onDoubleClickHeaderName}
             >
-              {isIconVisible && kanbanDataLength !== 1 && (
+              {isDeleteIconVisible && kanbanDataLength !== 1 && (
                 <Styled.IconWrapper onClick={openModal}>
                   <Icon icon="KanbanColumnDelete" />
                 </Styled.IconWrapper>

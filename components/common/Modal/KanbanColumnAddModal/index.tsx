@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
 
 import { postProjectsKanbanLane } from '@/lib/api/projects';
 
@@ -25,8 +26,13 @@ const KanbanColumnAddModal = ({ closeModal }: KanbanColumnAddModal) => {
   };
 
   const onClickColumnAdd = async () => {
-    await postProjectsKanbanLane({ projectId, name: kanbanName });
-    closeModal();
+    try {
+      await postProjectsKanbanLane({ projectId, name: kanbanName });
+      closeModal();
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      alert(JSON.stringify(error.response?.data.message));
+    }
   };
 
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
 
 import { TaskState } from '@/lib/api/types';
 import { deleteProjectsKanbanTask } from '@/lib/api/projects';
@@ -22,8 +23,13 @@ const TaskDeleteModal = ({ task, closeModal }: TaskDeleteModalProps) => {
   const projectId = parseInt(router.query.id as string, 10);
 
   const onClickTaskDelete = async () => {
-    await deleteProjectsKanbanTask({ projectId, taskId: task.id });
-    closeModal();
+    try {
+      await deleteProjectsKanbanTask({ projectId, taskId: task.id });
+      closeModal();
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      alert(JSON.stringify(error.response?.data.message));
+    }
   };
 
   return (

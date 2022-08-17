@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { DragDropContext, Droppable, DropResult, resetServerContext } from 'react-beautiful-dnd';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
 
 import { getProjectsKanban, postProjectsKanbanLaneChange, postProjectsKanbanTaskChange } from '@/lib/api/projects';
 
@@ -54,11 +55,16 @@ const Kanban = () => {
 
         // setData([...newColumn]);
 
-        await postProjectsKanbanLaneChange({
-          projectId,
-          originalIndex: source.index,
-          changeIndex: destination.index,
-        });
+        try {
+          await postProjectsKanbanLaneChange({
+            projectId,
+            originalIndex: source.index,
+            changeIndex: destination.index,
+          });
+        } catch (e: unknown) {
+          const error = e as AxiosError;
+          alert(JSON.stringify(error.response?.data.message));
+        }
 
         return;
       }
@@ -87,13 +93,18 @@ const Kanban = () => {
         //   }),
         // ]);
 
-        await postProjectsKanbanTaskChange({
-          projectId,
-          originalLaneId: Number(source.droppableId),
-          originalTaskIndex: source.index,
-          changeLaneId: Number(destination.droppableId),
-          changeTaskIndex: destination.index,
-        });
+        try {
+          await postProjectsKanbanTaskChange({
+            projectId,
+            originalLaneId: Number(source.droppableId),
+            originalTaskIndex: source.index,
+            changeLaneId: Number(destination.droppableId),
+            changeTaskIndex: destination.index,
+          });
+        } catch (e: unknown) {
+          const error = e as AxiosError;
+          alert(JSON.stringify(error.response?.data.message));
+        }
 
         return;
       }
@@ -119,13 +130,18 @@ const Kanban = () => {
       //   }),
       // ]);
 
-      await postProjectsKanbanTaskChange({
-        projectId,
-        originalLaneId: Number(source.droppableId),
-        originalTaskIndex: source.index,
-        changeLaneId: Number(destination.droppableId),
-        changeTaskIndex: destination.index,
-      });
+      try {
+        await postProjectsKanbanTaskChange({
+          projectId,
+          originalLaneId: Number(source.droppableId),
+          originalTaskIndex: source.index,
+          changeLaneId: Number(destination.droppableId),
+          changeTaskIndex: destination.index,
+        });
+      } catch (e: unknown) {
+        const error = e as AxiosError;
+        alert(JSON.stringify(error.response?.data.message));
+      }
     },
     [data],
   );
@@ -141,46 +157,48 @@ const Kanban = () => {
   }
 
   return (
-    data && (
-      <Styled.Wrapper>
-        {isShowModal && <KanbanColumnAddModal closeModal={closeModal} />}
-        <Styled.TaskTextWrapper>
-          <Text fontSize={20}>Task</Text>
-          {data.length < 5 && (
-            <Styled.ColumnAddContainer onClick={openModal}>
-              <Text fontSize={14}>레인 추가하기</Text>
-              <Icon width={24} height={24} icon="KanbanColumnAdd" />
-            </Styled.ColumnAddContainer>
-          )}
-        </Styled.TaskTextWrapper>
-        <Styled.KanbanWrapper>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="all-columns" direction="horizontal" type="column">
-              {(provided) => (
-                <Styled.Container {...provided.droppableProps} ref={provided.innerRef}>
-                  {data.map((column, index) => (
-                    <KanbanColumn
-                      key={column.id}
-                      id={column.id}
-                      name={column.name}
-                      tasks={column.tasks}
-                      index={index}
-                      kanbanDataLength={data.length}
-                    />
-                  ))}
-                  {provided.placeholder}
-                </Styled.Container>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </Styled.KanbanWrapper>
-        <Styled.ButtonWrapper>
-          <Button width={200} height={52}>
-            Task 추가하기
-          </Button>
-        </Styled.ButtonWrapper>
-      </Styled.Wrapper>
-    )
+    <Styled.Container>
+      {data && (
+        <>
+          {isShowModal && <KanbanColumnAddModal closeModal={closeModal} />}
+          <Styled.TaskTextWrapper>
+            <Text fontSize={20}>Task</Text>
+            {data.length < 5 && (
+              <Styled.ColumnAddContainer onClick={openModal}>
+                <Text fontSize={14}>레인 추가하기</Text>
+                <Icon width={24} height={24} icon="KanbanColumnAdd" />
+              </Styled.ColumnAddContainer>
+            )}
+          </Styled.TaskTextWrapper>
+          <Styled.KanbanWrapper>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="all-columns" direction="horizontal" type="column">
+                {(provided) => (
+                  <Styled.ColumnWrapper {...provided.droppableProps} ref={provided.innerRef}>
+                    {data.map((column, index) => (
+                      <KanbanColumn
+                        key={column.id}
+                        id={column.id}
+                        name={column.name}
+                        tasks={column.tasks}
+                        index={index}
+                        kanbanDataLength={data.length}
+                      />
+                    ))}
+                    {provided.placeholder}
+                  </Styled.ColumnWrapper>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </Styled.KanbanWrapper>
+          <Styled.ButtonWrapper>
+            <Button width={200} height={52}>
+              Task 추가하기
+            </Button>
+          </Styled.ButtonWrapper>
+        </>
+      )}
+    </Styled.Container>
   );
 };
 

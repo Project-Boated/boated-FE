@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
 
 import { deleteProjectsKanbanLane } from '@/lib/api/projects';
 
@@ -28,8 +29,13 @@ const KanbanColumnDeleteModal = ({
   const projectId = parseInt(router.query.id as string, 10);
 
   const onClickDeleteKanbanLane = async () => {
-    await deleteProjectsKanbanLane({ projectId, kanbanLaneId });
-    closeModal();
+    try {
+      await deleteProjectsKanbanLane({ projectId, kanbanLaneId });
+      closeModal();
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      alert(JSON.stringify(error.response?.data.message));
+    }
   };
 
   return (

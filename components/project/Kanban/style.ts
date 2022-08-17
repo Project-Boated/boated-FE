@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import Theme from '@/styles/Theme';
 
-export const Wrapper = styled.div``;
+export const Container = styled.div``;
 
 export const KanbanWrapper = styled.div`
   width: 1045px;
@@ -11,7 +11,7 @@ export const KanbanWrapper = styled.div`
   overflow-x: auto;
 `;
 
-export const Container = styled.div`
+export const ColumnWrapper = styled.div`
   display: flex;
 
   gap: 20px;

@@ -2,16 +2,16 @@ import styled from 'styled-components';
 
 import Theme from '@/styles/Theme';
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   width: 1062px;
   height: 478px;
 `;
 
-export const TitleContainer = styled.div`
+export const TitleWrapper = styled.div`
   margin-bottom: 50px;
 `;
 
-export const ProjectInviteWrapper = styled.div`
+export const ProjectInviteContainer = styled.div`
   display: flex;
   align-items: center;
 
