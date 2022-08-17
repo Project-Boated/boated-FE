@@ -33,7 +33,7 @@ const KanbanColumn = ({ id, name, tasks, index, kanbanDataLength }: KanbanColumn
   const kanbanHeaderRef = useRef<HTMLDivElement>(null);
   const kanbanHeaderInputRef = useRef<HTMLInputElement>(null);
 
-  const [changedHeaderName, setChangedHeaderName] = useState(name);
+  const [headerName, setHeaderName] = useState(name);
   const [isDeleteIconVisible, setIsDeleteIconVisible] = useState(false);
 
   const useDetectHeaderOutsideClick: any = (el: React.RefObject<HTMLDivElement>, initialState: boolean) => {
@@ -45,9 +45,9 @@ const KanbanColumn = ({ id, name, tasks, index, kanbanDataLength }: KanbanColumn
           setIsActive(!isActive);
 
           // 기존 이름과 바뀐 이름이 다르면 API 요청
-          if (name !== changedHeaderName) {
+          if (name !== headerName) {
             try {
-              await putProjectsKanbanLaneName({ projectId, kanbanLaneId: id, name: changedHeaderName });
+              await putProjectsKanbanLaneName({ projectId, kanbanLaneId: id, name: headerName });
             } catch (e: unknown) {
               const error = e as AxiosError;
               alert(JSON.stringify(error.response?.data.message));
@@ -63,7 +63,7 @@ const KanbanColumn = ({ id, name, tasks, index, kanbanDataLength }: KanbanColumn
       return () => {
         window.removeEventListener('click', pageClickEvent);
       };
-    }, [isActive, el, changedHeaderName]);
+    }, [isActive, el, headerName]);
 
     return [isActive, setIsActive];
   };
@@ -71,7 +71,7 @@ const KanbanColumn = ({ id, name, tasks, index, kanbanDataLength }: KanbanColumn
   const [isEditable, setIsEditable] = useDetectHeaderOutsideClick(kanbanHeaderRef, false);
 
   const onChangeHeaderName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChangedHeaderName(e.target.value);
+    setHeaderName(e.target.value);
   };
 
   const onDoubleClickHeaderName = () => {
@@ -119,7 +119,7 @@ const KanbanColumn = ({ id, name, tasks, index, kanbanDataLength }: KanbanColumn
                   width={200}
                   height={40}
                   maxLength={15}
-                  value={changedHeaderName}
+                  value={headerName}
                   onChange={onChangeHeaderName}
                   ref={kanbanHeaderInputRef}
                 />
