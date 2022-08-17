@@ -10,7 +10,7 @@ import {
   GetProjectMyResponse,
   GetProjectsInvitesResponse,
   GetProjectKanbanResponse,
-  PostProjectsKanbanRequestProps,
+  PutProjectsKanbanNameRequestProps,
   PostProjectsKanbanChangeRequestProps,
   PostProjectsKanbanTaskChangeRequestProps,
   PostProjectsKanbanTaskLikeRequestProps,
@@ -36,7 +36,9 @@ const projectsUrl = {
   projectsByIdCrews: (id: number) => `${projectsBaseUrl}/${id}/crews`,
 
   projectsKanban: (projectId: number) => `${projectsBaseUrl}/${projectId}/kanban`,
-  projectsKanbanLane: (projectId: number) => `${projectsBaseUrl}/${projectId}/kanban/lanes`,
+  projectsKanbanLaneAdd: (projectId: number) => `${projectsBaseUrl}/${projectId}/kanban/lanes`,
+  projectsKanbanLaneNameChange: ({ projectId, kanbanLaneId }: Omit<PutProjectsKanbanNameRequestProps, 'name'>) =>
+    `${projectsBaseUrl}/${projectId}/kanban/lanes/${kanbanLaneId}`,
   projectsKanbanLaneDelete: ({ projectId, kanbanLaneId }: DeleteProjectsKanbanRequestProps) =>
     `${projectsBaseUrl}/${projectId}/kanban/lanes/${kanbanLaneId}`,
   projectsKanbanLaneChange: ({ projectId, originalIndex, changeIndex }: PostProjectsKanbanChangeRequestProps) =>
@@ -101,8 +103,11 @@ export const postProjectsInviteReject = (invitationId: number) =>
 export const getProjectsKanban = (projectId: number) =>
   request<GetProjectKanbanResponse>('GET', projectsUrl.projectsKanban(projectId)).then((res) => res.data.lanes);
 
-export const postProjectsKanbanLane = ({ projectId, name }: PostProjectsKanbanRequestProps) =>
-  request('POST', projectsUrl.projectsKanbanLane(projectId), { name });
+export const postProjectsKanbanLane = ({ projectId, name }: Omit<PutProjectsKanbanNameRequestProps, 'kanbanLaneId'>) =>
+  request('POST', projectsUrl.projectsKanbanLaneAdd(projectId), { name });
+
+export const putProjectsKanbanLaneName = ({ projectId, kanbanLaneId, name }: PutProjectsKanbanNameRequestProps) =>
+  request('PUT', projectsUrl.projectsKanbanLaneNameChange({ projectId, kanbanLaneId }), { name });
 
 export const deleteProjectsKanbanLane = ({ projectId, kanbanLaneId }: DeleteProjectsKanbanRequestProps) =>
   request('DELETE', projectsUrl.projectsKanbanLaneDelete({ projectId, kanbanLaneId }));

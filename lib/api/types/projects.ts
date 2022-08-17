@@ -78,8 +78,9 @@ export interface GetProjectsInvitesResponse {
 }
 
 // 프로젝트 칸반 불러오기, lane 추가, 삭제
-export interface PostProjectsKanbanRequestProps {
+export interface PutProjectsKanbanNameRequestProps {
   projectId: number;
+  kanbanLaneId: number;
   name: string;
 }
 
