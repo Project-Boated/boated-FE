@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { boxDesign } from '@/styles/common';
+
 import Theme from '@/styles/Theme';
 
 export const Container = styled.div`
@@ -28,9 +30,7 @@ export const ProjectInviteTitleContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  background: ${Theme.S_0};
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 6px;
+  ${boxDesign()}
 `;
 
 export const IconNameContainer = styled.div`
@@ -73,9 +73,7 @@ export const CaptainNameBox = styled.div`
 
   padding: 5px 3px 5px 13px;
 
-  background: ${Theme.S_0};
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 6px;
+  ${boxDesign()}
 `;
 
 export const CircleMeBox = styled.div`

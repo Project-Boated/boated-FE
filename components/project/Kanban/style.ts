@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { boxDesign } from '@/styles/common';
+
 import Theme from '@/styles/Theme';
 
 export const Container = styled.div``;
@@ -37,9 +39,9 @@ export const ColumnAddContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  background: ${Theme.S_0};
+  ${boxDesign(17.5)}
+
   border: 1px solid ${Theme.M_1};
-  border-radius: 17.5px;
 
   cursor: pointer;
 `;
