@@ -28,9 +28,9 @@ const Task = ({ index, task }: TaskProps) => {
 
   const [isIconVisible, setIsIconVisible] = useState(false);
 
-  const ref = useRef(null);
+  const moreContainerRef = useRef(null);
 
-  const [isMoreClicked, setIsMoreClicked] = useDetectOutsideClick(ref, false);
+  const [isMoreClicked, setIsMoreClicked] = useDetectOutsideClick(moreContainerRef, false);
 
   const { isShowModal, closeModal, openModal } = useModal();
 
@@ -79,7 +79,7 @@ const Task = ({ index, task }: TaskProps) => {
               </Styled.DottedIconWrapper>
             )}
             {isMoreClicked && (
-              <Styled.MoreContainer ref={ref}>
+              <Styled.MoreContainer ref={moreContainerRef}>
                 <Styled.FavoriteAddWrapper onClick={onClickTaskLike}>
                   <Text>{task.like ? '즐겨찾기 삭제' : '즐겨찾기에 추가'}</Text>
                 </Styled.FavoriteAddWrapper>
