@@ -15,6 +15,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
+  position: relative;
+
   width: 100%;
   max-width: 1400px;
   height: 52px;
@@ -47,6 +49,8 @@ export const TabContainer = styled.ul`
 `;
 
 export const Tab = styled.li`
+  position: relative;
+
   width: 184px;
 
   display: flex;
@@ -56,9 +60,18 @@ export const Tab = styled.li`
   font-size: 13px;
   font-weight: 400;
   line-height: 18px;
+
+  cursor: pointer;
 `;
 
 export const ProfileWrapper = styled.div`
+  position: relative;
+
+  & > div:first-child {
+    top: 30px;
+    right: 8px;
+  }
+
   display: flex;
   align-items: center;
 
@@ -72,4 +85,10 @@ export const ProfileImg = styled.img`
   height: 30px;
 
   border-radius: 50%;
+`;
+
+export const TriangleIconWrapper = styled.div`
+  position: absolute;
+
+  top: 25px;
 `;
