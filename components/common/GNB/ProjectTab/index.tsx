@@ -1,4 +1,10 @@
-import React from 'react';
+import React, { Dispatch, MouseEvent, RefObject, SetStateAction } from 'react';
+import { useRouter } from 'next/router';
+import { useQuery } from 'react-query';
+
+import { getProjectMy } from '@/lib/api/projects';
+import { GetUserProfileResponse, MyProjectState } from '@/lib/api/types';
+import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Text from '@/components/atoms/Text';
 
@@ -9,19 +15,45 @@ import Theme from '@/styles/Theme';
 import * as Styled from './style';
 
 interface ProjectTabProps {
-  projectTabRef: React.RefObject<HTMLUListElement>;
+  projectTabRef: RefObject<HTMLUListElement>;
+  myInfo: GetUserProfileResponse;
+  setIsProjectTabOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const ProjectTab = ({ projectTabRef }: ProjectTabProps) => {
+const ProjectTab = ({ projectTabRef, myInfo, setIsProjectTabOpen }: ProjectTabProps) => {
+  const { data } = useQuery(`${queryKeys.PROJECTS_MY}/gnb/project-tab}`, () =>
+    getProjectMy({ captain: 'not-term', crew: 'not-term', page: 0, size: 5, sort: 'createdDate,asc' }),
+  );
+
+  const router = useRouter();
+
+  const onClickProjectCreate = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setIsProjectTabOpen(false);
+    router.push('/project/create');
+  };
+
+  const onClickMyProject = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setIsProjectTabOpen(false);
+    router.push('/project');
+  };
+
+  const onClickListItem = (e: MouseEvent<HTMLLIElement>, projectId: number) => {
+    e.stopPropagation();
+    setIsProjectTabOpen(false);
+    router.push(`/project/${projectId}`);
+  };
+
   return (
     <Styled.ProjectBoxContainer ref={projectTabRef}>
       <Styled.ItemContainer>
-        <Styled.ItemWrapper>
+        <Styled.ItemWrapper onClick={onClickProjectCreate}>
           <Styled.Item>
             <Text>프로젝트 생성하기</Text>
           </Styled.Item>
         </Styled.ItemWrapper>
-        <Styled.ItemWrapper>
+        <Styled.ItemWrapper onClick={onClickMyProject}>
           <Styled.Item>
             <Text>전체 프로젝트 보기</Text>
           </Styled.Item>
@@ -33,19 +65,23 @@ const ProjectTab = ({ projectTabRef }: ProjectTabProps) => {
             내 프로젝트 리스트
           </Text>
         </Styled.MyProjectTextWrapper>
-        {/* 내가 캡틴인거 먼저 보여주기 */}
-        <Styled.MyProjectListItem>
-          <Text fontSize={20}>프로젝트 2</Text>
-          <Styled.TextContainer>
-            <Text>캡틴 : 누구누구</Text>
-            <BlueCircleText>ME</BlueCircleText>
-          </Styled.TextContainer>
-        </Styled.MyProjectListItem>
-
-        <Styled.MyProjectListItem>
-          <Text fontSize={20}>프로젝트 2</Text>
-          <Text>캡틴 : 누구누구</Text>
-        </Styled.MyProjectListItem>
+        {data &&
+          data.content.map((project: MyProjectState) => {
+            return (
+              <Styled.MyProjectListItem
+                key={project.id}
+                onClick={(e) => {
+                  onClickListItem(e, project.id);
+                }}
+              >
+                <Text fontSize={20}>{project.name}</Text>
+                <Styled.TextContainer>
+                  <Text>{`캡틴 : ${project.captain.nickname}`}</Text>
+                  {project.captain.nickname === myInfo.nickname && <BlueCircleText>ME</BlueCircleText>}
+                </Styled.TextContainer>
+              </Styled.MyProjectListItem>
+            );
+          })}
       </Styled.MyProjectContainer>
     </Styled.ProjectBoxContainer>
   );
