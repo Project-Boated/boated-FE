@@ -27,19 +27,19 @@ const ProjectTab = ({ projectTabRef, myInfo, setIsProjectTabOpen }: ProjectTabPr
 
   const router = useRouter();
 
-  const onClickProjectCreate = (e: MouseEvent<HTMLDivElement>) => {
+  const onClickProjectCreateTab = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setIsProjectTabOpen(false);
     router.push('/project/create');
   };
 
-  const onClickMyProject = (e: MouseEvent<HTMLDivElement>) => {
+  const onClickMyProjectTab = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setIsProjectTabOpen(false);
     router.push('/project');
   };
 
-  const onClickListItem = (e: MouseEvent<HTMLLIElement>, projectId: number) => {
+  const onClickListItemTab = (e: MouseEvent<HTMLLIElement>, projectId: number) => {
     e.stopPropagation();
     setIsProjectTabOpen(false);
     router.push(`/project/${projectId}`);
@@ -48,12 +48,12 @@ const ProjectTab = ({ projectTabRef, myInfo, setIsProjectTabOpen }: ProjectTabPr
   return (
     <Styled.ProjectBoxContainer ref={projectTabRef}>
       <Styled.ItemContainer>
-        <Styled.ItemWrapper onClick={onClickProjectCreate}>
+        <Styled.ItemWrapper onClick={onClickProjectCreateTab}>
           <Styled.Item>
             <Text>프로젝트 생성하기</Text>
           </Styled.Item>
         </Styled.ItemWrapper>
-        <Styled.ItemWrapper onClick={onClickMyProject}>
+        <Styled.ItemWrapper onClick={onClickMyProjectTab}>
           <Styled.Item>
             <Text>전체 프로젝트 보기</Text>
           </Styled.Item>
@@ -71,7 +71,7 @@ const ProjectTab = ({ projectTabRef, myInfo, setIsProjectTabOpen }: ProjectTabPr
               <Styled.MyProjectListItem
                 key={project.id}
                 onClick={(e) => {
-                  onClickListItem(e, project.id);
+                  onClickListItemTab(e, project.id);
                 }}
               >
                 <Text fontSize={20}>{project.name}</Text>
