@@ -34,7 +34,7 @@ const MyInfoTab = ({ myInfoTabRef, myInfo, setIsMyInfoTabOpen }: MyInfoTabProps)
   const onClickProjectInviteTab = (e: MouseEvent<HTMLLIElement>) => {
     e.stopPropagation();
     setIsMyInfoTabOpen(false);
-    router.push('/user/change/project-invite');
+    router.push('/user/invite');
   };
 
   return (
