@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 
 import useModal from '@/hooks/useModal';
 
-import Modal from '@/components/common/Modal';
+import Modal from '@/components/Modal';
+
 import DropDown from '@/components/common/DropDown';
 
 import TimeTableBox from '@/components/date/TimeTableBox';
+import useCalendar from '@/components/date/Calendar/useCalendar';
+import useTimePicker from '@/components/date/TimePicker/useTimePicker';
 
 import Label from '@/components/atoms/Label';
 import Input from '@/components/atoms/Input';
@@ -25,6 +28,9 @@ const laneList = ['대기중', '진행중', '확인중', '완료'];
 
 const TaskDetailModal = () => {
   const { closeModal } = useModal();
+
+  const { year, setYear, month, setMonth, date, setDate } = useCalendar();
+  const { hourType, setHourType, hour, setHour, minute, setMinute } = useTimePicker();
 
   const [name, setName] = useState<string>('');
 
@@ -88,7 +94,20 @@ const TaskDetailModal = () => {
 
           <Styled.RightContainer>
             <Text fontSize={14}>마감기한</Text>
-            <TimeTableBox />
+            <TimeTableBox
+              year={year}
+              month={month}
+              date={date}
+              hourType={hourType}
+              hour={hour}
+              minute={minute}
+              setYear={setYear}
+              setMonth={setMonth}
+              setDate={setDate}
+              setHourType={setHourType}
+              setHour={setHour}
+              setMinute={setMinute}
+            />
             <Styled.LaneSelectorContainer>
               <Text fontSize={14}>레인 선택</Text>
               <DropDown

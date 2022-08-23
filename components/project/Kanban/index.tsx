@@ -14,7 +14,7 @@ import Text from '@/components/atoms/Text';
 import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
 
-import KanbanColumnAddModal from '@/components/common/Modal/KanbanColumnAddModal';
+import KanbanColumnAddModal from '@/components/Modal/KanbanColumnAddModal';
 
 import KanbanColumn from '@/components/project/Kanban/KanbanColumn';
 

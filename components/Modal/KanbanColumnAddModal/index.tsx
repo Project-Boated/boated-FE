@@ -6,8 +6,9 @@ import { postProjectsKanbanLane } from '@/lib/api/projects';
 
 import Button from '@/components/atoms/Button';
 import Text from '@/components/atoms/Text';
-import Modal from '@/components/common/Modal';
 import Input from '@/components/atoms/Input';
+
+import Modal from '@/components/Modal';
 
 import * as Styled from './style';
 
