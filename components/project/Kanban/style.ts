@@ -6,7 +6,7 @@ import Theme from '@/styles/Theme';
 
 export const Container = styled.div``;
 
-export const KanbanWrapper = styled.div`
+export const KanbanContainer = styled.section`
   width: 1045px;
   max-width: 1045px;
 
@@ -19,12 +19,17 @@ export const ColumnWrapper = styled.div`
   gap: 20px;
 `;
 
-export const TaskTextWrapper = styled.div`
+export const TaskHeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   margin-bottom: 20px;
+`;
+
+export const H1 = styled.h1`
+  font-size: 20px;
+  line-height: 28px;
 `;
 
 export const ColumnAddContainer = styled.div`
