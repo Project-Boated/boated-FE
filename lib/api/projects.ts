@@ -12,6 +12,7 @@ import {
   GetProjectKanbanResponse,
   PutProjectsKanbanNameRequestProps,
   PostProjectsKanbanChangeRequestProps,
+  PostProjectsKanbanTaskCreateProps,
   PostProjectsKanbanTaskChangeRequestProps,
   PostProjectsKanbanTaskLikeRequestProps,
   DeleteProjectsKanbanRequestProps,
@@ -44,6 +45,7 @@ const projectsUrl = {
   projectsKanbanLaneChange: ({ projectId, originalIndex, changeIndex }: PostProjectsKanbanChangeRequestProps) =>
     `${projectsBaseUrl}/${projectId}/kanban/lanes/change/${originalIndex}/${changeIndex}`,
 
+  projectsKanbanTaskCreate: (projectId: number) => `${projectsBaseUrl}/${projectId}/kanban/lanes/tasks`,
   projectsKanbanTaskDelete: ({ projectId, taskId }: DeleteProjectsKanbanTaskRequestProps) =>
     `${projectsBaseUrl}/${projectId}/kanban/lanes/tasks/${taskId}`,
   projectsKanbanTaskChange: ({
@@ -116,9 +118,15 @@ export const postProjectsKanbanLaneChange = ({
   projectId,
   originalIndex,
   changeIndex,
-}: PostProjectsKanbanChangeRequestProps) => {
+}: PostProjectsKanbanChangeRequestProps) =>
   request('POST', projectsUrl.projectsKanbanLaneChange({ projectId, originalIndex, changeIndex }));
-};
+
+export const postProjectsKanbanTask = ({ projectId, name, description, deadline }: PostProjectsKanbanTaskCreateProps) =>
+  request<Id, Omit<PostProjectsKanbanTaskCreateProps, 'projectId'>>(
+    'POST',
+    projectsUrl.projectsKanbanTaskCreate(projectId),
+    { name, description, deadline },
+  ).then((res) => res.data);
 
 export const deleteProjectsKanbanTask = ({ projectId, taskId }: DeleteProjectsKanbanTaskRequestProps) =>
   request('DELETE', projectsUrl.projectsKanbanTaskDelete({ projectId, taskId }));
