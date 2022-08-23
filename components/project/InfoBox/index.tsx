@@ -4,17 +4,16 @@ import Text from '@/components/atoms/Text';
 
 import InfoTitle from '@/components/project/InfoTitle';
 
-import TimeTableBox from '@/components/date/TimeTableBox';
+import TimeTableBox, { TimeTableBoxProps } from '@/components/date/TimeTableBox';
 
 import * as Styled from './style';
 
-export interface InfoBoxProps {
+export interface InfoBoxProps extends TimeTableBoxProps {
   name: string;
-  deadline: string;
   description: string;
 }
 
-const InfoBox = ({ name, deadline, description }: InfoBoxProps) => {
+const InfoBox = ({ name, description, ...props }: InfoBoxProps) => {
   return (
     <Styled.Wrapper>
       <Styled.Container>
@@ -26,7 +25,7 @@ const InfoBox = ({ name, deadline, description }: InfoBoxProps) => {
         </Styled.Row>
         <Styled.Row>
           <InfoTitle title="마감기한" isLabel={false} />
-          <TimeTableBox deadline={deadline} />
+          <TimeTableBox {...props} />
         </Styled.Row>
         <Styled.Row>
           <InfoTitle htmlFor="description" title="프로젝트 소개" />
