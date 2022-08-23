@@ -35,7 +35,8 @@ type IconOption = keyof typeof icons;
 
 interface IconProps extends IconWrapperProps {
   icon: IconOption;
-  color?: string; // icon's color
+  color?: string;
+  onClick?: () => void;
 }
 
 const Icon = ({ icon, width, height, rotate, isButton = false, onClick, ...props }: IconProps) => {
