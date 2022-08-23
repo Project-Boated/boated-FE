@@ -7,6 +7,7 @@ import { SizeProps } from '@/types/size';
 import { Wrapper } from './style';
 
 export interface Props {
+  type?: 'button' | 'submit' | 'reset';
   fontColor?: string;
   fontSize?: number;
   fontWeight?: number;
@@ -17,6 +18,7 @@ export interface Props {
 }
 
 const Button = ({
+  type = 'button',
   width,
   height,
   fontColor = Theme.S_0,
@@ -29,6 +31,7 @@ const Button = ({
 }: SizeProps & Props) => {
   return (
     <Wrapper
+      type={type}
       width={width}
       height={height}
       fontColor={fontColor}
