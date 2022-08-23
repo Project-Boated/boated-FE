@@ -18,6 +18,11 @@ export const InfoBoxContainer = styled.div`
   }
 `;
 
+export const H1 = styled.h1`
+  font-size: 20px;
+  line-height: 28px;
+`;
+
 export const SubInfoContainer = styled.div`
   display: flex;
 

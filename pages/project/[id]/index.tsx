@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 
@@ -14,6 +14,9 @@ import InfoBox from '@/components/project/InfoBox';
 import SubInfo from '@/components/project/SubInfo';
 import CrewManagementBox from '@/components/project/CrewManagementBox';
 
+import useCalendar from '@/components/date/Calendar/useCalendar';
+import useTimePicker from '@/components/date/TimePicker/useTimePicker';
+
 import * as Styled from '@/styles/pages/Project/[id].style';
 
 const ProjectDetailPage = () => {
@@ -26,16 +29,46 @@ const ProjectDetailPage = () => {
     projectsAPI.getProjectsByIdCrews(id),
   );
 
+  const { year, setYear, month, setMonth, date, setDate } = useCalendar();
+  const { hourType, setHourType, hour, setHour, minute, setMinute } = useTimePicker();
+
+  useEffect(() => {
+    if (!projectInfo) return;
+    const [calendarInfo, timePickerInfo] = projectInfo.deadline.split(' ');
+    const [year, month, date] = calendarInfo.split('-');
+    const [hour, minute, _] = timePickerInfo.split(':');
+
+    setYear(year);
+    setMonth(month);
+    setDate(date);
+    setHour(hour);
+    setMinute(minute);
+    setHourType(Number(hour) > 12 ? 'PM' : 'AM');
+  }, [projectInfo]);
+
   return (
     <AppLayoutMain height="100vh" bottom="-45vh">
       <Styled.Container>
         <Sidebar />
         <Styled.InfoBoxContainer>
-          <Text fontSize={20} lineHeight={28}>
-            프로젝트 정보
-          </Text>
+          <Styled.H1>프로젝트 정보</Styled.H1>
           {projectInfo && (
-            <InfoBox name={projectInfo.name} deadline={projectInfo.deadline} description={projectInfo.description} />
+            <InfoBox
+              name={projectInfo.name}
+              year={year}
+              month={month}
+              date={date}
+              hourType={hourType}
+              hour={hour}
+              minute={minute}
+              setYear={setYear}
+              setMonth={setMonth}
+              setDate={setDate}
+              setHourType={setHourType}
+              setHour={setHour}
+              setMinute={setMinute}
+              description={projectInfo.description}
+            />
           )}
           <Styled.SubInfoContainer>
             {projectInfo && (
