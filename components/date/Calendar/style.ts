@@ -33,10 +33,6 @@ export const MonthSelectorContainer = styled.div`
   width: inherit;
 `;
 
-export const IconWrapper = styled.div`
-  cursor: pointer;
-`;
-
 export const Table = styled.table`
   width: inherit;
 
@@ -44,6 +40,8 @@ export const Table = styled.table`
     margin-bottom: 4px;
   }
 `;
+
+export const Tbody = styled.tbody``;
 
 export const WeekListContainer = styled.tr`
   display: flex;
@@ -59,11 +57,19 @@ export const WeekListContainer = styled.tr`
   }
 `;
 
-export const DateWrapper = styled.td`
+export const Td = styled.td``;
+
+export const DateWrapper = styled.td<{ isClicked: boolean }>`
   cursor: pointer;
 
   display: flex;
   justify-content: center;
+  align-items: center;
 
-  min-width: 10px;
+  min-width: 20px;
+  height: 20px;
+
+  border-radius: 6px;
+
+  background-color: ${({ isClicked }) => isClicked && Theme.M_1};
 `;
