@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-import { SizeProps } from '@/types/size';
+import { CircleTextProps } from '@/types/size';
 
 import Theme from '@/styles/Theme';
 
-export const Wrapper = styled.div<Omit<SizeProps, 'borderRadius'>>`
+export const Wrapper = styled.div<CircleTextProps>`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
 
@@ -12,7 +12,7 @@ export const Wrapper = styled.div<Omit<SizeProps, 'borderRadius'>>`
   justify-content: center;
   align-items: center;
 
-  background: ${Theme.P_2};
+  background-color: ${({ backgroundColor }) => backgroundColor};
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 50%;
 `;

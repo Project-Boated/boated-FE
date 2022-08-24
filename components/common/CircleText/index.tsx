@@ -6,25 +6,27 @@ import Theme from '@/styles/Theme';
 
 import * as Styled from './style';
 
-export interface BlueCircleTextProps {
+export interface CircleTextProps {
   width?: number;
   height?: number;
   fontSize?: number;
   fontWeight?: number;
   color?: string;
+  backgroundColor?: string;
   children: React.ReactNode;
 }
 
-const BlueCircleText = ({
+const CircleText = ({
   width = 24,
   height = 24,
   fontSize = 10,
   fontWeight = 400,
   color = Theme.S_0,
+  backgroundColor = Theme.P_2,
   children,
-}: BlueCircleTextProps) => {
+}: CircleTextProps) => {
   return (
-    <Styled.Wrapper width={width} height={height}>
+    <Styled.Wrapper width={width} height={height} backgroundColor={backgroundColor}>
       <Text fontSize={fontSize} fontWeight={fontWeight} color={color}>
         {children}
       </Text>
@@ -32,4 +34,4 @@ const BlueCircleText = ({
   );
 };
 
-export default BlueCircleText;
+export default CircleText;

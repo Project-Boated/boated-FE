@@ -8,7 +8,7 @@ import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Text from '@/components/atoms/Text';
 
-import BlueCircleText from '@/components/common/BlueCircleText';
+import CircleText from '@/components/common/CircleText';
 
 import Theme from '@/styles/Theme';
 
@@ -77,7 +77,7 @@ const ProjectTab = ({ projectTabRef, myInfo, setIsProjectTabOpen }: ProjectTabPr
                 <Text fontSize={20}>{project.name}</Text>
                 <Styled.TextContainer>
                   <Text>{`캡틴 : ${project.captain.nickname}`}</Text>
-                  {project.captain.nickname === myInfo.nickname && <BlueCircleText>ME</BlueCircleText>}
+                  {project.captain.nickname === myInfo.nickname && <CircleText>ME</CircleText>}
                 </Styled.TextContainer>
               </Styled.MyProjectListItem>
             );

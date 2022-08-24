@@ -8,7 +8,7 @@ import { getProjectsInvite } from '@/lib/api/projects';
 
 import Text from '@/components/atoms/Text';
 
-import BlueCircleText from '@/components/common/BlueCircleText';
+import CircleText from '@/components/common/CircleText';
 
 import * as Styled from './style';
 
@@ -49,9 +49,9 @@ const MyInfoTab = ({ myInfoTabRef, myInfo, setIsMyInfoTabOpen }: MyInfoTabProps)
           <Styled.TabItem onClick={onClickProjectInviteTab}>
             <Text>초대 알림 확인하기</Text>
             {data && data.length > 0 && (
-              <BlueCircleText width={16} height={16}>
+              <CircleText width={16} height={16}>
                 {data.length}
-              </BlueCircleText>
+              </CircleText>
             )}
           </Styled.TabItem>
           <Styled.TabItem>

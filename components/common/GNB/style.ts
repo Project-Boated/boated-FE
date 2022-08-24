@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import Theme from '@/styles/Theme';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.nav`
   width: 100%;
   display: flex;
   justify-content: center;
