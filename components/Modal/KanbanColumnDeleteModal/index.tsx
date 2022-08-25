@@ -6,7 +6,8 @@ import { deleteProjectsKanbanLane } from '@/lib/api/projects';
 
 import Button from '@/components/atoms/Button';
 import Text from '@/components/atoms/Text';
-import Modal from '@/components/common/Modal';
+
+import Modal from '@/components/Modal';
 
 import Theme from '@/styles/Theme';
 

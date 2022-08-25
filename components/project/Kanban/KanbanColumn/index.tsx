@@ -11,7 +11,7 @@ import useModal from '@/hooks/useModal';
 import Text from '@/components/atoms/Text';
 import Icon from '@/components/atoms/Icon';
 
-import KanbanColumnDeleteModal from '@/components/common/Modal/KanbanColumnDeleteModal';
+import KanbanColumnDeleteModal from '@/components/Modal/KanbanColumnDeleteModal';
 
 import Task from '@/components/project/Kanban/Task';
 

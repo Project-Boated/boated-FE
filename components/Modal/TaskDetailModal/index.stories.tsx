@@ -5,7 +5,7 @@ import TaskDetailModal from '.';
 
 export default {
   component: TaskDetailModal,
-  title: 'task/TaskDetailModal',
+  title: 'Modal/TaskDetailModal',
 };
 
 const Template = () => <TaskDetailModal />;

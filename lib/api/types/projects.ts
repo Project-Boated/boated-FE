@@ -95,6 +95,13 @@ export interface PostProjectsKanbanChangeRequestProps {
   changeIndex: number;
 }
 
+export interface PostProjectsKanbanTaskCreateProps {
+  projectId: number;
+  name: string;
+  description: string;
+  deadline: string;
+}
+
 export interface AssignedAccount extends Id {
   nickname: string;
 }

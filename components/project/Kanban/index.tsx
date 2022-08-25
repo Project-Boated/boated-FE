@@ -14,7 +14,8 @@ import Text from '@/components/atoms/Text';
 import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
 
-import KanbanColumnAddModal from '@/components/common/Modal/KanbanColumnAddModal';
+import KanbanColumnAddModal from '@/components/Modal/KanbanColumnAddModal';
+import TaskCreateModal from '@/components/Modal/TaskCreateModal';
 
 import KanbanColumn from '@/components/project/Kanban/KanbanColumn';
 
@@ -24,7 +25,17 @@ const Kanban = () => {
   const router = useRouter();
   const projectId = parseInt(router.query.id as string, 10);
 
-  const { isShowModal, closeModal, openModal } = useModal();
+  const {
+    isShowModal: isShowKanbanColumnAddModal,
+    openModal: openKanbanColumnAddModal,
+    closeModal: closeKanbanColumnAddModal,
+  } = useModal();
+
+  const {
+    isShowModal: isShowTaskCreateModal,
+    openModal: openTaskCreateModal,
+    closeModal: closeTaskCreateModal,
+  } = useModal();
 
   const { isLoading, error, data } = useQuery(`${queryKeys.PROJECTS_KANBAN}/${projectId}`, () =>
     getProjectsKanban(projectId),
@@ -160,17 +171,18 @@ const Kanban = () => {
     <Styled.Container>
       {data && (
         <>
-          {isShowModal && <KanbanColumnAddModal closeModal={closeModal} />}
-          <Styled.TaskTextWrapper>
-            <Text fontSize={20}>Task</Text>
+          {isShowKanbanColumnAddModal && <KanbanColumnAddModal closeModal={closeKanbanColumnAddModal} />}
+          {isShowTaskCreateModal && router.isReady && <TaskCreateModal closeModal={closeTaskCreateModal} />}
+          <Styled.TaskHeaderContainer>
+            <Styled.H1>Task</Styled.H1>
             {data.length < 5 && (
-              <Styled.ColumnAddContainer onClick={openModal}>
+              <Styled.ColumnAddContainer onClick={openKanbanColumnAddModal}>
                 <Text fontSize={14}>레인 추가하기</Text>
                 <Icon width={24} height={24} icon="KanbanColumnAdd" />
               </Styled.ColumnAddContainer>
             )}
-          </Styled.TaskTextWrapper>
-          <Styled.KanbanWrapper>
+          </Styled.TaskHeaderContainer>
+          <Styled.KanbanContainer>
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="all-columns" direction="horizontal" type="column">
                 {(provided) => (
@@ -190,9 +202,9 @@ const Kanban = () => {
                 )}
               </Droppable>
             </DragDropContext>
-          </Styled.KanbanWrapper>
+          </Styled.KanbanContainer>
           <Styled.ButtonWrapper>
-            <Button width={200} height={52}>
+            <Button width={200} height={52} onClick={openTaskCreateModal}>
               Task 추가하기
             </Button>
           </Styled.ButtonWrapper>

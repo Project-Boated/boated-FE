@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import moment, { Moment } from 'moment';
 
 import Icon from '@/components/atoms/Icon';
@@ -8,7 +8,14 @@ import Theme from '@/styles/Theme';
 
 import * as Styled from './style';
 
-const Calendar = () => {
+export interface CalendarProps {
+  date: string;
+  setYear: React.Dispatch<React.SetStateAction<string>>;
+  setMonth: React.Dispatch<React.SetStateAction<string>>;
+  setDate: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Calendar = ({ date, setYear, setMonth, setDate }: CalendarProps) => {
   const [isOnMount, setIsOnMount] = useState<boolean>(false);
 
   const weekList: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
@@ -21,11 +28,6 @@ const Calendar = () => {
   const lastWeek = today.clone().endOf('month').week() === 1 ? 53 : today.clone().endOf('month').week();
 
   const year = useMemo(() => getMoment.weekYear(), [getMoment.weekYear()]);
-
-  const isWeekend = (day: Moment) => {
-    const [dayOfTheWeek, _] = day.toString().split(' ');
-    return dayOfTheWeek === 'Sat' || dayOfTheWeek === 'Sun';
-  };
 
   const isCurrentMonth = (currentMonth: number, selectedMonth: number) => currentMonth === selectedMonth;
 
@@ -49,6 +51,8 @@ const Calendar = () => {
     });
   }, [selectedMonth]);
 
+  const onClickDay = useCallback((date: number) => setDate(date < 10 ? `0${date}` : `${date}`), []);
+
   const calendarArr = useCallback(() => {
     const result = [];
     let week = firstWeek;
@@ -62,12 +66,16 @@ const Calendar = () => {
               const day = today.clone().startOf('year').week(week).startOf('week').add(index, 'day');
               const year: number = Number(day.format('Y'));
               const month: number = Number(day.format('M'));
-              const date: number = Number(day.format('D'));
+              const calendarDate: number = Number(day.format('D'));
 
               return (
-                <Styled.DateWrapper key={`${year}-${month}-${date}`}>
-                  <Text fontSize={10} lineHeight={15}>
-                    {isCurrentMonth(month, selectedMonth) && date}
+                <Styled.DateWrapper
+                  key={`${year}-${month}-${calendarDate}`}
+                  isClicked={calendarDate === +date}
+                  onClick={() => onClickDay(calendarDate)}
+                >
+                  <Text color={calendarDate === +date ? Theme.S_0 : Theme.M_1} fontSize={10} lineHeight={15}>
+                    {isCurrentMonth(Number(day.format('M')), selectedMonth) && calendarDate}
                   </Text>
                 </Styled.DateWrapper>
               );
@@ -77,7 +85,15 @@ const Calendar = () => {
     }
 
     return result;
-  }, [firstWeek]);
+  }, [firstWeek, date]);
+
+  useEffect(() => {
+    setYear(`${getMoment.weekYear()}`);
+  }, [getMoment.weekYear()]);
+
+  useEffect(() => {
+    setMonth(selectedMonth < 10 ? `0${selectedMonth}` : `${selectedMonth}`);
+  }, [selectedMonth]);
 
   useEffect(() => {
     setIsOnMount(true);
@@ -86,26 +102,32 @@ const Calendar = () => {
   return (
     <Styled.Container>
       <Styled.InnerContainer>
-        <Text fontSize={10}>{year}</Text>
         <Styled.MonthSelectorContainer>
           <Icon icon="Arrow" rotate={90} isButton onClick={onClickPrev} />
+          {/* <Text fontSize={10}>{year}</Text> */}
           <Text fontSize={14}>{selectedMonth}월</Text>
           <Icon icon="Arrow" rotate={270} isButton onClick={onClickNext} />
         </Styled.MonthSelectorContainer>
         {isOnMount && (
           <Styled.Table>
-            <tbody>
+            <Styled.Tbody>
               <Styled.WeekListContainer>
                 {weekList.map((week, index) => (
-                  <td key={index}>
-                    <Text fontSize={10} fontWeight={700} lineHeight={15} color={index === 0 ? Theme.W_1 : Theme.M_1}>
+                  <Styled.Td key={index}>
+                    <Text
+                      key={index}
+                      fontSize={10}
+                      fontWeight={700}
+                      lineHeight={15}
+                      color={index === 0 ? Theme.W_1 : Theme.M_1}
+                    >
                       {week}
                     </Text>
-                  </td>
+                  </Styled.Td>
                 ))}
               </Styled.WeekListContainer>
               {calendarArr()}
-            </tbody>
+            </Styled.Tbody>
           </Styled.Table>
         )}
       </Styled.InnerContainer>
