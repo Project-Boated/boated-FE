@@ -12,5 +12,5 @@ const Template: Story<AssignedAccountProps> = (args: AssignedAccountProps) => <A
 
 export const Default = Template.bind({});
 Default.args = {
-  nickname: '윤준서',
+  children: '윤준서',
 };
