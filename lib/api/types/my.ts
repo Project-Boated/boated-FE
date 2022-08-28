@@ -6,3 +6,8 @@ export interface GetMyTaskLikeResponse {
     task: Omit<TaskState, 'like'>;
   }>;
 }
+
+export interface PostMyTaskLikeChangeProps {
+  originalIndex: number;
+  changeIndex: number;
+}
