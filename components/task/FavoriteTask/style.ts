@@ -45,19 +45,23 @@ export const HeaderTr = styled.tr`
   }
 `;
 
-export const BodyContainer = styled.tbody`
-  box-sizing: border-box;
-
-  padding: 8px 0;
-
+export const BodyWrapper = styled.tbody`
   background-color: #f1f3ff;
 
   width: 1056px;
   height: 795px;
-
-  overflow-y: auto;
+  max-height: 795px;
 
   border-radius: 0px 0px 6px 6px;
+`;
+
+export const BodyContainer = styled.tr`
+  box-sizing: border-box;
+
+  padding: 8px 0;
+
+  max-height: 795px;
+  overflow-y: auto;
 
   gap: 8px;
 

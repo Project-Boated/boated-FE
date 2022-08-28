@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import { AxiosError } from 'axios';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 
-import { getMyTaskLike } from '@/lib/api/my';
+import { getMyTaskLike, postMyTaskLikeChange } from '@/lib/api/my';
+import { GetMyTaskLikeResponse } from '@/lib/api/types';
 
 import * as queryKeys from '@/lib/constants/queryKeys';
 
@@ -12,7 +15,40 @@ import FavoriteTaskItem from '@/components/task/FavoriteTask/FavoriteTaskItem';
 import * as Styled from './style';
 
 const FavoriteTask = () => {
-  const { data } = useQuery(queryKeys.MY_TASK_LIKE, () => getMyTaskLike());
+  const { data: queryData, refetch } = useQuery(queryKeys.MY_TASK_LIKE, () => getMyTaskLike());
+
+  const [data, setData] = useState<GetMyTaskLikeResponse | undefined>();
+
+  useEffect(() => {
+    setData(queryData);
+  }, [queryData]);
+
+  const onDragEnd = useCallback(
+    async (result: DropResult) => {
+      const { destination, source, draggableId } = result;
+
+      if (!data) return;
+      if (!destination) return;
+      if (destination.droppableId === source.droppableId && source.index === destination.index) return;
+
+      const changedData = [...data.taskLikes];
+      const targetTask = changedData.filter((like) => like.task.id === Number(draggableId))[0];
+
+      changedData.splice(source.index, 1);
+      changedData.splice(destination.index, 0, targetTask);
+
+      setData({ taskLikes: changedData });
+
+      try {
+        await postMyTaskLikeChange({ originalIndex: source.index, changeIndex: destination.index });
+        refetch();
+      } catch (e: unknown) {
+        const error = e as AxiosError;
+        alert(JSON.stringify(error.response?.data.message));
+      }
+    },
+    [data],
+  );
 
   return (
     <Styled.Container>
@@ -40,9 +76,22 @@ const FavoriteTask = () => {
           </th>
         </Styled.HeaderTr>
       </Styled.HeaderWrapper>
-      <Styled.BodyContainer>
-        {data && data.taskLikes.map((like) => <FavoriteTaskItem project={like.project} task={like.task} />)}
-      </Styled.BodyContainer>
+      {data && (
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="column" type="FavoriteTask" direction="vertical">
+            {(provided) => (
+              <Styled.BodyWrapper {...provided.droppableProps} ref={provided.innerRef}>
+                <Styled.BodyContainer>
+                  {data.taskLikes.map((like, index) => (
+                    <FavoriteTaskItem key={like.task.id} project={like.project} task={like.task} taskIndex={index} />
+                  ))}
+                  {provided.placeholder}
+                </Styled.BodyContainer>
+              </Styled.BodyWrapper>
+            )}
+          </Droppable>
+        </DragDropContext>
+      )}
     </Styled.Container>
   );
 };
