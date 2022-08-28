@@ -10,6 +10,8 @@ import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
 import TabNavigator from '@/components/project/TabNavigator';
 import ProjectsTemplate from '@/components/project/Template/ProjectsTemplate';
 
+import FavoriteTask from '@/components/task/FavoriteTask';
+
 import * as Styled from '@/styles/pages/Project/style';
 
 interface ProjectPageProps {
@@ -46,6 +48,7 @@ const ProjectPage = ({ query }: ProjectPageProps) => {
           {(selectedTab === '내 프로젝트' || selectedTab === '종료된 프로젝트 확인') && (
             <ProjectsTemplate query={query} />
           )}
+          {selectedTab === '즐겨찾는 Task' && <FavoriteTask />}
         </Styled.MainContentsContainer>
       </Styled.MainContainer>
     </AppLayoutMain>
