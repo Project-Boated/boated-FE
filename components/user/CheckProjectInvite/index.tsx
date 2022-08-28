@@ -10,6 +10,8 @@ import useGetMyInfo from '@/hooks/useGetMyInfo';
 import Button from '@/components/atoms/Button';
 import Text from '@/components/atoms/Text';
 
+import CircleText from '@/components/common/CircleText';
+
 import Theme from '@/styles/Theme';
 
 import * as Styled from './style';
@@ -50,13 +52,7 @@ const CheckProjectInvite = () => {
                   <Text>팀장 : </Text>
                   <Styled.CaptainNameBox>
                     <Text>{invitation.captainNickname}</Text>
-                    {myInfo && myInfo.nickname === invitation.captainNickname && (
-                      <Styled.CircleMeBox>
-                        <Text fontSize={10} fontWeight={400} color={Theme.S_0}>
-                          ME
-                        </Text>
-                      </Styled.CircleMeBox>
-                    )}
+                    {myInfo && myInfo.nickname === invitation.captainNickname && <CircleText>ME</CircleText>}
                   </Styled.CaptainNameBox>
                 </Styled.CaptainContainer>
               </Styled.ProjectInviteTitleContainer>

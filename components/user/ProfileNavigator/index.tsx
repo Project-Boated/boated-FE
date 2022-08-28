@@ -1,26 +1,33 @@
-import { TabItem, Wrapper } from '@/components/user/ProfileNavigator/style';
 import React from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-interface ProfileNavigator {
-  tabNumber: number;
-  setTabNumber: React.Dispatch<React.SetStateAction<number>>;
-}
+import { TabItem, Wrapper } from '@/components/user/ProfileNavigator/style';
 
-const ProfileNavigator = ({ tabNumber, setTabNumber }: ProfileNavigator) => {
+const ProfileNavigator = () => {
+  const router = useRouter();
+
+  const hrefs = {
+    change: '/user/change',
+    invite: '/user/invite',
+    medal: '/user/medal',
+    unregister: '/user/unregister',
+  };
+
   return (
     <Wrapper>
-      <TabItem onClick={() => setTabNumber(0)} isSelected={tabNumber === 0}>
-        내 정보
-      </TabItem>
-      <TabItem onClick={() => setTabNumber(1)} isSelected={tabNumber === 1}>
-        초대 확인하기
-      </TabItem>
-      <TabItem onClick={() => setTabNumber(2)} isSelected={tabNumber === 2}>
-        메달 확인하기
-      </TabItem>
-      <TabItem onClick={() => setTabNumber(3)} isSelected={tabNumber === 3}>
-        탈퇴하기
-      </TabItem>
+      <Link href="/user/change">
+        <TabItem isSelected={router.asPath === hrefs.change}>내 정보</TabItem>
+      </Link>
+      <Link href="/user/invite">
+        <TabItem isSelected={router.asPath === hrefs.invite}>초대 확인하기</TabItem>
+      </Link>
+      <Link href="/user/medal">
+        <TabItem isSelected={router.asPath === hrefs.medal}>메달 확인하기</TabItem>
+      </Link>
+      <Link href="/user/unregister">
+        <TabItem isSelected={router.asPath === hrefs.unregister}>탈퇴하기</TabItem>
+      </Link>
     </Wrapper>
   );
 };

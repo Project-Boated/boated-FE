@@ -22,3 +22,9 @@ export interface FontSizeProps {
   letterSpacing?: number;
   color?: string;
 }
+
+export interface CircleTextProps {
+  width?: number;
+  height?: number;
+  backgroundColor?: string;
+}
