@@ -4,7 +4,7 @@ import { boxDesign } from '@/styles/common';
 
 import Theme from '@/styles/Theme';
 
-export const Container = styled.div`
+export const Container = styled.td`
   width: 1033px;
   height: 65px;
 
