@@ -13,7 +13,7 @@ export interface TabNavigatorProps {
 }
 
 const TabNavigator = ({ selectedTab, setSelectedTab }: TabNavigatorProps) => {
-  const tabList = ['내 프로젝트', 'Task', '간트차트', '종료된 프로젝트 확인'];
+  const tabList = ['내 프로젝트', '즐겨찾는 Task', '간트차트', '종료된 프로젝트 확인'];
 
   const isSelected = useCallback((current: string, target: string) => current === target, []);
 
