@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TaskFavoriteBlue = (props: React.SVGProps<SVGSVGElement>) => {
+const TaskFavorite = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -11,4 +11,4 @@ const TaskFavoriteBlue = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-export default TaskFavoriteBlue;
+export default TaskFavorite;
