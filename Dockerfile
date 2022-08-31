@@ -5,8 +5,8 @@ WORKDIR /home/node/app
 COPY ./ /home/node/app/
 
 ENV CLIENT_URL http://15.164.89.188
-ENV SERVER_URL http://15.164.89.188:8081/
-ENV DESTINATION_URL http://15.164.89.188:8081/:path*
+ENV SERVER_URL http://15.164.89.188:8080/
+ENV DESTINATION_URL http://15.164.89.188:8080/:path*
 ENV SOURCE_PATH /:path*
 
 RUN npm cache clean -f
