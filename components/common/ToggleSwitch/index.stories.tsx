@@ -1,16 +1,14 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 
-import ToggleSwitch, { Props } from '@/components/common/ToggleSwitch';
-
-import { SizeProps } from '@/types/size';
+import ToggleSwitch, { ToggleSwitchProps } from '@/components/common/ToggleSwitch';
 
 export default {
   component: ToggleSwitch,
   title: 'common/ToggleSwitch',
 };
 
-const Template: Story<SizeProps & Props> = (args: SizeProps & Props) => <ToggleSwitch {...args} />;
+const Template: Story<ToggleSwitchProps> = (args: ToggleSwitchProps) => <ToggleSwitch {...args} />;
 
 export const TimeToggle = Template.bind({});
 TimeToggle.args = {
