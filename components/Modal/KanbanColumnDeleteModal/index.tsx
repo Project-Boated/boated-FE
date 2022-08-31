@@ -2,8 +2,12 @@ import React from 'react';
 
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
+import { useQueryClient } from 'react-query';
 
 import { deleteProjectsKanbanLane } from '@/lib/api/projects';
+
+import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Button from '@/components/atoms/Button';
 import Text from '@/components/atoms/Text';
@@ -31,9 +35,12 @@ const KanbanColumnDeleteModal = ({
   const router = useRouter();
   const projectId = parseInt(router.query.id as string, 10);
 
+  const queryClient = useQueryClient();
+
   const onClickDeleteKanbanLane = async () => {
     try {
       await deleteProjectsKanbanLane({ projectId, kanbanLaneId });
+      queryClient.invalidateQueries(queryKeys.PROJECTS_KANBAN_BY_ID(projectId));
       closeModal();
     } catch (e: unknown) {
       const error = e as AxiosError;

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 
 import { useRouter } from 'next/router';
+import { useQueryClient } from 'react-query';
 
 import { postProjectsKanbanTask } from '@/lib/api/projects';
 import { PostProjectsKanbanTaskCreateProps } from '@/lib/api/types';
+
+import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
@@ -31,6 +34,8 @@ interface InfoState {
 
 const TaskCreateModal = ({ closeModal }: TaskCreateModalProps) => {
   const router = useRouter();
+
+  const queryClient = useQueryClient();
 
   const { hourType, setHourType, hour, setHour, minute, setMinute } = useTimePicker();
   const { year, setYear, month, setMonth, date, setDate } = useCalendar();
@@ -75,7 +80,7 @@ const TaskCreateModal = ({ closeModal }: TaskCreateModalProps) => {
 
     try {
       await postProjectsKanbanTask(requestObj);
-      alert('task 생성이 완료되었습니다!');
+      queryClient.invalidateQueries(queryKeys.PROJECTS_KANBAN_BY_ID(projectId));
       closeModal();
     } catch (e) {
       console.log(e);

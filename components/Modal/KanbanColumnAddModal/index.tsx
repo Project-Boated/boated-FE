@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
+import { useQueryClient } from 'react-query';
 
 import { postProjectsKanbanLane } from '@/lib/api/projects';
+
+import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
@@ -22,6 +26,8 @@ const KanbanColumnAddModal = ({ closeModal }: KanbanColumnAddModalProps) => {
   const router = useRouter();
   const projectId = parseInt(router.query.id as string, 10);
 
+  const queryClient = useQueryClient();
+
   const [kanbanName, setKanbanName] = useState('');
 
   const onChangeKanbanColumnName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +37,7 @@ const KanbanColumnAddModal = ({ closeModal }: KanbanColumnAddModalProps) => {
   const onClickColumnAdd = async () => {
     try {
       await postProjectsKanbanLane({ projectId, name: kanbanName });
+      queryClient.invalidateQueries(queryKeys.PROJECTS_KANBAN_BY_ID(projectId));
       closeModal();
     } catch (e: unknown) {
       const error = e as AxiosError;
