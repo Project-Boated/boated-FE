@@ -1,3 +1,4 @@
+import { Blob } from 'buffer';
 import request from './request';
 import {
   Id,
@@ -16,6 +17,8 @@ import {
   PostProjectsKanbanTaskLikeRequestProps,
   DeleteProjectsKanbanRequestProps,
   DeleteProjectsKanbanTaskRequestProps,
+  PutProjectsVieoRequestProps,
+  GetProjectsVideoResponse,
 } from './types';
 
 const projectsBaseUrl = '/api/projects';
@@ -58,6 +61,8 @@ const projectsUrl = {
 
   projectsKanbanTaskLike: ({ projectId, taskId }: PostProjectsKanbanTaskLikeRequestProps) =>
     `${projectsBaseUrl}/${projectId}/tasks/${taskId}/like`,
+
+  projectsVideoUpload: (projectId: number) => `${projectsBaseUrl}/${projectId}/video`,
 };
 
 export const createProject = ({ name, description, deadline }: PostProjectRequestProps) =>
@@ -154,3 +159,11 @@ export const postProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjectsKa
 
 export const deleteProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjectsKanbanTaskLikeRequestProps) =>
   request('DELETE', projectsUrl.projectsKanbanTaskLike({ projectId, taskId }));
+
+// 프로젝트 비디오
+
+export const putProjectsVideo = ({ videoFormData, projectId }: PutProjectsVieoRequestProps) =>
+  request('PUT', projectsUrl.projectsVideoUpload(projectId), videoFormData);
+
+export const getProjectsVideo = (projectId: number) =>
+  request<Blob>('GET', projectsUrl.projectsVideoUpload(projectId)).then((res) => res.data);

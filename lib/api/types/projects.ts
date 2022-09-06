@@ -143,3 +143,14 @@ export interface PostProjectsKanbanTaskLikeRequestProps {
   projectId: number;
   taskId: number;
 }
+
+// 프로젝트 비디오
+
+export interface PutProjectsVieoRequestProps {
+  videoFormData: FormData;
+  projectId: number;
+}
+
+export interface GetProjectsVideoResponse {
+  data: File | undefined;
+}
