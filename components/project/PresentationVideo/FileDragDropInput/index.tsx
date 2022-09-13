@@ -1,44 +1,51 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AxiosError } from 'axios';
+import { useQueryClient } from 'react-query';
 import { useRouter } from 'next/router';
 
-import Button from '@/components/atoms/Button';
+import { putProjectsVideo } from '@/lib/api/projects';
+import * as queryKeys from '@/lib/constants/queryKeys';
+
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
 
 import Theme from '@/styles/Theme';
 
 import * as Styled from './style';
-import { putProjectsVideo } from '@/lib/api/projects';
 
-interface FileDragDropInputProps {
-  videoFile: File | undefined;
-  setVideoFile: React.Dispatch<React.SetStateAction<File | undefined>>;
-  projectId: number;
-}
-
-const FileDragDropInput = ({ videoFile, setVideoFile, projectId }: FileDragDropInputProps) => {
+const FileDragDropInput = () => {
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const dragRef = useRef<HTMLLabelElement | null>(null);
 
-  const onChangeFile = useCallback(async (e: React.ChangeEvent<HTMLInputElement> | any) => {
-    const videoFormData = new FormData();
+  const router = useRouter();
+  const projectId = parseInt(router.query.id as string, 10);
 
-    if (e.type === 'drop') {
-      videoFormData.append('file', e.dataTransfer.files['0']);
-      // setVideoFile(e.dataTransfer.files['0']);
-    } else {
-      videoFormData.append('file', e.target.files['0']);
-      //   setVideoFile(e.target.files['0']);
-    }
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
-    try {
-      await putProjectsVideo({ videoFormData, projectId });
-    } catch (e: unknown) {
-      const error = e as AxiosError;
-      alert(JSON.stringify(error.response?.data.message));
-    }
-  }, []);
+  const queryClient = useQueryClient();
+
+  const onChangeFile = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement> | any) => {
+      const videoFormData = new FormData();
+
+      if (e.type === 'drop') {
+        videoFormData.append('file', e.dataTransfer.files['0']);
+      } else {
+        videoFormData.append('file', e.target.files['0']);
+      }
+
+      try {
+        setIsUploading(true);
+        await putProjectsVideo({ videoFormData, projectId });
+        queryClient.invalidateQueries(`${queryKeys.PROJECTS_VIDEO}/${projectId}`);
+        setIsUploading(false);
+      } catch (e: unknown) {
+        const error = e as AxiosError;
+        alert(JSON.stringify(error.response?.data.message));
+      }
+    },
+    [projectId],
+  );
 
   const handleDragIn = useCallback((e: DragEvent): void => {
     e.preventDefault();
@@ -100,15 +107,17 @@ const FileDragDropInput = ({ videoFile, setVideoFile, projectId }: FileDragDropI
     return () => resetDragEvents();
   }, [initDragEvents, resetDragEvents]);
 
-  return (
+  return isUploading ? (
+    <Styled.LoadingWrapper>Uploading...</Styled.LoadingWrapper>
+  ) : (
     <>
-      <Styled.FileInput type="file" id="videoUpload" onChange={onChangeFile} />
+      <Styled.FileInput type="file" id="videoUpload" onChange={onChangeFile} accept="video/*" />
       <Styled.FileLabel ref={dragRef} htmlFor="videoUpload" isDragging={isDragging}>
         <Styled.FileUploadContainer>
           <Text fontSize={14} fontWeight={500}>
             발표 영상 업로드
           </Text>
-          <Text fontSize={10} fontWeight={400} color={Theme.S_4}>
+          <Text fontSize={10} fontWeight={400} color={isDragging ? Theme.P_2 : Theme.S_4}>
             파일을 드롭해서 바로 등록해보세요.
           </Text>
           <Styled.ButtonLabel htmlFor="videoUpload">
@@ -117,7 +126,7 @@ const FileDragDropInput = ({ videoFile, setVideoFile, projectId }: FileDragDropI
             </Text>
           </Styled.ButtonLabel>
           <Styled.IconWrapper>
-            <Icon icon="BoatedSymbol" color={Theme.S_2} width={428} height={428} />
+            <Icon icon="BoatedSymbol" color={isDragging ? '#94B0DC61' : Theme.S_2} width={428} height={428} />
           </Styled.IconWrapper>
         </Styled.FileUploadContainer>
       </Styled.FileLabel>

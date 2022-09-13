@@ -4,6 +4,15 @@ import { boxDesign } from '@/styles/common';
 
 import Theme from '@/styles/Theme';
 
+export const LoadingWrapper = styled.div`
+  width: 999px;
+  height: 488px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const FileInput = styled.input`
   display: none;
 `;
@@ -25,7 +34,8 @@ export const FileLabel = styled.label<{ isDragging: boolean }>`
   ${({ isDragging }) =>
     isDragging &&
     css`
-      background-color: blue;
+      background-color: #94b0dc61;
+      border: 1px dashed ${Theme.P_6};
     `}
 `;
 
