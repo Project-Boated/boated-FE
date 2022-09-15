@@ -12,6 +12,8 @@ import ProjectsTemplate from '@/components/project/Template/ProjectsTemplate';
 
 import FavoriteTask from '@/components/task/FavoriteTask';
 
+import GanttChart from '@/components/ganttChart';
+
 import * as Styled from '@/styles/pages/Project/style';
 
 interface ProjectPageProps {
@@ -49,6 +51,7 @@ const ProjectPage = ({ query }: ProjectPageProps) => {
             <ProjectsTemplate query={query} />
           )}
           {selectedTab === '즐겨찾는 Task' && <FavoriteTask />}
+          {selectedTab === '간트차트' && <GanttChart />}
         </Styled.MainContentsContainer>
       </Styled.MainContainer>
     </AppLayoutMain>
