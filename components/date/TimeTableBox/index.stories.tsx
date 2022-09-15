@@ -11,7 +11,7 @@ export default {
   title: 'date/TimeTableBox',
 };
 
-const Template = () => {
+const Template: Story = () => {
   const { year, setYear, month, setMonth, date, setDate } = useCalendar();
   const { hourType, setHourType, hour, setHour, minute, setMinute } = useTimePicker();
 
