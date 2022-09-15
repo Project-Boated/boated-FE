@@ -1,17 +1,28 @@
 import request from '@/lib/api/request';
 
-import { GetMyTaskLikeResponse, PostMyTaskLikeChangeProps } from '@/lib/api/types';
+import {
+  GetMyTaskLikeResponse,
+  PostMyTaskLikeChangeProps,
+  GetMyGanttChartProps,
+  GetMyGanttChartResponse,
+} from '@/lib/api/types';
 
-const profileBaseUrl = '/api/my';
+const myBaseUrl = '/api/my';
 
-const profileUrl = {
-  getMyTaskLike: `${profileBaseUrl}/likes`,
+const myUrl = {
+  getMyTaskLike: `${myBaseUrl}/likes`,
   postMyTaskLikeChange: ({ originalIndex, changeIndex }: PostMyTaskLikeChangeProps) =>
-    `${profileBaseUrl}/likes/change/${originalIndex}/${changeIndex}`,
+    `${myBaseUrl}/likes/change/${originalIndex}/${changeIndex}`,
+  getMyGanttChart: `${myBaseUrl}/gantt-chart`,
 };
 
-export const getMyTaskLike = () =>
-  request<GetMyTaskLikeResponse>('GET', profileUrl.getMyTaskLike).then((res) => res.data);
+export const getMyTaskLike = () => request<GetMyTaskLikeResponse>('GET', myUrl.getMyTaskLike).then((res) => res.data);
 
 export const postMyTaskLikeChange = ({ originalIndex, changeIndex }: PostMyTaskLikeChangeProps) =>
-  request('POST', profileUrl.postMyTaskLikeChange({ originalIndex, changeIndex }));
+  request('POST', myUrl.postMyTaskLikeChange({ originalIndex, changeIndex }));
+
+export const getMyGanttChart = ({ year, month }: GetMyGanttChartProps) =>
+  request<GetMyGanttChartResponse, null, GetMyGanttChartProps>('GET', myUrl.getMyGanttChart, null, {
+    year,
+    month,
+  }).then((res) => res.data);
