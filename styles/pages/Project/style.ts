@@ -9,4 +9,8 @@ export const MainContainer = styled.main`
   margin-top: 128px;
 `;
 
-export const MainContentsContainer = styled.section``;
+export const MainContentsContainer = styled.section`
+  & > :first-child {
+    margin-bottom: 22px;
+  }
+`;
