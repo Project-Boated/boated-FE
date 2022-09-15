@@ -15,7 +15,7 @@ import FavoriteTaskItem from '@/components/task/FavoriteTask/FavoriteTaskItem';
 import * as Styled from './style';
 
 const FavoriteTask = () => {
-  const { data: queryData, refetch } = useQuery(queryKeys.MY_TASK_LIKE, () => getMyTaskLike());
+  const { data: queryData, refetch } = useQuery(queryKeys.MY_TASK_LIKES, () => getMyTaskLike());
 
   const [data, setData] = useState<GetMyTaskLikeResponse | undefined>();
 
