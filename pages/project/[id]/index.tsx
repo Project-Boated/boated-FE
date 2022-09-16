@@ -4,12 +4,14 @@ import { useRouter } from 'next/router';
 
 import * as queryKeys from '@/lib/constants/queryKeys';
 import * as projectsAPI from '@/lib/api/projects';
+import getSideTabList from '@/lib/util/getSideTabList';
 
 import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
 
 import Text from '@/components/atoms/Text';
 
 import Sidebar from '@/components/project/Sidebar';
+import SideTab from '@/components/project/Sidebar/TabList/SideTab';
 import InfoBox from '@/components/project/InfoBox';
 import SubInfo from '@/components/project/SubInfo';
 import CrewManagementBox from '@/components/project/CrewManagementBox';
@@ -22,6 +24,7 @@ import * as Styled from '@/styles/pages/Project/[id].style';
 const ProjectDetailPage = () => {
   const router = useRouter();
   const id = parseInt(router.query.id as string, 10);
+  const path = router.route.split('[id]')[1];
 
   const { data: projectInfo } = useQuery(`${queryKeys.PROJECTS_BY_ID(id)}`, () => projectsAPI.getProjectsById(id));
 
@@ -49,7 +52,7 @@ const ProjectDetailPage = () => {
   return (
     <AppLayoutMain height="100vh" bottom="-45vh">
       <Styled.Container>
-        <Sidebar />
+        <Sidebar TabList={<SideTab path={path} sideTabList={getSideTabList(id)} />} />
         <Styled.InfoBoxContainer>
           <Styled.H1>프로젝트 정보</Styled.H1>
           {projectInfo && (
