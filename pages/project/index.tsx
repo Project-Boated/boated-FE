@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
@@ -9,6 +9,8 @@ import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
 
 import TabNavigator from '@/components/project/TabNavigator';
 import ProjectsTemplate from '@/components/project/Template/ProjectsTemplate';
+import Sidebar from '@/components/project/Sidebar';
+import Tab from '@/components/project/Sidebar/TabList/Tab';
 
 import FavoriteTask from '@/components/task/FavoriteTask';
 
@@ -24,6 +26,20 @@ const ProjectPage = ({ query }: ProjectPageProps) => {
   const router = useRouter();
 
   const [selectedTab, setSelectedTab] = useState<string>('내 프로젝트');
+
+  const tabList = useMemo(
+    () => [
+      {
+        href: '/project/invite',
+        children: '프로젝트 초대 확인하기',
+      },
+      {
+        href: '/medal',
+        children: '나의 메달 확인하기',
+      },
+    ],
+    [],
+  );
 
   useEffect(() => {
     if (selectedTab === 'Task' || selectedTab === '간트차트') {
@@ -44,7 +60,17 @@ const ProjectPage = ({ query }: ProjectPageProps) => {
   return (
     <AppLayoutMain>
       <Styled.MainContainer>
-        <div>sidebar</div>
+        <Sidebar
+          TabList={
+            <Styled.TabListContainer>
+              {tabList.map(({ href, children }) => (
+                <Tab key={href} href={href}>
+                  {children}
+                </Tab>
+              ))}
+            </Styled.TabListContainer>
+          }
+        />
         <Styled.MainContentsContainer>
           <TabNavigator selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
           {(selectedTab === '내 프로젝트' || selectedTab === '종료된 프로젝트 확인') && (
