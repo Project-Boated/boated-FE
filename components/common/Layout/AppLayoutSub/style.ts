@@ -5,7 +5,7 @@ export const BackgroundSeaWave = styled.div`
 
   height: 445px;
 
-  background: url('../imgs/SubAppLayoutSeaWave.svg') no-repeat;
+  background: url('/imgs/SubAppLayoutSeaWave.svg') no-repeat;
   background-size: cover;
 `;
 
@@ -14,6 +14,6 @@ export const BackgroundRectangle = styled.div`
 
   height: 160px;
 
-  background: url('../imgs/SubAppLayoutRectangle.svg') no-repeat;
+  background: url('/imgs/SubAppLayoutRectangle.svg') no-repeat;
   background-size: cover;
 `;
