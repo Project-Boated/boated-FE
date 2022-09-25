@@ -27,7 +27,7 @@ const Body = ({ year, month, height, calendarList, projectList }: BodyProps) => 
     <Styled.Container height={height}>
       <Styled.GridContainer>
         {calendarList.map(({ date, dayOfTheWeek }) => (
-          <Styled.GridItem>
+          <Styled.GridItem key={date}>
             <Date date={date} dayOfTheWeek={dayOfTheWeek} />
           </Styled.GridItem>
         ))}
@@ -43,7 +43,7 @@ const Body = ({ year, month, height, calendarList, projectList }: BodyProps) => 
           });
 
           return (
-            <Styled.GanttWrapper left={projectLeft}>
+            <Styled.GanttWrapper key={project.id} left={projectLeft}>
               <ProjectProgressBar
                 period={projectPeriod}
                 backgroundColor={Theme[ganttChartColorList[getRandomNumber(10) - 1]]}
