@@ -15,7 +15,7 @@ const getSideTabList = (id: number) => [
   {
     tab: SIDE_TAB.task,
     link: `/project/${id}/kanban`,
-    path: '/kanban',
+    path: `/project/${id}/kanban`,
   },
   { tab: SIDE_TAB.presentation, link: `/project/${id}/presentation`, path: '/presentation' },
 ];
