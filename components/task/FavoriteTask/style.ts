@@ -2,9 +2,7 @@ import styled from 'styled-components';
 
 import Theme from '@/styles/Theme';
 
-export const Container = styled.table`
-  margin-top: 21px;
-`;
+export const Container = styled.table``;
 
 export const HeaderWrapper = styled.thead``;
 
@@ -46,7 +44,7 @@ export const HeaderTr = styled.tr`
 `;
 
 export const BodyWrapper = styled.tbody`
-  background-color: #f1f3ff;
+  background-color: ${Theme.P_11};
 
   width: 1056px;
   height: 795px;
