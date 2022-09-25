@@ -9,7 +9,7 @@ import Icon from '@/components/atoms/Icon';
 
 import * as Styled from './style';
 
-interface ProjectAccordionProps extends ProjectState {
+export interface ProjectAccordionProps extends ProjectState {
   setProjectList: React.Dispatch<React.SetStateAction<ProjectState[]>>;
 }
 
