@@ -20,4 +20,3 @@ export { default as BackgroundX } from './BackgroundX';
 export { default as MoreDot } from './MoreDot';
 export { default as TaskFavorite } from './TaskFavorite';
 export { default as GanttArrow } from './GanttArrow';
-export { default as Img } from '../../../../public/imgs/defaultProfileImg.png';
