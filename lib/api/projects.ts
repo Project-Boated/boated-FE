@@ -1,3 +1,4 @@
+import client from '@/lib/api/client';
 import { Blob } from 'buffer';
 import request from './request';
 import {
@@ -165,5 +166,8 @@ export const deleteProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjects
 export const putProjectsVideo = ({ videoFormData, projectId }: PutProjectsVieoRequestProps) =>
   request('PUT', projectsUrl.projectsVideoUpload(projectId), videoFormData);
 
+// response Header에 접근하기 위해  request 대신 client 사용
 export const getProjectsVideo = (projectId: number) =>
-  request<Blob>('GET', projectsUrl.projectsVideoUpload(projectId)).then((res) => res.data);
+  client.get(projectsUrl.projectsVideoUpload(projectId)).then((res) => res);
+
+export const deleteProjectsVideo = (projectId: number) => request('DELETE', projectsUrl.projectsVideoUpload(projectId));

@@ -19,7 +19,7 @@ const PresentationVideo = () => {
   const router = useRouter();
   const projectId = parseInt(router.query.id as string, 10);
 
-  const { data, isLoading, remove, refetch, isError, isFetched, isFetching } = useQuery(
+  const { data, isLoading, remove, refetch } = useQuery(
     `${queryKeys.PROJECTS_VIDEO}/${projectId}`,
     () => getProjectsVideo(projectId),
     {
@@ -45,12 +45,7 @@ const PresentationVideo = () => {
       <Styled.PresentationContainer>
         {isLoading && <Styled.LoadingWrapper>Loading...</Styled.LoadingWrapper>}
         {!data && !isLoading && <FileDragDropInput />}
-        {data && <Styled.PresentationVideo src="/api/projects/5/video" controls autoPlay={false} />}
-        {/* {data ? (
-          <Styled.PresentationVideo src="/api/projects/5/video" controls autoPlay={false} />
-        ) : (
-          <FileDragDropInput />
-        )} */}
+        {data && <Styled.PresentationVideo src={`/api/projects/${projectId}/video`} controls autoPlay={false} />}
         <VideoDescription />
       </Styled.PresentationContainer>
       {data && (
