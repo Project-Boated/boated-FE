@@ -1,11 +1,10 @@
-import React, { useCallback, useState } from 'react';
-
-import { AxiosError } from 'axios';
-import { useRouter } from 'next/router';
+import React, { useCallback, useEffect, useState } from 'react';
 import { DragDropContext, Droppable, DropResult, resetServerContext } from 'react-beautiful-dnd';
 import { useQuery } from 'react-query';
 
 import { getProjectsKanban, postProjectsKanbanLaneChange, postProjectsKanbanTaskChange } from '@/lib/api/projects';
+import { KanbanColumnState } from '@/lib/api/types';
+
 import * as queryKeys from '@/lib/constants/queryKeys';
 
 import useModal from '@/hooks/useModal';
@@ -37,11 +36,22 @@ const Kanban = () => {
     closeModal: closeTaskCreateModal,
   } = useModal();
 
-  const { isLoading, error, data } = useQuery(`${queryKeys.PROJECTS_KANBAN}/${projectId}`, () =>
-    getProjectsKanban(projectId),
-  );
+  const {
+    isLoading,
+    error,
+    data: kanbanData,
+  } = useQuery(queryKeys.PROJECTS_KANBAN_BY_ID(projectId), () => getProjectsKanban(projectId));
 
-  // const [data, setData] = useState<Array<KanbanState>(kanbanData);
+  const [data, setData] = useState<Array<KanbanColumnState>>([]);
+
+  useEffect(() => {
+    if (!router.isReady) {
+      return;
+    }
+    if (kanbanData) {
+      setData(kanbanData);
+    }
+  }, [router, kanbanData]);
 
   const onDragEnd = useCallback(
     async (result: DropResult) => {
@@ -64,7 +74,7 @@ const Kanban = () => {
         newColumn.splice(source.index, 1);
         newColumn.splice(destination.index, 0, targetColumn);
 
-        // setData([...newColumn]);
+        setData([...newColumn]);
 
         try {
           await postProjectsKanbanLaneChange({
@@ -92,17 +102,17 @@ const Kanban = () => {
         destinationTaskList.splice(source.index, 1);
         destinationTaskList.splice(destination.index, 0, targetTask);
 
-        // setData((prev) => [
-        //   ...prev.map((column) => {
-        //     if (column.id === destinationColumn.id) {
-        //       return {
-        //         ...destinationColumn,
-        //         tasks: destinationTaskList,
-        //       };
-        //     }
-        //     return column;
-        //   }),
-        // ]);
+        setData((prev) => [
+          ...prev.map((column) => {
+            if (column.id === destinationColumn.id) {
+              return {
+                ...destinationColumn,
+                tasks: destinationTaskList,
+              };
+            }
+            return column;
+          }),
+        ]);
 
         try {
           await postProjectsKanbanTaskChange({
@@ -123,23 +133,24 @@ const Kanban = () => {
       const startTargetTask = [...sourceTaskList.filter((task) => task.id === Number(draggableId))][0];
       sourceTaskList.splice(source.index, 1);
       destinationTaskList.splice(destination.index, 0, startTargetTask);
-      // setData((prev) => [
-      //   ...prev.map((column) => {
-      //     if (column.id === sourceColumn.id) {
-      //       return {
-      //         ...sourceColumn,
-      //         tasks: sourceTaskList,
-      //       };
-      //     }
-      //     if (column.id === destinationColumn.id) {
-      //       return {
-      //         ...destinationColumn,
-      //         tasks: destinationTaskList,
-      //       };
-      //     }
-      //     return column;
-      //   }),
-      // ]);
+
+      setData((prev) => [
+        ...prev.map((column) => {
+          if (column.id === sourceColumn.id) {
+            return {
+              ...sourceColumn,
+              tasks: sourceTaskList,
+            };
+          }
+          if (column.id === destinationColumn.id) {
+            return {
+              ...destinationColumn,
+              tasks: destinationTaskList,
+            };
+          }
+          return column;
+        }),
+      ]);
 
       try {
         await postProjectsKanbanTaskChange({

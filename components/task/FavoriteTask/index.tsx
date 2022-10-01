@@ -20,7 +20,9 @@ const FavoriteTask = () => {
   const [data, setData] = useState<GetMyTaskLikeResponse | undefined>();
 
   useEffect(() => {
-    setData(queryData);
+    if (queryData) {
+      setData(queryData);
+    }
   }, [queryData]);
 
   const onDragEnd = useCallback(
