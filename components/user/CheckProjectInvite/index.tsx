@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
-import { useQuery } from 'react-query';
+
 import { AxiosError } from 'axios';
+import { useQuery } from 'react-query';
 
 import { getProjectsInvite, postProjectsInviteAccept, postProjectsInviteReject } from '@/lib/api/projects';
 import * as queryKeys from '@/lib/constants/queryKeys';
@@ -9,7 +10,6 @@ import useGetMyInfo from '@/hooks/useGetMyInfo';
 
 import Button from '@/components/atoms/Button';
 import Text from '@/components/atoms/Text';
-
 import CircleText from '@/components/common/CircleText';
 
 import Theme from '@/styles/Theme';
@@ -21,7 +21,7 @@ const CheckProjectInvite = () => {
   const { myInfo } = useGetMyInfo();
 
   const onClickInviteButton = useCallback((event: React.MouseEvent<HTMLButtonElement>, invitationId: number) => {
-    const currentTarget: HTMLButtonElement = event.currentTarget;
+    const {currentTarget} = event;
 
     if (currentTarget.innerText === '수락') {
       postProjectsInviteAccept(invitationId)
@@ -40,8 +40,7 @@ const CheckProjectInvite = () => {
         <Text fontSize={20}>초대 받은 프로젝트</Text>
       </Styled.TitleWrapper>
       {data &&
-        data.map((invitation) => {
-          return (
+        data.map((invitation) => (
             <Styled.ProjectInviteContainer>
               <Styled.ProjectInviteTitleContainer>
                 <Styled.IconNameContainer>
@@ -75,8 +74,7 @@ const CheckProjectInvite = () => {
                 거절
               </Button>
             </Styled.ProjectInviteContainer>
-          );
-        })}
+          ))}
     </Styled.Container>
   );
 };

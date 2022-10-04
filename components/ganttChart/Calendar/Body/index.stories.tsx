@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { Story } from '@storybook/react';
 
-import Body, { BodyProps } from '.';
 import useCalendar from '@/components/ganttChart/Calendar/useCalendar';
+
+import Body, { BodyProps } from '.';
 
 export default {
   component: Body,

@@ -20,7 +20,7 @@ export const ProjectListContainer = styled.div`
   }
 `;
 
-export const h2 = styled.h2`
+export const H2 = styled.h2`
   text-align: center;
 
   font-size: 14px;

@@ -1,15 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+
 import { AxiosError } from 'axios';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { useQuery } from 'react-query';
 
 import { getMyTaskLike, postMyTaskLikeChange } from '@/lib/api/my';
 import { GetMyTaskLikeResponse } from '@/lib/api/types';
-
 import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Text from '@/components/atoms/Text';
-
 import FavoriteTaskItem from '@/components/task/FavoriteTask/FavoriteTaskItem';
 
 import * as Styled from './style';

@@ -1,13 +1,15 @@
 import React from 'react';
+
 import { Story } from '@storybook/react';
 
 import getSideTabList from '@/lib/util/getSideTabList';
 
-import Sidebar, { SidebarProps } from '.';
 import SideTab from '@/components/project/Sidebar/TabList/SideTab';
 import Tab from '@/components/project/Sidebar/TabList/Tab';
 
 import { TabListContainer } from '@/styles/pages/Project/style';
+
+import Sidebar, { SidebarProps } from '.';
 
 export default {
   component: Sidebar,

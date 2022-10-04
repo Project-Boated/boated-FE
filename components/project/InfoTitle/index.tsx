@@ -16,8 +16,7 @@ export interface InfoTitleProps {
   subTitle?: React.ReactText;
 }
 
-const InfoTitle = ({ isLabel = true, htmlFor, margin = 13, iconColor, title, subTitle }: InfoTitleProps) => {
-  return isLabel ? (
+const InfoTitle = ({ isLabel = true, htmlFor, margin = 13, iconColor, title, subTitle }: InfoTitleProps) => isLabel ? (
     <Label htmlFor={htmlFor} margin={margin}>
       <Icon icon="BoatedSymbol" width={20} height={20} color={iconColor} />
       <Text fontSize={14}>{title}</Text>
@@ -33,6 +32,5 @@ const InfoTitle = ({ isLabel = true, htmlFor, margin = 13, iconColor, title, sub
       <Text fontSize={14}>{title}</Text>
     </Div>
   );
-};
 
 export default InfoTitle;

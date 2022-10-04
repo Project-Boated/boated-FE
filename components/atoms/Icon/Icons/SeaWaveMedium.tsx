@@ -1,7 +1,6 @@
 import React from 'react';
 
-const SeaWaveMedium = () => {
-  return (
+const SeaWaveMedium = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="916" height="586" viewBox="0 0 916 586" fill="none">
       <mask id="mask0_192_681" mask="alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="912" height="582">
         <rect x="4" y="586" width="582" height="911.423" rx="51" transform="rotate(-90 4 586)" fill="white" />
@@ -22,6 +21,5 @@ const SeaWaveMedium = () => {
       </g>
     </svg>
   );
-};
 
 export default SeaWaveMedium;

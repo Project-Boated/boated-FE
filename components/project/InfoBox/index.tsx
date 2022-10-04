@@ -1,10 +1,8 @@
 import React from 'react';
 
 import Text from '@/components/atoms/Text';
-
-import InfoTitle from '@/components/project/InfoTitle';
-
 import TimeTableBox, { TimeTableBoxProps } from '@/components/date/TimeTableBox';
+import InfoTitle from '@/components/project/InfoTitle';
 
 import * as Styled from './style';
 
@@ -13,8 +11,7 @@ export interface InfoBoxProps extends TimeTableBoxProps {
   description: string;
 }
 
-const InfoBox = ({ name, description, ...props }: InfoBoxProps) => {
-  return (
+const InfoBox = ({ name, description, ...props }: InfoBoxProps) => (
     <Styled.Wrapper>
       <Styled.Container>
         <Styled.Row>
@@ -36,6 +33,5 @@ const InfoBox = ({ name, description, ...props }: InfoBoxProps) => {
       </Styled.Container>
     </Styled.Wrapper>
   );
-};
 
 export default React.memo(InfoBox);

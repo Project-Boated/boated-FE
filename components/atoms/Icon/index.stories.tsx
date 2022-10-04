@@ -1,13 +1,15 @@
 import React from 'react';
+
 import styled from 'styled-components';
 
-import { IconOption } from './type';
 
 import Icon from '@/components/atoms/Icon';
-import Text from '@/components/atoms/Text';
 import * as Icons from '@/components/atoms/Icon/Icons';
+import Text from '@/components/atoms/Text';
 
 import Theme from '@/styles/Theme';
+
+import { IconOption } from './type';
 
 export default {
   component: Icon,

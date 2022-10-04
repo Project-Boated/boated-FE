@@ -14,8 +14,7 @@ export interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ type, id, name, width, height, value, maxLength, placeholder, onChange }: InputProps) => {
-  return (
+const Input = ({ type, id, name, width, height, value, maxLength, placeholder, onChange }: InputProps) => (
     <Styled.Wrapper
       type={type}
       id={id}
@@ -28,6 +27,5 @@ const Input = ({ type, id, name, width, height, value, maxLength, placeholder, o
       onChange={onChange}
     />
   );
-};
 
 export default React.memo(Input);

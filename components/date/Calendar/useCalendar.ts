@@ -4,7 +4,7 @@ import addZeroToNumber from '@/lib/util/addZeroToNumber';
 
 const today = new Date();
 
-const useCalendar = (calendar: string = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`) => {
+const useCalendar = (calendar = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`) => {
   const [y, m, d] = calendar.split('-');
 
   const [year, setYear] = useState<string>(addZeroToNumber(y));

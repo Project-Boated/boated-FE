@@ -1,17 +1,17 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { Draggable } from 'react-beautiful-dnd';
-import { useRouter } from 'next/router';
+
 import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+import { Draggable } from 'react-beautiful-dnd';
 
 import { deleteProjectsKanbanTaskLike, postProjectsKanbanTaskLike } from '@/lib/api/projects';
 import { TaskState } from '@/lib/api/types';
 
-import useModal from '@/hooks/useModal';
 import useDetectOutsideClick from '@/hooks/useDetectOutside';
+import useModal from '@/hooks/useModal';
 
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
-
 import TaskDeleteModal from '@/components/Modal/TaskDeleteModal';
 
 import Theme from '@/styles/Theme';

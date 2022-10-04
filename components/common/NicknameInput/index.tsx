@@ -7,15 +7,15 @@ import useDebounce from '@/hooks/useDebounce';
 import Icon from '@/components/atoms/Icon';
 import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
-
-import Theme from '@/styles/Theme';
-
 import {
   LoadingWrapper,
   NicknameInputWrapper,
   NicknameTitleWrapper,
   NicknameWarningTextWrapper,
 } from '@/components/common/NicknameInput/style';
+
+import Theme from '@/styles/Theme';
+
 
 export interface NicknameInputProps {
   value: string;

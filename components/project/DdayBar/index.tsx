@@ -11,8 +11,7 @@ export interface DdayBarProps {
   totalDay: number;
 }
 
-const DdayBar = ({ dday, totalDay }: DdayBarProps) => {
-  return (
+const DdayBar = ({ dday, totalDay }: DdayBarProps) => (
     <Wrapper>
       <Container dday={dday} percentage={Math.ceil((Math.abs(dday) / totalDay) * 100)} />
       <Text fontSize={15}>D{dday > 0 && '+'}</Text>
@@ -21,6 +20,5 @@ const DdayBar = ({ dday, totalDay }: DdayBarProps) => {
       </Text>
     </Wrapper>
   );
-};
 
 export default React.memo(DdayBar);

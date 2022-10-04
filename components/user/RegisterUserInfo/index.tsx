@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useState } from 'react';
+
 import { useRouter } from 'next/router';
 
 import { patchProfile } from '@/lib/api/profile';
 
-import Icon from '@/components/atoms/Icon';
 import Button from '@/components/atoms/Button';
-
+import Icon from '@/components/atoms/Icon';
 import NicknameInput from '@/components/common/NicknameInput';
 import UserProfile from '@/components/common/UserProfile';
 

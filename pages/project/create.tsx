@@ -1,13 +1,14 @@
 import React, { useState, useCallback } from 'react';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
+
 import { AxiosError } from 'axios';
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 import { createProject } from '@/lib/api/projects';
 
+import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
 import CreateBox from '@/components/project/CreateBox';
 
-import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
 
 import { RequiredInfo, OptionalInfo } from '@/types/project';
 

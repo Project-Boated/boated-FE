@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
+
 import { useRouter } from 'next/router';
 
 import { postProjectsKanbanTask } from '@/lib/api/projects';
 import { PostProjectsKanbanTaskCreateProps } from '@/lib/api/types';
 
-import Label from '@/components/atoms/Label';
-import Input from '@/components/atoms/Input';
 import Button from '@/components/atoms/Button';
+import Input from '@/components/atoms/Input';
+import Label from '@/components/atoms/Label';
 import Text from '@/components/atoms/Text';
 import Textarea from '@/components/atoms/Textarea';
-
-import Modal from '@/components/Modal';
-
-import TimeTableBox from '@/components/date/TimeTableBox';
-import useTimePicker from '@/components/date/TimePicker/useTimePicker';
 import useCalendar from '@/components/date/Calendar/useCalendar';
+import useTimePicker from '@/components/date/TimePicker/useTimePicker';
+import TimeTableBox from '@/components/date/TimeTableBox';
+import Modal from '@/components/Modal';
 
 import * as Styled from './style';
 
@@ -66,8 +65,8 @@ const TaskCreateModal = ({ closeModal }: TaskCreateModalProps) => {
 
     Object.keys(requestObj).forEach((key) => {
       if (requestObj[key as Key] === '') {
-        alert(requestObjForKor[key as Key] + '항목을 채워주세요!');
-        return;
+        alert(`${requestObjForKor[key as Key]  }항목을 채워주세요!`);
+        
       }
     });
 

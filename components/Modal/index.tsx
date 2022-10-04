@@ -12,8 +12,7 @@ interface ModalProps {
   closeModal: () => void;
 }
 
-const Modal = ({ children, width = 729, height = 258, borderRadius = 37, closeModal }: ModalProps) => {
-  return (
+const Modal = ({ children, width = 729, height = 258, borderRadius = 37, closeModal }: ModalProps) => (
     <Styled.Background>
       <Styled.Overlay onClick={closeModal} />
       <Styled.Container width={width} height={height} borderRadius={borderRadius}>
@@ -24,6 +23,5 @@ const Modal = ({ children, width = 729, height = 258, borderRadius = 37, closeMo
       </Styled.Container>
     </Styled.Background>
   );
-};
 
 export default Modal;

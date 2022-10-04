@@ -4,8 +4,8 @@ import { ProjectState } from '@/lib/api/types';
 
 import useBoolean from '@/hooks/useBoolean';
 
-import Text from '@/components/atoms/Text';
 import Icon from '@/components/atoms/Icon';
+import Text from '@/components/atoms/Text';
 
 import * as Styled from './style';
 

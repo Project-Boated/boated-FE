@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Story } from '@storybook/react';
 
 import ProjectAccordion, { ProjectAccordionProps } from '@/components/ganttChart/ProjectAccordion';

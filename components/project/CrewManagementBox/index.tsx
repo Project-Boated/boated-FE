@@ -3,7 +3,6 @@ import React from 'react';
 import { PersonInfoState, CrewState } from '@/lib/api/types';
 
 import Icon from '@/components/atoms/Icon';
-
 import InfoTitle from '@/components/project/InfoTitle';
 
 import Theme from '@/styles/Theme';
@@ -15,8 +14,7 @@ export interface CrewManagementBoxProps {
   crews: Array<CrewState>;
 }
 
-const CrewManagementBox = ({ captain, crews }: CrewManagementBoxProps) => {
-  return (
+const CrewManagementBox = ({ captain, crews }: CrewManagementBoxProps) => (
     <Styled.Container>
       <Styled.InnerContainer>
         <Styled.CaptainContainer>
@@ -46,6 +44,5 @@ const CrewManagementBox = ({ captain, crews }: CrewManagementBoxProps) => {
       </Styled.InnerContainer>
     </Styled.Container>
   );
-};
 
 export default CrewManagementBox;

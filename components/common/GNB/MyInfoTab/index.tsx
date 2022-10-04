@@ -1,13 +1,13 @@
 import React, { Dispatch, MouseEvent, SetStateAction } from 'react';
+
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 
+import { getProjectsInvite } from '@/lib/api/projects';
 import { GetUserProfileResponse } from '@/lib/api/types';
 import * as queryKeys from '@/lib/constants/queryKeys';
-import { getProjectsInvite } from '@/lib/api/projects';
 
 import Text from '@/components/atoms/Text';
-
 import CircleText from '@/components/common/CircleText';
 
 import * as Styled from './style';

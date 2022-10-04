@@ -5,10 +5,8 @@ import { patchProfile } from '@/lib/api/profile';
 import useGetMyInfo from '@/hooks/useGetMyInfo';
 
 import Button from '@/components/atoms/Button';
-
 import NicknameInput from '@/components/common/NicknameInput';
 import UserProfile from '@/components/common/UserProfile';
-
 import { Container, Wrapper } from '@/components/user/ChangeUserInfo/style';
 import { ImgObject } from '@/components/user/RegisterUserInfo';
 

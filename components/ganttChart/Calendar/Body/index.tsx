@@ -2,8 +2,8 @@ import React from 'react';
 
 import { ProjectState } from '@/lib/api/types';
 import ganttChartColorList from '@/lib/constants/ganttChartColorList';
-import getRandomNumber from '@/lib/util/getRandomNumber';
 import getPeriod from '@/lib/util/getPeriod';
+import getRandomNumber from '@/lib/util/getRandomNumber';
 
 import Date from '@/components/ganttChart/Calendar/Date';
 import { DateProps } from '@/components/ganttChart/Calendar/type';
@@ -22,8 +22,7 @@ export interface BodyProps {
   projectList: Array<ProjectState>;
 }
 
-const Body = ({ year, month, height, calendarList, projectList }: BodyProps) => {
-  return (
+const Body = ({ year, month, height, calendarList, projectList }: BodyProps) => (
     <Styled.Container height={height}>
       <Styled.GridContainer>
         {calendarList.map(({ date, dayOfTheWeek }) => (
@@ -67,6 +66,5 @@ const Body = ({ year, month, height, calendarList, projectList }: BodyProps) => 
       </Styled.GanttContainer>
     </Styled.Container>
   );
-};
 
 export default React.memo(Body);

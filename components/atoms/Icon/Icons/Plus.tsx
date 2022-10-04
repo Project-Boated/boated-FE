@@ -1,7 +1,6 @@
 import React from 'react';
 
-const Plus = () => {
-  return (
+const Plus = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none">
       <g filter="url(#filter0_d_526_1016)">
         <circle cx="16.5" cy="16.5" r="12.5" fill="white" />
@@ -37,6 +36,5 @@ const Plus = () => {
       </defs>
     </svg>
   );
-};
 
 export default Plus;

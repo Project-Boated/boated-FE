@@ -9,13 +9,11 @@ export interface AssignedAccountProps {
   children: React.ReactText;
 }
 
-const AssignedAccount = ({ children }: AssignedAccountProps) => {
-  return (
+const AssignedAccount = ({ children }: AssignedAccountProps) => (
     <Container>
       <Text fontSize={14}>{children}</Text>
       <Icon icon="BackgroundX" />
     </Container>
   );
-};
 
 export default AssignedAccount;

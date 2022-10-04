@@ -1,18 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
-import { useRouter } from 'next/router';
-import { AxiosError } from 'axios';
 
-import { KanbanColumnState } from '@/lib/api/types';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
+
 import { putProjectsKanbanLaneName } from '@/lib/api/projects';
+import { KanbanColumnState } from '@/lib/api/types';
 
 import useModal from '@/hooks/useModal';
 
-import Text from '@/components/atoms/Text';
 import Icon from '@/components/atoms/Icon';
-
+import Text from '@/components/atoms/Text';
 import KanbanColumnDeleteModal from '@/components/Modal/KanbanColumnDeleteModal';
-
 import Task from '@/components/project/Kanban/Task';
 
 import Theme from '@/styles/Theme';
@@ -124,7 +123,7 @@ const KanbanColumn = ({ id, name, tasks, index, kanbanDataLength }: KanbanColumn
                   ref={kanbanHeaderInputRef}
                 />
               ) : (
-                <Text fontSize={14} fontFamily={'Gmarket Sans'} color={Theme.S_0}>
+                <Text fontSize={14} fontFamily="Gmarket Sans" color={Theme.S_0}>
                   {name}
                 </Text>
               )}

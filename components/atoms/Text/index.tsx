@@ -22,8 +22,7 @@ const Text = ({
   fontFamily = 'Noto Sans KR',
   hasUnderline = false,
   children,
-}: TextProps) => {
-  return (
+}: TextProps) => (
     <Wrapper
       color={color}
       fontSize={fontSize}
@@ -35,6 +34,5 @@ const Text = ({
       {children}
     </Wrapper>
   );
-};
 
 export default Text;

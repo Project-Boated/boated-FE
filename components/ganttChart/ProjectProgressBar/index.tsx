@@ -7,8 +7,6 @@ export interface ProjectProgressBarProps {
   backgroundColor: string;
 }
 
-const ProjectProgressBar = ({ period, backgroundColor }: ProjectProgressBarProps) => {
-  return <Styled.Wrapper width={period * 51} backgroundColor={backgroundColor} />;
-};
+const ProjectProgressBar = ({ period, backgroundColor }: ProjectProgressBarProps) => <Styled.Wrapper width={period * 51} backgroundColor={backgroundColor} />;
 
 export default ProjectProgressBar;

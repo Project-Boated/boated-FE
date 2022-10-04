@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+
 import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
 
 import { postProjectsKanbanLane } from '@/lib/api/projects';
 
 import Button from '@/components/atoms/Button';
-import Text from '@/components/atoms/Text';
 import Input from '@/components/atoms/Input';
-
+import Text from '@/components/atoms/Text';
 import Modal from '@/components/Modal';
 
 import * as Styled from './style';

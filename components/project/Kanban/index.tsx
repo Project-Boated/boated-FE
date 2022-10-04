@@ -1,22 +1,20 @@
 import React, { useCallback, useState } from 'react';
+
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
 import { DragDropContext, Droppable, DropResult, resetServerContext } from 'react-beautiful-dnd';
 import { useQuery } from 'react-query';
-import { useRouter } from 'next/router';
-import { AxiosError } from 'axios';
 
 import { getProjectsKanban, postProjectsKanbanLaneChange, postProjectsKanbanTaskChange } from '@/lib/api/projects';
-
 import * as queryKeys from '@/lib/constants/queryKeys';
 
 import useModal from '@/hooks/useModal';
 
-import Text from '@/components/atoms/Text';
 import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
-
+import Text from '@/components/atoms/Text';
 import KanbanColumnAddModal from '@/components/Modal/KanbanColumnAddModal';
 import TaskCreateModal from '@/components/Modal/TaskCreateModal';
-
 import KanbanColumn from '@/components/project/Kanban/KanbanColumn';
 
 import * as Styled from './style';

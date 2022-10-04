@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { Story } from '@storybook/react';
 
-import Calendar, { CalendarProps } from '.';
 import useCalendar from './useCalendar';
+
+import Calendar, { CalendarProps } from '.';
 
 export default {
   component: Calendar,

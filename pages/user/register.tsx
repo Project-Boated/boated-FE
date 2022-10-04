@@ -1,16 +1,15 @@
 import React from 'react';
+
 import { NextPage } from 'next';
 
+import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
 import RegisterUserInfo from '@/components/user/RegisterUserInfo';
 
-import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
 
-const RegisterUserInfoPage: NextPage = () => {
-  return (
+const RegisterUserInfoPage: NextPage = () => (
     <AppLayoutSub>
       <RegisterUserInfo />
     </AppLayoutSub>
   );
-};
 
 export default RegisterUserInfoPage;

@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery } from 'react-query';
-import { useRouter } from 'next/router';
+
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useQuery } from 'react-query';
 
 import { getProjectMy } from '@/lib/api/projects';
 import { GetProjectMyProps } from '@/lib/api/types';
-import * as queryKeys from '@/lib/constants/queryKeys';
 import { sortMethodList } from '@/lib/constants/dropdownList';
+import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Text from '@/components/atoms/Text';
-
 import DropDown from '@/components/common/DropDown';
-
-import SearchInput from '@/components/project/SearchInput';
 import ProjectItem from '@/components/project/ProjectItem';
+import SearchInput from '@/components/project/SearchInput';
 
 import Theme from '@/styles/Theme';
 

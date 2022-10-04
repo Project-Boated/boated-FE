@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
-import Text from '@/components/atoms/Text';
 import Icon from '@/components/atoms/Icon';
+import Text from '@/components/atoms/Text';
 
 import Theme from '@/styles/Theme';
 

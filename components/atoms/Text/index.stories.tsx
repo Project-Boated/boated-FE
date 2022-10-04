@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Story } from '@storybook/react';
 
 import Text, { TextProps } from '@/components/atoms/Text';

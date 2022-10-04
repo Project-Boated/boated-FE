@@ -4,9 +4,6 @@ import useGetMyInfo from '@/hooks/useGetMyInfo';
 
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
-
-import { ImgObject } from '@/components/user/RegisterUserInfo';
-
 import {
   ImageInput,
   ProfileImage,
@@ -14,6 +11,7 @@ import {
   TextWrapper,
   UserProfileWrapper,
 } from '@/components/common/UserProfile/style';
+import { ImgObject } from '@/components/user/RegisterUserInfo';
 
 export interface UserProfileProps {
   isChangeProfile?: boolean;
@@ -64,11 +62,9 @@ const UserProfile = ({ isChangeProfile, imgObject, children, setImgObject }: Use
           <Text fontSize={14}>{children}</Text>
         </>
       ) : (
-        <>
-          <TextWrapper>
+        <TextWrapper>
             <Text fontSize={14}>{nickname}</Text>
           </TextWrapper>
-        </>
       )}
     </UserProfileWrapper>
   );

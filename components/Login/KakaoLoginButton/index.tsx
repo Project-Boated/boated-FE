@@ -6,13 +6,11 @@ import Icon from '@/components/atoms/Icon';
 
 import { Wrapper } from './style';
 
-const KakaoLoginButton = () => {
-  return (
+const KakaoLoginButton = () => (
     <Wrapper href={kakaoLoginPath}>
       <Icon icon="KakaoSymbol" width={21} height={20} />
       <span>카카오 로그인</span>
     </Wrapper>
   );
-};
 
 export default KakaoLoginButton;

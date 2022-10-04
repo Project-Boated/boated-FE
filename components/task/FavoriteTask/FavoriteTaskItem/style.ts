@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import { boxDesign } from '@/styles/common';
-
 import Theme from '@/styles/Theme';
 
 export const Container = styled.td`

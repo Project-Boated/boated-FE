@@ -6,14 +6,12 @@ export interface TaskProgressBarProps {
   period: number;
 }
 
-const TaskProgressBar = ({ period }: TaskProgressBarProps) => {
-  return (
+const TaskProgressBar = ({ period }: TaskProgressBarProps) => (
     <Styled.Container>
       <Styled.Circle />
       <Styled.Bar width={period * 51} />
       <Styled.Circle />
     </Styled.Container>
   );
-};
 
 export default TaskProgressBar;

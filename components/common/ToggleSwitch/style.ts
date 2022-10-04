@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
+import { SizeProps } from '@/types/size';
+
 import Theme from '@/styles/Theme';
 
-import { SizeProps } from '@/types/size';
 
 interface ClickedProps {
   isRight: boolean;

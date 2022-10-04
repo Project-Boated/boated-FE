@@ -11,8 +11,7 @@ export interface SideTabProps {
   sideTabList: SideTabState[];
 }
 
-const SideTab = ({ path, sideTabList }: SideTabProps) => {
-  return (
+const SideTab = ({ path, sideTabList }: SideTabProps) => (
     <Styled.Container>
       {sideTabList.map((sideTab, idx) => (
         <Tab key={idx} isFocused={path === sideTab.path} href={sideTab.link}>
@@ -21,6 +20,5 @@ const SideTab = ({ path, sideTabList }: SideTabProps) => {
       ))}
     </Styled.Container>
   );
-};
 
 export default SideTab;
