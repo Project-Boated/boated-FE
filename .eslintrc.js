@@ -33,6 +33,7 @@ module.exports = {
     'react/function-component-definition': 0,
     'react/jsx-props-no-spreading': 0,
     'react/require-default-props': 0,
+
     // import order settings
     'import/order': [
       'error',
@@ -75,6 +76,7 @@ module.exports = {
             position: 'after',
           },
         ],
+        pathGroupsExcludedImportTypes: ['react'],
         alphabetize: {
           order: 'asc',
           caseInsensitive: true,
