@@ -114,9 +114,9 @@ const Calendar = ({ date, setYear, setMonth, setDate }: CalendarProps) => {
             <Styled.Tbody>
               <Styled.WeekListContainer>
                 {weekList.map((week, index) => (
-                  <Styled.Td key={index}>
+                  <Styled.Td key={week}>
                     <Text
-                      key={index}
+                      key={week}
                       fontSize={10}
                       fontWeight={700}
                       lineHeight={15}

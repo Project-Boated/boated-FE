@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 
 import useModal from '@/hooks/useModal';
 
-
-
-
 import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
 import Label from '@/components/atoms/Label';
@@ -73,7 +70,7 @@ const TaskDetailModal = () => {
               </Label>
               <Styled.AssignedCrewListContainer>
                 {assignedCrewList.map((crew) => (
-                  <AssignedAccount>{crew}</AssignedAccount>
+                  <AssignedAccount key={crew}>{crew}</AssignedAccount>
                 ))}
               </Styled.AssignedCrewListContainer>
               <Styled.AssignedCrewDropDownContainer>

@@ -11,11 +11,9 @@ export interface TabProps {
 }
 
 const Tab = ({ isFocused = true, href, children }: TabProps) => (
-    <Styled.Wrapper isFocused={isFocused}>
-      <Link href={href}>
-        <a>{children}</a>
-      </Link>
-    </Styled.Wrapper>
-  );
+  <Styled.Wrapper isFocused={isFocused}>
+    <Link href={href}>{children}</Link>
+  </Styled.Wrapper>
+);
 
 export default Tab;

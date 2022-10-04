@@ -15,3 +15,7 @@ export interface IconProps extends IconWrapperProps {
   color?: string;
   onClick?: () => void;
 }
+
+export interface IconPropsWithSVGProps extends React.SVGProps<SVGElement> {
+  color?: string;
+}

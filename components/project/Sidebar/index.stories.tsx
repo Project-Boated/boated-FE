@@ -20,13 +20,11 @@ const Template: Story<SidebarProps> = (args: SidebarProps) => <Sidebar {...args}
 
 export const ProjectDetailPageSidebar = Template.bind({});
 ProjectDetailPageSidebar.args = {
-  ProjectInfo: <></>,
   TabList: <SideTab path="" sideTabList={getSideTabList(1)} />,
 };
 
 export const ProjectPageSidebar = Template.bind({});
 ProjectPageSidebar.args = {
-  UserInfo: <></>,
   TabList: (
     <TabListContainer>
       <Tab href="/project/invite">프로젝트 초대 확인하기</Tab>

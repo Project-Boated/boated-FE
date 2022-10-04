@@ -89,9 +89,9 @@ const DropDown = ({
       {isShowList && (
         <RefWrapper type={type}>
           <SelectListWrapper ref={selectListRef} type={type} borderRadius={borderRadius}>
-            {selectList.map((item, idx) => (
+            {selectList.map((item) => (
               <SelectItemWrapper
-                key={idx}
+                key={item}
                 ref={isSelected(item, selectedItem) ? selectedItemRef : null}
                 type={type}
                 isSelected={isSelected(item, selectedItem)}

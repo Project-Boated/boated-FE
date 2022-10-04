@@ -14,7 +14,6 @@ import { RequiredInfo, OptionalInfo } from '@/types/project';
 
 import Theme from '@/styles/Theme';
 
-
 import {
   Wrapper,
   SeaWaveWrapper,
@@ -68,8 +67,8 @@ const CreateBox = ({
         <Icon icon="SeaWaveMedium" />
       </SeaWaveWrapper>
       <LeftContainer>
-        <img src="/imgs/InnerCircle.png" />
-        <img src="/imgs/OuterCircle.png" />
+        <img src="/imgs/InnerCircle.png" alt="logo" />
+        <img src="/imgs/OuterCircle.png" alt="logo" />
         <Icon icon="BoatedSymbol" width={49} height={46} />
         <Text fontSize={18} fontWeight={300} lineHeight={18} fontFamily="Gmarket Sans">
           프로젝트 생성하기

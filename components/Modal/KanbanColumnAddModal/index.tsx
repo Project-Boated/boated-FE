@@ -12,11 +12,11 @@ import Modal from '@/components/Modal';
 
 import * as Styled from './style';
 
-export interface KanbanColumnAddModal {
+export interface KanbanColumnAddModalProps {
   closeModal: () => void;
 }
 
-const KanbanColumnAddModal = ({ closeModal }: KanbanColumnAddModal) => {
+const KanbanColumnAddModal = ({ closeModal }: KanbanColumnAddModalProps) => {
   const router = useRouter();
   const projectId = parseInt(router.query.id as string, 10);
 

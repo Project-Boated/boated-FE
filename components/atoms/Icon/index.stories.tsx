@@ -2,7 +2,6 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-
 import Icon from '@/components/atoms/Icon';
 import * as Icons from '@/components/atoms/Icon/Icons';
 import Text from '@/components/atoms/Text';
@@ -52,7 +51,7 @@ const Template = () => {
   return (
     <GridContainer>
       {iconList.map((icon) => (
-        <IconWrapper>
+        <IconWrapper key={icon}>
           <Icon icon={icon} />
           <Text fontSize={13} fontWeight={700}>
             {icon}

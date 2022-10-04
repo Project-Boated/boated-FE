@@ -37,7 +37,7 @@ const ProjectDetailPage = () => {
     if (!projectInfo) return;
     const [calendarInfo, timePickerInfo] = projectInfo.deadline.split(' ');
     const [year, month, date] = calendarInfo.split('-');
-    const [hour, minute, _] = timePickerInfo.split(':');
+    const [hour, minute] = timePickerInfo.split(':');
 
     setYear(year);
     setMonth(month);

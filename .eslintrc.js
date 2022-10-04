@@ -26,15 +26,23 @@ module.exports = {
   },
   plugins: ['react', 'jsx-a11y', '@typescript-eslint'],
   rules: {
+    'no-alert': 0,
+    'no-plusplus': 0,
+    'no-continue': 0,
+
+    'react/function-component-definition': 0,
+    'react/jsx-props-no-spreading': 0,
+    'react/require-default-props': 0,
+    'react/destructuring-assignment': 0,
+    'react-hooks/exhaustive-deps': 0,
+
+    '@typescript-eslint/no-shadow': 0,
+    '@typescript-eslint/no-loop-func': 0,
+
     // import devDependencies
     'import/no-extraneous-dependencies': 0,
     'import/extensions': 0,
     'import/prefer-default-export': 0,
-    'react/function-component-definition': 0,
-    'react/jsx-props-no-spreading': 0,
-    'react/require-default-props': 0,
-
-    // import order settings
     'import/order': [
       'error',
       {

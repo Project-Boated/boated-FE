@@ -148,7 +148,7 @@ const Task = ({ index, task }: TaskProps) => {
                       );
                     }
                     return (
-                      <Text fontWeight={400} fontSize={13}>
+                      <Text key={account.id} fontWeight={400} fontSize={13}>
                         {`${account.nickname}, `}
                       </Text>
                     );

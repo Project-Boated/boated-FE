@@ -9,10 +9,9 @@ import { createProject } from '@/lib/api/projects';
 import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
 import CreateBox from '@/components/project/CreateBox';
 
-
 import { RequiredInfo, OptionalInfo } from '@/types/project';
 
-const projectCreatePage: NextPage = () => {
+const ProjectCreatePage: NextPage = () => {
   const router = useRouter();
 
   const [isRight, setIsRight] = useState<boolean>(false);
@@ -119,4 +118,4 @@ const projectCreatePage: NextPage = () => {
   );
 };
 
-export default projectCreatePage;
+export default ProjectCreatePage;
