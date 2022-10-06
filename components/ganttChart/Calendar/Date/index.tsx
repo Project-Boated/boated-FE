@@ -1,9 +1,11 @@
 import React from 'react';
 
 import Text from '@/components/atoms/Text';
-import { DateProps } from '@/components/ganttChart/Calendar/type';
 
 import * as Styled from './style';
+
+import { DateProps } from '@/components/ganttChart/Calendar/type';
+
 
 const Date = ({ date, dayOfTheWeek }: DateProps) => (
     <Styled.Container>

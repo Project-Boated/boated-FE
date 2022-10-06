@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import getSideTabList from '@/lib/util/getSideTabList';
 
 import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
+
 import Kanban from '@/components/project/Kanban';
 import Sidebar from '@/components/project/Sidebar';
 import SideTab from '@/components/project/Sidebar/TabList/SideTab';

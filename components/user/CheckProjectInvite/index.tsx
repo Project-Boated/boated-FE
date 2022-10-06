@@ -10,6 +10,7 @@ import useGetMyInfo from '@/hooks/useGetMyInfo';
 
 import Button from '@/components/atoms/Button';
 import Text from '@/components/atoms/Text';
+
 import CircleText from '@/components/common/CircleText';
 
 import Theme from '@/styles/Theme';

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Icon from '@/components/atoms/Icon';
+
 import KakaoLoginButton from '@/components/Login/KakaoLoginButton';
 
 import { Wrapper, SeaWaveWrapper, Container, Text } from './style';

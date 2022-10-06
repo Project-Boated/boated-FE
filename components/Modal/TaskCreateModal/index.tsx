@@ -10,12 +10,15 @@ import Input from '@/components/atoms/Input';
 import Label from '@/components/atoms/Label';
 import Text from '@/components/atoms/Text';
 import Textarea from '@/components/atoms/Textarea';
+
 import useCalendar from '@/components/date/Calendar/useCalendar';
 import useTimePicker from '@/components/date/TimePicker/useTimePicker';
 import TimeTableBox from '@/components/date/TimeTableBox';
-import Modal from '@/components/Modal';
 
 import * as Styled from './style';
+
+import Modal from '@/components/Modal';
+
 
 export interface TaskCreateModalProps {
   closeModal: () => void;

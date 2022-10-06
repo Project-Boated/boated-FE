@@ -12,6 +12,7 @@ import useModal from '@/hooks/useModal';
 
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
+
 import TaskDeleteModal from '@/components/Modal/TaskDeleteModal';
 
 import Theme from '@/styles/Theme';

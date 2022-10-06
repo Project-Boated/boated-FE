@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { createProject } from '@/lib/api/projects';
 
 import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
+
 import CreateBox from '@/components/project/CreateBox';
 
 import { RequiredInfo, OptionalInfo } from '@/types/project';

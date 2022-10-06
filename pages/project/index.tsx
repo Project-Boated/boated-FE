@@ -7,11 +7,14 @@ import { GetProjectMyProps } from '@/lib/api/types';
 import queryIntegerization from '@/lib/util/queryIntegerization';
 
 import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
+
 import GanttChart from '@/components/ganttChart';
+
 import Sidebar from '@/components/project/Sidebar';
 import Tab from '@/components/project/Sidebar/TabList/Tab';
 import TabNavigator from '@/components/project/TabNavigator';
 import ProjectsTemplate from '@/components/project/Template/ProjectsTemplate';
+
 import FavoriteTask from '@/components/task/FavoriteTask';
 
 import * as Styled from '@/styles/pages/Project/style';

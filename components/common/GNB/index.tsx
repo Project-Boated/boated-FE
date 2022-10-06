@@ -7,6 +7,7 @@ import useGetMyInfo from '@/hooks/useGetMyInfo';
 
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
+
 import MyInfoTab from '@/components/common/GNB/MyInfoTab';
 import ProjectTab from '@/components/common/GNB/ProjectTab';
 

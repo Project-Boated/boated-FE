@@ -3,6 +3,7 @@ import React from 'react';
 import { MyProjectState } from '@/lib/api/types';
 
 import Text from '@/components/atoms/Text';
+
 import DdayBar from '@/components/project/DdayBar';
 
 import Theme from '@/styles/Theme';

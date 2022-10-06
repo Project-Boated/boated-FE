@@ -5,14 +5,16 @@ import ganttChartColorList from '@/lib/constants/ganttChartColorList';
 import getPeriod from '@/lib/util/getPeriod';
 import getRandomNumber from '@/lib/util/getRandomNumber';
 
+import Theme from '@/styles/Theme';
+
+import * as Styled from './style';
+
 import Date from '@/components/ganttChart/Calendar/Date';
 import { DateProps } from '@/components/ganttChart/Calendar/type';
 import ProjectProgressBar from '@/components/ganttChart/ProjectProgressBar';
 import TaskProgressBar from '@/components/ganttChart/TaskProgressBar';
 
-import Theme from '@/styles/Theme';
 
-import * as Styled from './style';
 
 export interface BodyProps {
   year: number;

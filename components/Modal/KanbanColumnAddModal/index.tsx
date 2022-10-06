@@ -8,9 +8,11 @@ import { postProjectsKanbanLane } from '@/lib/api/projects';
 import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
-import Modal from '@/components/Modal';
 
 import * as Styled from './style';
+
+import Modal from '@/components/Modal';
+
 
 export interface KanbanColumnAddModalProps {
   closeModal: () => void;

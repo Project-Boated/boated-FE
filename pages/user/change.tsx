@@ -3,6 +3,7 @@ import React from 'react';
 import { NextPage } from 'next';
 
 import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
+
 import ChangeUserInfo from '@/components/user/ChangeUserInfo';
 import ProfileNavigator from '@/components/user/ProfileNavigator';
 

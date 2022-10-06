@@ -7,6 +7,7 @@ import useDebounce from '@/hooks/useDebounce';
 import Icon from '@/components/atoms/Icon';
 import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
+
 import {
   LoadingWrapper,
   NicknameInputWrapper,

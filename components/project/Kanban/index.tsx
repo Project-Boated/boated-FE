@@ -13,8 +13,10 @@ import useModal from '@/hooks/useModal';
 import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
+
 import KanbanColumnAddModal from '@/components/Modal/KanbanColumnAddModal';
 import TaskCreateModal from '@/components/Modal/TaskCreateModal';
+
 import KanbanColumn from '@/components/project/Kanban/KanbanColumn';
 
 import * as Styled from './style';

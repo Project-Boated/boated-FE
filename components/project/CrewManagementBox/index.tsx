@@ -3,6 +3,7 @@ import React from 'react';
 import { PersonInfoState, CrewState } from '@/lib/api/types';
 
 import Icon from '@/components/atoms/Icon';
+
 import InfoTitle from '@/components/project/InfoTitle';
 
 import Theme from '@/styles/Theme';

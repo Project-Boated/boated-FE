@@ -8,11 +8,13 @@ import { TaskState } from '@/lib/api/types';
 
 import Button from '@/components/atoms/Button';
 import Text from '@/components/atoms/Text';
-import Modal from '@/components/Modal';
+
 
 import Theme from '@/styles/Theme';
 
 import * as Styled from './style';
+
+import Modal from '@/components/Modal';
 
 export interface TaskDeleteModalProps {
   task: TaskState;

@@ -4,6 +4,7 @@ import useGetMyInfo from '@/hooks/useGetMyInfo';
 
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
+
 import {
   ImageInput,
   ProfileImage,
@@ -11,6 +12,7 @@ import {
   TextWrapper,
   UserProfileWrapper,
 } from '@/components/common/UserProfile/style';
+
 import { ImgObject } from '@/components/user/RegisterUserInfo';
 
 export interface UserProfileProps {

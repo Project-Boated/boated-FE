@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { kakaoLogin } from '@/lib/api/auth';
 
 import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
+
 import LoginBox from '@/components/Login/LoginBox';
 
 const LoginPage: NextPage = () => {

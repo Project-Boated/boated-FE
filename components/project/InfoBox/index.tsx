@@ -1,7 +1,9 @@
 import React from 'react';
 
 import Text from '@/components/atoms/Text';
+
 import TimeTableBox, { TimeTableBoxProps } from '@/components/date/TimeTableBox';
+
 import InfoTitle from '@/components/project/InfoTitle';
 
 import * as Styled from './style';

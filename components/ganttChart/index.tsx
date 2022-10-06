@@ -6,12 +6,13 @@ import { getMyGanttChart } from '@/lib/api/my';
 import { ProjectState } from '@/lib/api/types';
 import * as queryKeys from '@/lib/constants/queryKeys';
 
+import * as Styled from './style';
+
 import Body from '@/components/ganttChart/Calendar/Body';
 import Header from '@/components/ganttChart/Calendar/Header';
 import useCalendar from '@/components/ganttChart/Calendar/useCalendar';
 import ProjectAccordion from '@/components/ganttChart/ProjectAccordion';
 
-import * as Styled from './style';
 
 const GanttChart = () => {
   const { year, month, calendarList, onClickPrev, onClickNext } = useCalendar();

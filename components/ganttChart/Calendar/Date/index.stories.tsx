@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 
+import Date from '.';
 import { DateProps } from '@/components/ganttChart/Calendar/type';
 
-import Date from '.';
 
 
 export default {

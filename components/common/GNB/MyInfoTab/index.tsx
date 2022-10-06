@@ -8,6 +8,7 @@ import { GetUserProfileResponse } from '@/lib/api/types';
 import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Text from '@/components/atoms/Text';
+
 import CircleText from '@/components/common/CircleText';
 
 import * as Styled from './style';
