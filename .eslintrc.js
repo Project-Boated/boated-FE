@@ -64,7 +64,47 @@ module.exports = {
             position: 'after',
           },
           {
-            pattern: '@/components/**',
+            pattern: '@/components/atoms/**',
+            group: 'internal',
+            position: 'after',
+          },
+          {
+            pattern: '@/components/common/**',
+            group: 'internal',
+            position: 'after',
+          },
+          {
+            pattern: '@/components/date/**',
+            group: 'internal',
+            position: 'after',
+          },
+          {
+            pattern: '@/components/ganttChart',
+            group: 'internal',
+            position: 'after',
+          },
+          {
+            pattern: '@/components/Login/**',
+            group: 'internal',
+            position: 'after',
+          },
+          {
+            pattern: '@/components/Modal/**',
+            group: 'internal',
+            position: 'after',
+          },
+          {
+            pattern: '@/components/project/**',
+            group: 'internal',
+            position: 'after',
+          },
+          {
+            pattern: '@/components/task/**',
+            group: 'internal',
+            position: 'after',
+          },
+          {
+            pattern: '@/components/user/**',
             group: 'internal',
             position: 'after',
           },
