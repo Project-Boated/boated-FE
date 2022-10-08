@@ -121,7 +121,7 @@ const Task = ({ index, task }: TaskProps) => {
                       마감기한
                     </Text>
                     <Text fontWeight={400} fontSize={13} color={Theme.W_1}>{` (${
-                      task.dday > 0 ? `D+${task.dday}` : `D-${task.dday}`
+                      task.dday > 0 ? `D+${task.dday}` : `D${task.dday}`
                     })`}</Text>
                     <br />
                     <Text fontWeight={400} fontSize={13}>

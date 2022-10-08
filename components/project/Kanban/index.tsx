@@ -171,11 +171,19 @@ const Kanban = () => {
   resetServerContext();
 
   if (error) {
-    return <div>error</div>;
+    return (
+      <Styled.Container>
+        <div>error</div>
+      </Styled.Container>
+    );
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <Styled.Container>
+        <div>Loading...</div>
+      </Styled.Container>
+    );
   }
 
   return (
