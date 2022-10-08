@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { boxDesign } from '@/styles/common';
 
 export const Container = styled.div`
+  position: relative;
+
   display: flex;
   flex-direction: column;
 
@@ -60,4 +62,22 @@ export const LoadingWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const ButtonContainer = styled.div`
+  position: relative;
+
+  & > button {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+  }
+`;
+
+export const SaveWrapper = styled.div`
+  position: absolute;
+
+  right: 0;
+  bottom: 0;
 `;
