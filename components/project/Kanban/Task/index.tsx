@@ -35,7 +35,7 @@ const Task = ({ index, task }: TaskProps) => {
 
   const queryClient = useQueryClient();
 
-  const [isDottedIconVisible, setIsDottedIconVisible] = useState(false);
+  const [isDottedIconVisible, setIsDottedIconVisible] = useState<boolean>(false);
 
   const moreContainerRef = useRef(null);
 
@@ -73,8 +73,8 @@ const Task = ({ index, task }: TaskProps) => {
       setIsDottedIconVisible(true);
       return;
     }
-    setIsDottedIconVisible(true);
-  }, [setIsDottedIconVisible]);
+    setIsDottedIconVisible(false);
+  }, [isDottedIconVisible]);
 
   return (
     <>
