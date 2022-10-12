@@ -151,6 +151,11 @@ export interface PutProjectsVieoRequestProps {
   projectId: number;
 }
 
-export interface GetProjectsVideoResponse {
-  data: File | undefined;
+export interface PutProjectsVideoDescriptionRequestProps {
+  projectId: number;
+  description: string;
+}
+
+export interface GetProjectsVideoDescriptionResponse {
+  description: string;
 }
