@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { AxiosError } from 'axios';
 
-import { deleteProjectsVideo, getProjectsVideo } from '@/lib/api/projects';
+import { deleteProjectsVideo, getProjectsVideo, putProjectsVideoDescription } from '@/lib/api/projects';
 import * as queryKeys from '@/lib/constants/queryKeys';
 
 import useModal from '@/hooks/useModal';
@@ -22,6 +22,8 @@ import * as Styled from './style';
 const PresentationVideo = () => {
   const router = useRouter();
   const projectId = parseInt(router.query.id as string, 10);
+
+  const [description, setDescription] = useState<string>('');
 
   const { isShowModal, closeModal, openModal } = useModal();
 
@@ -46,6 +48,15 @@ const PresentationVideo = () => {
     }
   };
 
+  const handleVideoDescriptionButton = async () => {
+    try {
+      await putProjectsVideoDescription({ projectId, description });
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      alert(JSON.stringify(error.response?.data.message));
+    }
+  };
+
   return (
     <Styled.Container>
       {isShowModal && (
@@ -56,21 +67,23 @@ const PresentationVideo = () => {
         {isLoading && <Styled.LoadingWrapper>Loading...</Styled.LoadingWrapper>}
         {!data && !isLoading && <FileDragDropInput />}
         {data && <Styled.PresentationVideo src={`/api/projects/${projectId}/video`} controls autoPlay={false} />}
-        <VideoDescription />
+        <VideoDescription description={description} setDescription={setDescription} />
       </Styled.PresentationContainer>
       <Styled.ButtonContainer>
         {data && (
-          <Styled.VideoInfoContainer>
-            <Icon width={20} height={20} icon="BoatedSymbol" />
-            <Text>파일 용량 : {Math.ceil(Number(data?.headers['content-length']) / 1000000)}MB</Text>
-            <Button width={86} height={32} borderRadius={26} onClick={openModal}>
-              삭제하기
+          <>
+            <Styled.VideoInfoContainer>
+              <Icon width={20} height={20} icon="BoatedSymbol" />
+              <Text>파일 용량 : {Math.ceil(Number(data?.headers['content-length']) / 1000000)}MB</Text>
+              <Button width={86} height={32} borderRadius={26} onClick={openModal}>
+                삭제하기
+              </Button>
+            </Styled.VideoInfoContainer>
+            <Button width={200} height={53} borderRadius={6} onClick={handleVideoDescriptionButton}>
+              저장하기
             </Button>
-          </Styled.VideoInfoContainer>
+          </>
         )}
-        <Button width={200} height={53} borderRadius={6}>
-          저장하기
-        </Button>
       </Styled.ButtonContainer>
     </Styled.Container>
   );

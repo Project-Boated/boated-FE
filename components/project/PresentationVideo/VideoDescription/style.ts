@@ -16,9 +16,16 @@ export const TitleContainer = styled.div`
   gap: 15px;
 `;
 
-export const DescriptionTextarea = styled.div`
+export const DescriptionTextarea = styled.textarea`
   width: 999px;
   height: 139px;
+
+  resize: none;
+
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  font-family: 'Noto Sans KR';
 
   ${boxDesign()};
 `;
