@@ -120,9 +120,10 @@ const Task = ({ index, task }: TaskProps) => {
                     <Text fontWeight={400} fontSize={13}>
                       마감기한
                     </Text>
-                    <Text fontWeight={400} fontSize={13} color={Theme.W_1}>{` (${
-                      task.dday > 0 ? `D+${task.dday}` : `D${task.dday}`
-                    })`}</Text>
+                    <Text fontWeight={400} fontSize={13} color={Theme.W_1}>
+                      {' '}
+                      {task.dday >= 0 ? `(D+${task.dday})` : `(D${task.dday})`}
+                    </Text>
                     <br />
                     <Text fontWeight={400} fontSize={13}>
                       {task.deadline}

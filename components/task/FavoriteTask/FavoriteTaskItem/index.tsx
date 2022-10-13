@@ -33,7 +33,7 @@ const FavoriteTaskItem = ({ project, task, taskIndex }: FavoriteTaskItemProps) =
           <Styled.DdayWrapper>
             <Text fontSize={13}>{task.deadline.split(' ')[0]}</Text>
             <Text fontSize={13} color={Theme.W_1}>
-              {`(D${task.dday})`}
+              {task.dday >= 0 ? `(D+${task.dday})` : `(D${task.dday})`}
             </Text>
           </Styled.DdayWrapper>
           <Styled.TeammatesWrapper>
