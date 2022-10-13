@@ -14,7 +14,7 @@ import ProjectTab from '@/components/common/GNB/ProjectTab';
 import * as Styled from './style';
 
 const GNB = () => {
-  const { myInfo } = useGetMyInfo();
+  const { myInfo, remove } = useGetMyInfo();
 
   const projectTabRef = useRef(null);
   const myInfoTabRef = useRef(null);
@@ -62,7 +62,12 @@ const GNB = () => {
                 <Styled.TriangleIconWrapper>
                   <Icon icon="Triangle" />
                 </Styled.TriangleIconWrapper>
-                <MyInfoTab myInfoTabRef={myInfoTabRef} myInfo={myInfo} setIsMyInfoTabOpen={setIsMyInfoTabOpen} />
+                <MyInfoTab
+                  myInfoTabRef={myInfoTabRef}
+                  myInfo={myInfo}
+                  setIsMyInfoTabOpen={setIsMyInfoTabOpen}
+                  queryRemove={remove}
+                />
               </>
             )}
 
