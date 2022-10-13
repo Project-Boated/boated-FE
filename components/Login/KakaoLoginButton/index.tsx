@@ -16,5 +16,6 @@ const KakaoLoginButton = () => {
       </Wrapper>
     </Link>
   );
+};
 
 export default KakaoLoginButton;
