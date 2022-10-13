@@ -15,8 +15,7 @@ export interface CrewManagementBoxProps {
   crews: Array<CrewState>;
 }
 
-const CrewManagementBox = ({ captain, crews }: CrewManagementBoxProps) => {
-  return (
+const CrewManagementBox = ({ captain, crews }: CrewManagementBoxProps) => (
     <Styled.Container>
       <Styled.InnerContainer>
         <Styled.CaptainContainer>
@@ -46,6 +45,5 @@ const CrewManagementBox = ({ captain, crews }: CrewManagementBoxProps) => {
       </Styled.InnerContainer>
     </Styled.Container>
   );
-};
 
 export default CrewManagementBox;

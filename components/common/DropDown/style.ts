@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components';
 
+import { DropDownSize } from '@/types/size';
+
 import Theme from '@/styles/Theme';
 
-import { DropDownSize } from '@/types/size';
 
 export const Wrapper = styled.div`
   position: relative;

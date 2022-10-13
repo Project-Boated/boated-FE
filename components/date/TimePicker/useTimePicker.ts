@@ -4,7 +4,7 @@ import addZeroToNumber from '@/lib/util/addZeroToNumber';
 
 const today = new Date();
 
-const useTimePicker = (time: string = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`) => {
+const useTimePicker = (time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`) => {
   const [h, m] = time.split(':');
   const AM_PM: 'AM' | 'PM' = +h < 12 ? 'AM' : 'PM';
 

@@ -1,8 +1,9 @@
 import React from 'react';
 
+import { SizeProps } from '@/types/size';
+
 import Theme from '@/styles/Theme';
 
-import { SizeProps } from '@/types/size';
 
 import { Wrapper } from './style';
 
@@ -28,8 +29,7 @@ const Button = ({
   backgroundColor = Theme.M_1,
   children,
   onClick,
-}: SizeProps & Props) => {
-  return (
+}: SizeProps & Props) => (
     <Wrapper
       type={type}
       width={width}
@@ -44,6 +44,5 @@ const Button = ({
       {children}
     </Wrapper>
   );
-};
 
 export default Button;

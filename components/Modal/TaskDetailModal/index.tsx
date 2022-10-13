@@ -2,25 +2,25 @@ import React, { useState } from 'react';
 
 import useModal from '@/hooks/useModal';
 
-import Modal from '@/components/Modal';
+import Button from '@/components/atoms/Button';
+import Input from '@/components/atoms/Input';
+import Label from '@/components/atoms/Label';
+import Text from '@/components/atoms/Text';
+import Textarea from '@/components/atoms/Textarea';
 
 import DropDown from '@/components/common/DropDown';
 
-import TimeTableBox from '@/components/date/TimeTableBox';
 import useCalendar from '@/components/date/Calendar/useCalendar';
 import useTimePicker from '@/components/date/TimePicker/useTimePicker';
-
-import Label from '@/components/atoms/Label';
-import Input from '@/components/atoms/Input';
-import Button from '@/components/atoms/Button';
-import Text from '@/components/atoms/Text';
-import Textarea from '@/components/atoms/Textarea';
+import TimeTableBox from '@/components/date/TimeTableBox';
 
 import AssignedAccount from '@/components/task/AssignedAccount';
 
 import Theme from '@/styles/Theme';
 
 import * as Styled from './style';
+
+import Modal from '@/components/Modal';
 
 const crewList = ['윤준서', '윤준서', '윤준서', '윤준서', '윤준서', '윤준서', '윤준서'];
 const assignedCrewList = ['윤준서', '팀원1', '팀원2', '팀원3', '팀원4'];
@@ -74,7 +74,7 @@ const TaskDetailModal = () => {
               </Label>
               <Styled.AssignedCrewListContainer>
                 {assignedCrewList.map((crew) => (
-                  <AssignedAccount>{crew}</AssignedAccount>
+                  <AssignedAccount key={crew}>{crew}</AssignedAccount>
                 ))}
               </Styled.AssignedCrewListContainer>
               <Styled.AssignedCrewDropDownContainer>

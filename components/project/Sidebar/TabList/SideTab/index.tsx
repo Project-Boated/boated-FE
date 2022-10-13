@@ -11,16 +11,14 @@ export interface SideTabProps {
   sideTabList: SideTabState[];
 }
 
-const SideTab = ({ path, sideTabList }: SideTabProps) => {
-  return (
-    <Styled.Container>
-      {sideTabList.map((sideTab, idx) => (
-        <Tab key={idx} isFocused={path === sideTab.path} href={sideTab.link}>
-          {sideTab.tab}
-        </Tab>
-      ))}
-    </Styled.Container>
-  );
-};
+const SideTab = ({ path, sideTabList }: SideTabProps) => (
+  <Styled.Container>
+    {sideTabList.map((sideTab) => (
+      <Tab key={sideTab.path} isFocused={path === sideTab.path} href={sideTab.link}>
+        {sideTab.tab}
+      </Tab>
+    ))}
+  </Styled.Container>
+);
 
 export default SideTab;

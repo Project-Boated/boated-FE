@@ -1,9 +1,11 @@
 import React from 'react';
+
 import { Story } from '@storybook/react';
+
+import { MyProjectState } from '@/lib/api/types';
 
 import ProjectItem from '.';
 
-import { MyProjectState } from '@/lib/api/types';
 
 export default {
   component: ProjectItem,

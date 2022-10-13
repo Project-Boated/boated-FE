@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Story } from '@storybook/react';
 
 import NicknameInput, { NicknameInputProps } from '@/components/common/NicknameInput';

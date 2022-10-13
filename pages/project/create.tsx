@@ -1,17 +1,18 @@
 import React, { useState, useCallback } from 'react';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
+
 import { AxiosError } from 'axios';
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 import { createProject } from '@/lib/api/projects';
 
-import CreateBox from '@/components/project/CreateBox';
-
 import AppLayoutSub from '@/components/common/Layout/AppLayoutSub';
+
+import CreateBox from '@/components/project/CreateBox';
 
 import { RequiredInfo, OptionalInfo } from '@/types/project';
 
-const projectCreatePage: NextPage = () => {
+const ProjectCreatePage: NextPage = () => {
   const router = useRouter();
 
   const [isRight, setIsRight] = useState<boolean>(false);
@@ -118,4 +119,4 @@ const projectCreatePage: NextPage = () => {
   );
 };
 
-export default projectCreatePage;
+export default ProjectCreatePage;

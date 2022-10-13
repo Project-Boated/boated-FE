@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
-import { useQuery } from 'react-query';
+
 import { AxiosError } from 'axios';
+import { useQuery } from 'react-query';
 
 import { getProjectsInvite, postProjectsInviteAccept, postProjectsInviteReject } from '@/lib/api/projects';
 import * as queryKeys from '@/lib/constants/queryKeys';
@@ -21,7 +22,7 @@ const CheckProjectInvite = () => {
   const { myInfo } = useGetMyInfo();
 
   const onClickInviteButton = useCallback((event: React.MouseEvent<HTMLButtonElement>, invitationId: number) => {
-    const currentTarget: HTMLButtonElement = event.currentTarget;
+    const { currentTarget } = event;
 
     if (currentTarget.innerText === '수락') {
       postProjectsInviteAccept(invitationId)
@@ -40,43 +41,41 @@ const CheckProjectInvite = () => {
         <Text fontSize={20}>초대 받은 프로젝트</Text>
       </Styled.TitleWrapper>
       {data &&
-        data.map((invitation) => {
-          return (
-            <Styled.ProjectInviteContainer>
-              <Styled.ProjectInviteTitleContainer>
-                <Styled.IconNameContainer>
-                  <Styled.BoatedCircle />
-                  <Text>{invitation.name}</Text>
-                </Styled.IconNameContainer>
-                <Styled.CaptainContainer>
-                  <Text>팀장 : </Text>
-                  <Styled.CaptainNameBox>
-                    <Text>{invitation.captainNickname}</Text>
-                    {myInfo && myInfo.nickname === invitation.captainNickname && <CircleText>ME</CircleText>}
-                  </Styled.CaptainNameBox>
-                </Styled.CaptainContainer>
-              </Styled.ProjectInviteTitleContainer>
-              <Button
-                width={115}
-                height={59}
-                fontSize={15}
-                onClick={(event) => onClickInviteButton(event, invitation.id)}
-              >
-                수락
-              </Button>
-              <Button
-                width={115}
-                height={59}
-                fontSize={15}
-                backgroundColor={Theme.S_0}
-                fontColor={Theme.W_1}
-                onClick={(event) => onClickInviteButton(event, invitation.id)}
-              >
-                거절
-              </Button>
-            </Styled.ProjectInviteContainer>
-          );
-        })}
+        data.map((invitation) => (
+          <Styled.ProjectInviteContainer key={invitation.id}>
+            <Styled.ProjectInviteTitleContainer>
+              <Styled.IconNameContainer>
+                <Styled.BoatedCircle />
+                <Text>{invitation.name}</Text>
+              </Styled.IconNameContainer>
+              <Styled.CaptainContainer>
+                <Text>팀장 : </Text>
+                <Styled.CaptainNameBox>
+                  <Text>{invitation.captainNickname}</Text>
+                  {myInfo && myInfo.nickname === invitation.captainNickname && <CircleText>ME</CircleText>}
+                </Styled.CaptainNameBox>
+              </Styled.CaptainContainer>
+            </Styled.ProjectInviteTitleContainer>
+            <Button
+              width={115}
+              height={59}
+              fontSize={15}
+              onClick={(event) => onClickInviteButton(event, invitation.id)}
+            >
+              수락
+            </Button>
+            <Button
+              width={115}
+              height={59}
+              fontSize={15}
+              backgroundColor={Theme.S_0}
+              fontColor={Theme.W_1}
+              onClick={(event) => onClickInviteButton(event, invitation.id)}
+            >
+              거절
+            </Button>
+          </Styled.ProjectInviteContainer>
+        ))}
     </Styled.Container>
   );
 };

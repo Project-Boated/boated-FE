@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+
 import moment, { Moment } from 'moment';
 
 import Icon from '@/components/atoms/Icon';
@@ -64,9 +65,9 @@ const Calendar = ({ date, setYear, setMonth, setDate }: CalendarProps) => {
             .fill(0)
             .map((_, index) => {
               const day = today.clone().startOf('year').week(week).startOf('week').add(index, 'day');
-              const year: number = Number(day.format('Y'));
-              const month: number = Number(day.format('M'));
-              const calendarDate: number = Number(day.format('D'));
+              const year = Number(day.format('Y'));
+              const month = Number(day.format('M'));
+              const calendarDate = Number(day.format('D'));
 
               return (
                 <Styled.DateWrapper
@@ -113,9 +114,9 @@ const Calendar = ({ date, setYear, setMonth, setDate }: CalendarProps) => {
             <Styled.Tbody>
               <Styled.WeekListContainer>
                 {weekList.map((week, index) => (
-                  <Styled.Td key={index}>
+                  <Styled.Td key={week}>
                     <Text
-                      key={index}
+                      key={week}
                       fontSize={10}
                       fontWeight={700}
                       lineHeight={15}

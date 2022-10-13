@@ -1,14 +1,15 @@
 import React, { useEffect, useRef } from 'react';
+
 import Link from 'next/link';
 
-import useGetMyInfo from '@/hooks/useGetMyInfo';
 import useDetectOutsideClick from '@/hooks/useDetectOutside';
+import useGetMyInfo from '@/hooks/useGetMyInfo';
 
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
 
-import ProjectTab from '@/components/common/GNB/ProjectTab';
 import MyInfoTab from '@/components/common/GNB/MyInfoTab';
+import ProjectTab from '@/components/common/GNB/ProjectTab';
 
 import * as Styled from './style';
 

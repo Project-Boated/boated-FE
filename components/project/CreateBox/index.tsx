@@ -2,18 +2,18 @@ import React, { useCallback } from 'react';
 
 import { yearList, monthList, dateList, amHourList, pmHourList, minuteList } from '@/lib/constants/dropdownList';
 
+import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
 import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
-import Button from '@/components/atoms/Button';
 import Textarea from '@/components/atoms/Textarea';
 
 import DropDown from '@/components/common/DropDown';
 import ToggleSwitch from '@/components/common/ToggleSwitch';
 
-import Theme from '@/styles/Theme';
-
 import { RequiredInfo, OptionalInfo } from '@/types/project';
+
+import Theme from '@/styles/Theme';
 
 import {
   Wrapper,
@@ -68,8 +68,8 @@ const CreateBox = ({
         <Icon icon="SeaWaveMedium" />
       </SeaWaveWrapper>
       <LeftContainer>
-        <img src="/imgs/InnerCircle.png" />
-        <img src="/imgs/OuterCircle.png" />
+        <img src="/imgs/InnerCircle.png" alt="logo" />
+        <img src="/imgs/OuterCircle.png" alt="logo" />
         <Icon icon="BoatedSymbol" width={49} height={46} />
         <Text fontSize={18} fontWeight={300} lineHeight={18} fontFamily="Gmarket Sans">
           프로젝트 생성하기

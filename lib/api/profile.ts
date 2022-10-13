@@ -1,6 +1,4 @@
-import client from '@/lib/api/client';
 import request from '@/lib/api/request';
-
 import {
   GetUserProfileResponse,
   PostProfileNicknameDuplicatedRequestProps,

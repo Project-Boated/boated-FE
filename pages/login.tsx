@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
+
 import { AxiosError } from 'axios';
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 import { kakaoLogin } from '@/lib/api/auth';
 

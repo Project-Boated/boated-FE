@@ -3,8 +3,8 @@ import React, { useMemo } from 'react';
 import useModal from '@/hooks/useModal';
 
 import Calendar, { CalendarProps } from '@/components/date/Calendar';
-import TimeTableSelector from '@/components/date/TimeTableSelector';
 import TimePicker, { TimePickerProps } from '@/components/date/TimePicker';
+import TimeTableSelector from '@/components/date/TimeTableSelector';
 
 import * as Styled from './style';
 

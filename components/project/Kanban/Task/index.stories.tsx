@@ -1,6 +1,7 @@
 import React from 'react';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+
 import { Story } from '@storybook/react';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import Task, { TaskProps } from '@/components/project/Kanban/Task';
 

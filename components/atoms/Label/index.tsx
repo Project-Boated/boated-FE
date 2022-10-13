@@ -26,8 +26,7 @@ const Label = ({
   isRequired = false,
   children,
   onClick,
-}: LabelProps) => {
-  return (
+}: LabelProps) => (
     <Styled.Wrapper
       width={width}
       height={height}
@@ -43,6 +42,5 @@ const Label = ({
       {children} {isRequired && <span className="is-required">*</span>}
     </Styled.Wrapper>
   );
-};
 
 export default Label;

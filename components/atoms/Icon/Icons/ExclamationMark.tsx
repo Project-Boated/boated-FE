@@ -1,7 +1,6 @@
 import React from 'react';
 
-const ExclamationMark = () => {
-  return (
+const ExclamationMark = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="70" viewBox="0 0 17 70" fill="none">
       <g clipPath="url(#clip0_191_678)">
         <path
@@ -20,6 +19,5 @@ const ExclamationMark = () => {
       </defs>
     </svg>
   );
-};
 
 export default ExclamationMark;

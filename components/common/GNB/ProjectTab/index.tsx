@@ -1,4 +1,5 @@
 import React, { Dispatch, MouseEvent, RefObject, SetStateAction } from 'react';
+
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 
@@ -66,8 +67,7 @@ const ProjectTab = ({ projectTabRef, myInfo, setIsProjectTabOpen }: ProjectTabPr
           </Text>
         </Styled.MyProjectTextWrapper>
         {data &&
-          data.content.map((project: MyProjectState) => {
-            return (
+          data.content.map((project: MyProjectState) => (
               <Styled.MyProjectListItem
                 key={project.id}
                 onClick={(e) => {
@@ -80,8 +80,7 @@ const ProjectTab = ({ projectTabRef, myInfo, setIsProjectTabOpen }: ProjectTabPr
                   {project.captain.nickname === myInfo.nickname && <CircleText>ME</CircleText>}
                 </Styled.TextContainer>
               </Styled.MyProjectListItem>
-            );
-          })}
+            ))}
       </Styled.MyProjectContainer>
     </Styled.ProjectBoxContainer>
   );

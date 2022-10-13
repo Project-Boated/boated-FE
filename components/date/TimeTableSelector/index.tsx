@@ -15,8 +15,7 @@ export interface TimeTableSelectorProps {
   onClick: () => void;
 }
 
-const TimeTableSelector = ({ type, contents, onClick }: TimeTableSelectorProps) => {
-  return (
+const TimeTableSelector = ({ type, contents, onClick }: TimeTableSelectorProps) => (
     <Styled.Container onClick={onClick}>
       <Icon icon="Calendar" />
       <Styled.ContentsContainer>
@@ -28,6 +27,5 @@ const TimeTableSelector = ({ type, contents, onClick }: TimeTableSelectorProps) 
       <Icon icon="Arrow" />
     </Styled.Container>
   );
-};
 
 export default TimeTableSelector;

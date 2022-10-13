@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
 
 import client from './client';
-
 import { Method, ErrorResponse, ApiResponse } from './types';
 
 const request = async <RES = unknown, REQ = null, PARAMS = null>(

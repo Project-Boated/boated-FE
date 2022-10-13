@@ -12,8 +12,7 @@ import * as Styled from './style';
 
 type Props = Omit<MyProjectState, 'id'>;
 
-const ProjectItem = ({ name, description, deadline, captain, crews, terminated, dday, totalDay }: Props) => {
-  return (
+const ProjectItem = ({ name, description, deadline, captain, crews, terminated, dday, totalDay }: Props) => (
     <Styled.Wrapper terminated={terminated}>
       {!terminated && <DdayBar dday={dday} totalDay={totalDay} />}
       <Styled.Container terminated={terminated}>
@@ -53,6 +52,5 @@ const ProjectItem = ({ name, description, deadline, captain, crews, terminated, 
       </Styled.Container>
     </Styled.Wrapper>
   );
-};
 
 export default React.memo(ProjectItem);

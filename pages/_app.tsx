@@ -1,9 +1,10 @@
 import React from 'react';
+
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { ThemeProvider } from 'styled-components';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { ThemeProvider } from 'styled-components';
 
 import { fontFace, GlobalStyle } from '@/styles/GlobalStyle';
 import Theme from '@/styles/Theme';

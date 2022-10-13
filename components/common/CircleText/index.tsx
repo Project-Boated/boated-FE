@@ -24,14 +24,12 @@ const CircleText = ({
   color = Theme.S_0,
   backgroundColor = Theme.P_2,
   children,
-}: CircleTextProps) => {
-  return (
+}: CircleTextProps) => (
     <Styled.Wrapper width={width} height={height} backgroundColor={backgroundColor}>
       <Text fontSize={fontSize} fontWeight={fontWeight} color={color}>
         {children}
       </Text>
     </Styled.Wrapper>
   );
-};
 
 export default CircleText;

@@ -1,9 +1,11 @@
 import React from 'react';
+
 import { Story } from '@storybook/react';
+
+import Theme from '@/styles/Theme';
 
 import ProjectProgressBar, { ProjectProgressBarProps } from '.';
 
-import Theme from '@/styles/Theme';
 
 export default {
   component: ProjectProgressBar,

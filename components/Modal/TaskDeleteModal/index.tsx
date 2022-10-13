@@ -1,18 +1,20 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { AxiosError } from 'axios';
 
-import { TaskState } from '@/lib/api/types';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+
 import { deleteProjectsKanbanTask } from '@/lib/api/projects';
+import { TaskState } from '@/lib/api/types';
 
 import Button from '@/components/atoms/Button';
 import Text from '@/components/atoms/Text';
 
-import Modal from '@/components/Modal';
 
 import Theme from '@/styles/Theme';
 
 import * as Styled from './style';
+
+import Modal from '@/components/Modal';
 
 export interface TaskDeleteModalProps {
   task: TaskState;

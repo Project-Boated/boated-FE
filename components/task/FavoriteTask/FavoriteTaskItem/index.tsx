@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Draggable } from 'react-beautiful-dnd';
 
 import { MyProjectState, TaskState } from '@/lib/api/types';
@@ -15,8 +16,7 @@ export interface FavoriteTaskItemProps {
   taskIndex: number;
 }
 
-const FavoriteTaskItem = ({ project, task, taskIndex }: FavoriteTaskItemProps) => {
-  return (
+const FavoriteTaskItem = ({ project, task, taskIndex }: FavoriteTaskItemProps) => (
     <Draggable draggableId={String(task.id)} index={taskIndex}>
       {(provided) => (
         <Styled.Container {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
@@ -51,6 +51,5 @@ const FavoriteTaskItem = ({ project, task, taskIndex }: FavoriteTaskItemProps) =
       )}
     </Draggable>
   );
-};
 
 export default React.memo(FavoriteTaskItem);

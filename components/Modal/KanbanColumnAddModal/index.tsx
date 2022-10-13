@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+
 import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
 
 import { postProjectsKanbanLane } from '@/lib/api/projects';
 
 import Button from '@/components/atoms/Button';
-import Text from '@/components/atoms/Text';
 import Input from '@/components/atoms/Input';
-
-import Modal from '@/components/Modal';
+import Text from '@/components/atoms/Text';
 
 import * as Styled from './style';
 
-export interface KanbanColumnAddModal {
+import Modal from '@/components/Modal';
+
+
+export interface KanbanColumnAddModalProps {
   closeModal: () => void;
 }
 
-const KanbanColumnAddModal = ({ closeModal }: KanbanColumnAddModal) => {
+const KanbanColumnAddModal = ({ closeModal }: KanbanColumnAddModalProps) => {
   const router = useRouter();
   const projectId = parseInt(router.query.id as string, 10);
 

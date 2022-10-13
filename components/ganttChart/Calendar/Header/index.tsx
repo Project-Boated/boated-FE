@@ -12,8 +12,7 @@ export interface HeaderProps {
   onClickNext: () => void;
 }
 
-const Header = ({ year, month, onClickPrev, onClickNext }: HeaderProps) => {
-  return (
+const Header = ({ year, month, onClickPrev, onClickNext }: HeaderProps) => (
     <Styled.Container>
       <Icon icon="Arrow" rotate={90} onClick={onClickPrev} isButton />
       <Text fontSize={14} fontWeight={500} fontFamily="Gmarket Sans">
@@ -22,6 +21,5 @@ const Header = ({ year, month, onClickPrev, onClickNext }: HeaderProps) => {
       <Icon icon="Arrow" rotate={270} onClick={onClickNext} isButton />
     </Styled.Container>
   );
-};
 
 export default React.memo(Header);

@@ -1,23 +1,24 @@
 import React, { useEffect } from 'react';
-import { useQuery } from 'react-query';
+
 import { useRouter } from 'next/router';
+import { useQuery } from 'react-query';
 
-import * as queryKeys from '@/lib/constants/queryKeys';
 import * as projectsAPI from '@/lib/api/projects';
+import * as queryKeys from '@/lib/constants/queryKeys';
 import getSideTabList from '@/lib/util/getSideTabList';
-
-import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
 
 import Text from '@/components/atoms/Text';
 
-import Sidebar from '@/components/project/Sidebar';
-import SideTab from '@/components/project/Sidebar/TabList/SideTab';
-import InfoBox from '@/components/project/InfoBox';
-import SubInfo from '@/components/project/SubInfo';
-import CrewManagementBox from '@/components/project/CrewManagementBox';
+import AppLayoutMain from '@/components/common/Layout/AppLayoutMain';
 
 import useCalendar from '@/components/date/Calendar/useCalendar';
 import useTimePicker from '@/components/date/TimePicker/useTimePicker';
+
+import CrewManagementBox from '@/components/project/CrewManagementBox';
+import InfoBox from '@/components/project/InfoBox';
+import Sidebar from '@/components/project/Sidebar';
+import SideTab from '@/components/project/Sidebar/TabList/SideTab';
+import SubInfo from '@/components/project/SubInfo';
 
 import * as Styled from '@/styles/pages/Project/[id].style';
 
@@ -39,7 +40,7 @@ const ProjectDetailPage = () => {
     if (!projectInfo) return;
     const [calendarInfo, timePickerInfo] = projectInfo.deadline.split(' ');
     const [year, month, date] = calendarInfo.split('-');
-    const [hour, minute, _] = timePickerInfo.split(':');
+    const [hour, minute] = timePickerInfo.split(':');
 
     setYear(year);
     setMonth(month);
