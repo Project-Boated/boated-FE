@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
-import { AxiosError } from 'axios';
 import { useQueryClient } from 'react-query';
 
 import { postProjectsKanbanLane } from '@/lib/api/projects';
@@ -16,7 +15,6 @@ import Text from '@/components/atoms/Text';
 import * as Styled from './style';
 
 import Modal from '@/components/Modal';
-
 
 export interface KanbanColumnAddModalProps {
   closeModal: () => void;

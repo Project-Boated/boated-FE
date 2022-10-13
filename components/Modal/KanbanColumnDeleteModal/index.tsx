@@ -2,7 +2,6 @@ import React from 'react';
 
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
-import { AxiosError } from 'axios';
 import { useQueryClient } from 'react-query';
 
 import { deleteProjectsKanbanLane } from '@/lib/api/projects';
@@ -11,7 +10,6 @@ import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Button from '@/components/atoms/Button';
 import Text from '@/components/atoms/Text';
-
 
 import Theme from '@/styles/Theme';
 

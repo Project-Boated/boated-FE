@@ -3,8 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
-import { useRouter } from 'next/router';
-import { AxiosError } from 'axios';
 import { useQueryClient } from 'react-query';
 
 import { putProjectsKanbanLaneName } from '@/lib/api/projects';
