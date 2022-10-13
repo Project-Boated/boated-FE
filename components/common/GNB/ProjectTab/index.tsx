@@ -43,7 +43,7 @@ const ProjectTab = ({ projectTabRef, myInfo, setIsProjectTabOpen }: ProjectTabPr
   const onClickListItemTab = (e: MouseEvent<HTMLLIElement>, projectId: number) => {
     e.stopPropagation();
     setIsProjectTabOpen(false);
-    router.push(`/project/${projectId}`);
+    router.push(`/project/${projectId}/kanban`);
   };
 
   return (
