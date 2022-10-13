@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-
+import React, { useRef } from 'react';
 import Link from 'next/link';
 
 import useDetectOutsideClick from '@/hooks/useDetectOutside';
@@ -26,7 +25,7 @@ const GNB = () => {
     <Styled.Wrapper>
       <Styled.Container>
         <Styled.IconWrapper>
-          <Link href="/">
+          <Link href={myInfo ? '/project' : '/'} passHref>
             <Styled.IconAnchor>
               <Icon icon="BoatedSymbol" width={29} height={29} />
               <Icon icon="BoatedSignature" width={92} height={30} />
@@ -56,24 +55,30 @@ const GNB = () => {
           )}
         </Styled.IconWrapper>
         {myInfo && (
-          <Styled.ProfileWrapper onClick={() => setIsMyInfoTabOpen(true)}>
-            {isMyInfoTabOpen && (
-              <>
-                <Styled.TriangleIconWrapper>
-                  <Icon icon="Triangle" />
-                </Styled.TriangleIconWrapper>
-                <MyInfoTab
-                  myInfoTabRef={myInfoTabRef}
-                  myInfo={myInfo}
-                  setIsMyInfoTabOpen={setIsMyInfoTabOpen}
-                  queryRemove={remove}
-                />
-              </>
-            )}
-
-            <Styled.ProfileImg src={myInfo.profileImageUrl} />
-            <Text fontSize={13}>{myInfo.nickname}</Text>
-          </Styled.ProfileWrapper>
+          <>
+            <Styled.ProfileWrapper onClick={() => setIsMyInfoTabOpen(true)}>
+              {isMyInfoTabOpen && (
+                <>
+                  <Styled.TriangleIconWrapper>
+                    <Icon icon="Triangle" />
+                  </Styled.TriangleIconWrapper>
+                  <MyInfoTab
+                    myInfoTabRef={myInfoTabRef}
+                    myInfo={myInfo}
+                    setIsMyInfoTabOpen={setIsMyInfoTabOpen}
+                    queryRemove={remove}
+                  />
+                </>
+              )}
+              <Styled.ProfileImg src={myInfo.profileImageUrl} />
+              <Text fontSize={13}>{myInfo.nickname}</Text>
+            </Styled.ProfileWrapper>
+            <Link href="/project/create" passHref>
+              <Styled.ProjectAddWrapper>
+                <Icon icon="ProjectAdd" width={56} height={56} />
+              </Styled.ProjectAddWrapper>
+            </Link>
+          </>
         )}
       </Styled.Container>
     </Styled.Wrapper>
