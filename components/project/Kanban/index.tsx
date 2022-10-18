@@ -104,17 +104,17 @@ const Kanban = () => {
         destinationTaskList.splice(source.index, 1);
         destinationTaskList.splice(destination.index, 0, targetTask);
 
-        setData((prev) => [
-          ...prev.map((column) => {
-            if (column.id === destinationColumn.id) {
-              return {
-                ...destinationColumn,
-                tasks: destinationTaskList,
-              };
-            }
-            return column;
-          }),
-        ]);
+        const newData = data.map((column) => {
+          if (column.id === destinationColumn.id) {
+            return {
+              ...destinationColumn,
+              tasks: destinationTaskList,
+            };
+          }
+          return column;
+        });
+
+        setData(newData);
 
         try {
           await postProjectsKanbanTaskChange({
@@ -136,23 +136,23 @@ const Kanban = () => {
       sourceTaskList.splice(source.index, 1);
       destinationTaskList.splice(destination.index, 0, startTargetTask);
 
-      setData((prev) => [
-        ...prev.map((column) => {
-          if (column.id === sourceColumn.id) {
-            return {
-              ...sourceColumn,
-              tasks: sourceTaskList,
-            };
-          }
-          if (column.id === destinationColumn.id) {
-            return {
-              ...destinationColumn,
-              tasks: destinationTaskList,
-            };
-          }
-          return column;
-        }),
-      ]);
+      const newData = data.map((column) => {
+        if (column.id === sourceColumn.id) {
+          return {
+            ...sourceColumn,
+            tasks: sourceTaskList,
+          };
+        }
+        if (column.id === destinationColumn.id) {
+          return {
+            ...destinationColumn,
+            tasks: destinationTaskList,
+          };
+        }
+        return column;
+      });
+
+      setData(newData);
 
       try {
         await postProjectsKanbanTaskChange({
