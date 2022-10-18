@@ -13,11 +13,7 @@ export const LoadingWrapper = styled.div`
   align-items: center;
 `;
 
-export const FileInput = styled.input`
-  display: none;
-`;
-
-export const FileLabel = styled.label<{ isDragging: boolean }>`
+export const Container = styled.div<{ isDragging: boolean }>`
   position: relative;
 
   overflow: hidden;
@@ -37,6 +33,10 @@ export const FileLabel = styled.label<{ isDragging: boolean }>`
       background-color: #94b0dc61;
       border: 1px dashed ${Theme.P_6};
     `}
+`;
+
+export const FileInput = styled.input`
+  display: none;
 `;
 
 export const ButtonLabel = styled.label`
