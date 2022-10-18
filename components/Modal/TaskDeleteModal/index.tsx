@@ -6,7 +6,6 @@ import { useQueryClient } from 'react-query';
 
 import { deleteProjectsKanbanTask } from '@/lib/api/projects';
 import { TaskState } from '@/lib/api/types';
-
 import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Button from '@/components/atoms/Button';

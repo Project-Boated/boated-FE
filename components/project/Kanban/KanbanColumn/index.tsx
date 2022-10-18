@@ -7,7 +7,6 @@ import { useQueryClient } from 'react-query';
 
 import { putProjectsKanbanLaneName } from '@/lib/api/projects';
 import { KanbanColumnState } from '@/lib/api/types';
-
 import * as queryKeys from '@/lib/constants/queryKeys';
 
 import useModal from '@/hooks/useModal';

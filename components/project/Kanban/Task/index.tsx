@@ -7,7 +7,6 @@ import { useQueryClient } from 'react-query';
 
 import { deleteProjectsKanbanTaskLike, postProjectsKanbanTaskLike } from '@/lib/api/projects';
 import { TaskState } from '@/lib/api/types';
-
 import * as queryKeys from '@/lib/constants/queryKeys';
 
 import useDetectOutsideClick from '@/hooks/useDetectOutside';

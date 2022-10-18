@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { useQueryClient } from 'react-query';
 
 import { deleteProjectsKanbanLane } from '@/lib/api/projects';
-
 import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Button from '@/components/atoms/Button';

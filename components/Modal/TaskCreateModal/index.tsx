@@ -5,7 +5,6 @@ import { useQueryClient } from 'react-query';
 
 import { postProjectsKanbanTask } from '@/lib/api/projects';
 import { PostProjectsKanbanTaskCreateProps } from '@/lib/api/types';
-
 import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Button from '@/components/atoms/Button';
