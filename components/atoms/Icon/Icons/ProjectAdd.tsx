@@ -1,7 +1,6 @@
 import React from 'react';
 
-const ProjectAdd = () => {
-  return (
+const ProjectAdd = () => (
     <svg
       width="64"
       height="64"
@@ -60,6 +59,5 @@ const ProjectAdd = () => {
       </defs>
     </svg>
   );
-};
 
 export default ProjectAdd;

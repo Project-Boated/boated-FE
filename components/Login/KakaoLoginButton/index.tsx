@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Link from 'next/link';
 
 import { kakaoLoginPath } from '@/lib/constants';
@@ -7,8 +8,7 @@ import Icon from '@/components/atoms/Icon';
 
 import { Wrapper } from './style';
 
-const KakaoLoginButton = () => {
-  return (
+const KakaoLoginButton = () => (
     <Link href={kakaoLoginPath} passHref>
       <Wrapper>
         <Icon icon="KakaoSymbol" width={21} height={20} />
@@ -16,6 +16,5 @@ const KakaoLoginButton = () => {
       </Wrapper>
     </Link>
   );
-};
 
 export default KakaoLoginButton;

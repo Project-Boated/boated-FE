@@ -1,8 +1,8 @@
 import React, { Dispatch, MouseEvent, SetStateAction } from 'react';
 
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
-import { AxiosError } from 'axios';
 
 import { logout } from '@/lib/api/auth';
 import { getProjectsInvite } from '@/lib/api/projects';
