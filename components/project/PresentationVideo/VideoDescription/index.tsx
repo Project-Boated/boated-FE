@@ -7,15 +7,16 @@ import * as queryKeys from '@/lib/constants/queryKeys';
 
 import Icon from '@/components/atoms/Icon';
 import Text from '@/components/atoms/Text';
+import Textarea from '@/components/atoms/Textarea';
 
 import * as Styled from './style';
 
-export interface VideoDescription {
+export interface VideoDescriptionProps {
   description: string;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const VideoDescription = ({ description, setDescription }: VideoDescription) => {
+const VideoDescription = ({ description, setDescription }: VideoDescriptionProps) => {
   const router = useRouter();
   const projectId = parseInt(router.query.id as string, 10);
 
@@ -47,7 +48,7 @@ const VideoDescription = ({ description, setDescription }: VideoDescription) => 
         <Icon width={20} height={20} icon="BoatedSymbol" />
         <Text>설명 (300자 이내)</Text>
       </Styled.TitleContainer>
-      <Styled.DescriptionTextarea value={description} onChange={handleTextareaChange} />
+      <Textarea width={999} height={139} value={description} onChange={handleTextareaChange} />
     </Styled.Container>
   );
 };

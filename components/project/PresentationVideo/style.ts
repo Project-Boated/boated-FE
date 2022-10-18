@@ -69,7 +69,6 @@ export const ButtonContainer = styled.div`
 
   & > button {
     position: absolute;
-
     top: 0;
     right: 0;
   }
@@ -77,7 +76,6 @@ export const ButtonContainer = styled.div`
 
 export const SaveWrapper = styled.div`
   position: absolute;
-
   right: 0;
   bottom: 0;
 `;
