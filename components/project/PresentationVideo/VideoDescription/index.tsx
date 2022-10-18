@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
-import { useQuery } from 'react-query';
+
 import { useRouter } from 'next/router';
+import { useQuery } from 'react-query';
 
 import { getProjectsVideoDescription } from '@/lib/api/projects';
 import * as queryKeys from '@/lib/constants/queryKeys';

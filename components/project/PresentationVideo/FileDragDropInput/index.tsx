@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+
 import { AxiosError } from 'axios';
-import { useQueryClient } from 'react-query';
 import { useRouter } from 'next/router';
+import { useQueryClient } from 'react-query';
 
 import { putProjectsVideo } from '@/lib/api/projects';
 import * as queryKeys from '@/lib/constants/queryKeys';
