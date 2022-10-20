@@ -92,3 +92,12 @@ export const TriangleIconWrapper = styled.div`
 
   top: 25px;
 `;
+
+export const ProjectAddWrapper = styled.a`
+  position: fixed;
+
+  bottom: 20px;
+  right: 46px;
+
+  cursor: pointer;
+`;

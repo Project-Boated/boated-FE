@@ -82,8 +82,8 @@ const ProjectsTemplate = ({ query }: ProjecTemplateProps) => {
         {data &&
           data.content.length > 0 &&
           data.content.map(({ id, name, description, deadline, captain, crews, terminated, dday, totalDay }) => (
-            <Link key={`PROJECT_ITEM_${id}`} href={`project/${id}`}>
-              <a href={`project/${id}`}>
+            <Link href={`project/${id}/kanban`} key={`PROJECT_ITEM_${id}`}>
+              <a>
                 <ProjectItem
                   name={name}
                   description={description}

@@ -31,7 +31,7 @@ const ProjectPage = ({ query }: ProjectPageProps) => {
   const tabList = useMemo(
     () => [
       {
-        href: '/project/invite',
+        href: '/user/invite',
         children: '프로젝트 초대 확인하기',
       },
       {

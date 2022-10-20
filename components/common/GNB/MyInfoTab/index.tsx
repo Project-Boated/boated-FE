@@ -1,8 +1,10 @@
 import React, { Dispatch, MouseEvent, SetStateAction } from 'react';
 
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 
+import { logout } from '@/lib/api/auth';
 import { getProjectsInvite } from '@/lib/api/projects';
 import { GetUserProfileResponse } from '@/lib/api/types';
 import * as queryKeys from '@/lib/constants/queryKeys';
@@ -17,9 +19,10 @@ interface MyInfoTabProps {
   myInfoTabRef: React.RefObject<HTMLDivElement>;
   myInfo: GetUserProfileResponse;
   setIsMyInfoTabOpen: Dispatch<SetStateAction<boolean>>;
+  queryRemove: () => void;
 }
 
-const MyInfoTab = ({ myInfoTabRef, myInfo, setIsMyInfoTabOpen }: MyInfoTabProps) => {
+const MyInfoTab = ({ myInfoTabRef, myInfo, setIsMyInfoTabOpen, queryRemove }: MyInfoTabProps) => {
   const { nickname, profileImageUrl } = myInfo;
 
   const { data } = useQuery(queryKeys.PROJECTS_INVITES, () => getProjectsInvite());
@@ -36,6 +39,18 @@ const MyInfoTab = ({ myInfoTabRef, myInfo, setIsMyInfoTabOpen }: MyInfoTabProps)
     e.stopPropagation();
     setIsMyInfoTabOpen(false);
     router.push('/user/invite');
+  };
+
+  const handleLogoutTabClick = async () => {
+    try {
+      await logout();
+      setIsMyInfoTabOpen(false);
+      queryRemove();
+      router.push('/');
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      alert(JSON.stringify(error.response?.data.message));
+    }
   };
 
   return (
@@ -55,7 +70,7 @@ const MyInfoTab = ({ myInfoTabRef, myInfo, setIsMyInfoTabOpen }: MyInfoTabProps)
               </CircleText>
             )}
           </Styled.TabItem>
-          <Styled.TabItem>
+          <Styled.TabItem onClick={handleLogoutTabClick}>
             <Text>로그아웃</Text>
           </Styled.TabItem>
         </Styled.TabContainer>

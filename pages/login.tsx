@@ -21,9 +21,11 @@ const LoginPage: NextPage = () => {
         try {
           res = await kakaoLogin(String(code));
 
-          if (res.status === 200) {
-            router.push('/user/register');
+          if (res.data.login) {
+            router.push('/project');
+            return;
           }
+          router.push('/user/register');
         } catch (e: unknown) {
           const error = e as AxiosError;
           alert(JSON.stringify(error.response?.data.message));
