@@ -1,3 +1,5 @@
+import client from '@/lib/api/client';
+
 import request from './request';
 import {
   Id,
@@ -16,6 +18,9 @@ import {
   PostProjectsKanbanTaskLikeRequestProps,
   DeleteProjectsKanbanRequestProps,
   DeleteProjectsKanbanTaskRequestProps,
+  PutProjectsVieoRequestProps,
+  PutProjectsVideoDescriptionRequestProps,
+  GetProjectsVideoDescriptionResponse,
 } from './types';
 
 const projectsBaseUrl = '/api/projects';
@@ -58,6 +63,9 @@ const projectsUrl = {
 
   projectsKanbanTaskLike: ({ projectId, taskId }: PostProjectsKanbanTaskLikeRequestProps) =>
     `${projectsBaseUrl}/${projectId}/tasks/${taskId}/like`,
+
+  projectsVideoUpload: (projectId: number) => `${projectsBaseUrl}/${projectId}/video`,
+  projectsVideoDescriptionUpload: (projectId: number) => `${projectsBaseUrl}/${projectId}/video/description`,
 };
 
 export const createProject = ({ name, description, deadline }: PostProjectRequestProps) =>
@@ -154,3 +162,22 @@ export const postProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjectsKa
 
 export const deleteProjectsKanbanTaskLike = ({ projectId, taskId }: PostProjectsKanbanTaskLikeRequestProps) =>
   request('DELETE', projectsUrl.projectsKanbanTaskLike({ projectId, taskId }));
+
+// 프로젝트 비디오
+
+export const putProjectsVideo = ({ videoFormData, projectId }: PutProjectsVieoRequestProps) =>
+  request('PUT', projectsUrl.projectsVideoUpload(projectId), videoFormData);
+
+export const putProjectsVideoDescription = ({ projectId, description }: PutProjectsVideoDescriptionRequestProps) =>
+  request('PUT', projectsUrl.projectsVideoDescriptionUpload(projectId), { description });
+
+export const getProjectsVideoDescription = (projectId: number) =>
+  request<GetProjectsVideoDescriptionResponse>('GET', projectsUrl.projectsVideoDescriptionUpload(projectId)).then(
+    (res) => res.data,
+  );
+
+// response Header에 접근하기 위해  request 대신 client 사용
+export const getProjectsVideo = (projectId: number) =>
+  client.get(projectsUrl.projectsVideoUpload(projectId)).then((res) => res);
+
+export const deleteProjectsVideo = (projectId: number) => request('DELETE', projectsUrl.projectsVideoUpload(projectId));

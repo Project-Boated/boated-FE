@@ -17,7 +17,7 @@ const getSideTabList = (id: number) => [
     link: `/project/${id}/kanban`,
     path: `/project/${id}/kanban`,
   },
-  { tab: SIDE_TAB.presentation, link: `/project/${id}/presentation`, path: '/presentation' },
+  { tab: SIDE_TAB.presentation, link: `/project/${id}/presentation`, path: `/project/${id}/presentation` },
 ];
 
 export default getSideTabList;
