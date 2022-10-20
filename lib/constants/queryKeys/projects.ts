@@ -8,5 +8,6 @@ export const PROJECTS_KANBAN = '/projects/kanban';
 export const PROJECTS_VIDEO = '/projects/video';
 export const PROJECTS_VIDEO_DESCRIPTION = '/projects/video/description';
 
+export const PROJECTS_KANBAN_BY_ID = (id: number) => `/projects/kanban/${id}`;
 export const PROJECTS_BY_ID = (id: number) => `/projects/${id}`;
 export const PROJECTS_BY_ID_CREWS = (id: number) => `/projects/${id}/crews`;

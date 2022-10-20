@@ -3,9 +3,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { useQueryClient } from 'react-query';
 
 import { putProjectsKanbanLaneName } from '@/lib/api/projects';
 import { KanbanColumnState } from '@/lib/api/types';
+import * as queryKeys from '@/lib/constants/queryKeys';
 
 import useModal from '@/hooks/useModal';
 
@@ -29,6 +31,8 @@ const KanbanColumn = ({ id, name, tasks, index, kanbanDataLength }: KanbanColumn
   const router = useRouter();
   const projectId = parseInt(router.query.id as string, 10);
 
+  const queryClient = useQueryClient();
+
   const { isShowModal, closeModal, openModal } = useModal();
 
   const kanbanHeaderRef = useRef<HTMLDivElement>(null);
@@ -49,6 +53,7 @@ const KanbanColumn = ({ id, name, tasks, index, kanbanDataLength }: KanbanColumn
           if (name !== headerName) {
             try {
               await putProjectsKanbanLaneName({ projectId, kanbanLaneId: id, name: headerName });
+              queryClient.invalidateQueries(queryKeys.PROJECTS_KANBAN_BY_ID(projectId));
             } catch (e: unknown) {
               const error = e as AxiosError;
               alert(JSON.stringify(error.response?.data.message));

@@ -3,9 +3,11 @@ import React, { useCallback, useRef, useState } from 'react';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { Draggable } from 'react-beautiful-dnd';
+import { useQueryClient } from 'react-query';
 
 import { deleteProjectsKanbanTaskLike, postProjectsKanbanTaskLike } from '@/lib/api/projects';
 import { TaskState } from '@/lib/api/types';
+import * as queryKeys from '@/lib/constants/queryKeys';
 
 import useDetectOutsideClick from '@/hooks/useDetectOutside';
 import useModal from '@/hooks/useModal';
@@ -28,7 +30,9 @@ const Task = ({ index, task }: TaskProps) => {
   const router = useRouter();
   const projectId = parseInt(router.query.id as string, 10);
 
-  const [isDottedIconVisible, setIsDottedIconVisible] = useState(false);
+  const queryClient = useQueryClient();
+
+  const [isDottedIconVisible, setIsDottedIconVisible] = useState<boolean>(false);
 
   const moreContainerRef = useRef(null);
 
@@ -46,11 +50,13 @@ const Task = ({ index, task }: TaskProps) => {
     try {
       if (task.like) {
         await deleteProjectsKanbanTaskLike({ projectId, taskId: task.id });
+        queryClient.invalidateQueries(queryKeys.PROJECTS_KANBAN_BY_ID(projectId));
         setIsMoreClicked(false);
         setIsDottedIconVisible(false);
         return;
       }
       await postProjectsKanbanTaskLike({ projectId, taskId: task.id });
+      queryClient.invalidateQueries(queryKeys.PROJECTS_KANBAN_BY_ID(projectId));
       setIsMoreClicked(false);
       setIsDottedIconVisible(false);
     } catch (e: unknown) {
@@ -64,8 +70,8 @@ const Task = ({ index, task }: TaskProps) => {
       setIsDottedIconVisible(true);
       return;
     }
-    setIsDottedIconVisible(true);
-  }, [setIsDottedIconVisible]);
+    setIsDottedIconVisible(false);
+  }, [isDottedIconVisible]);
 
   return (
     <>
@@ -111,9 +117,10 @@ const Task = ({ index, task }: TaskProps) => {
                     <Text fontWeight={400} fontSize={13}>
                       마감기한
                     </Text>
-                    <Text fontWeight={400} fontSize={13} color={Theme.W_1}>{` (${
-                      task.dday > 0 ? `D+${task.dday}` : `D${task.dday}`
-                    })`}</Text>
+                    <Text fontWeight={400} fontSize={13} color={Theme.W_1}>
+                      {' '}
+                      {task.dday >= 0 ? `(D+${task.dday})` : `(D${task.dday})`}
+                    </Text>
                     <br />
                     <Text fontWeight={400} fontSize={13}>
                       {task.deadline}
